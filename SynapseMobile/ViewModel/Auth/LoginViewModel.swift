@@ -19,7 +19,7 @@ class LoginViewModel: ObservableObject {
         }
         
         
-        FetchService().executeRequest(url: "http://localhost:8080/auth/login",
+        FetchService().executeRequest(url: "/auth/login",
                                       method: "POST",
                                       data: ["username": username, "password": password]
         ) { data, response, error in

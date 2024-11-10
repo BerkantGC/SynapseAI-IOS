@@ -10,6 +10,12 @@ import Foundation
 class FetchService{
     
     func buildUrl(url: String, method: String?, data: [String: Any]?) -> URLRequest{
+        var url = url
+        
+        if !url.starts(with: "http://"){
+            url = "http://localhost:8080" + url
+        }
+        
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = method ?? "GET"
         
