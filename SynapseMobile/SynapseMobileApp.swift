@@ -11,7 +11,7 @@ import SwiftUI
 struct SynapseMobileApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LoginView()
         }
     }
 }
