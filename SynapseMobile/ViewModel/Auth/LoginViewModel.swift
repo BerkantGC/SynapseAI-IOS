@@ -32,7 +32,13 @@ class LoginViewModel: ObservableObject {
                     let user = try JSONDecoder().decode(User.self, from: data)
                     self.user = user
                     self.isLogged = true
-                    print("User: \(user)")
+                    
+                    // Save the user to the keychain
+                    do {
+                        try KeychainService.instance.secureStore(user, forKey: "user")
+                    } catch {
+                        self.errorMessage = "Failed to save user to keychain."
+                    }
                 } catch {
                     self.errorMessage = "Invalid username or password."
                 }
