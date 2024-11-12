@@ -18,13 +18,15 @@ struct HomeView: View {
                     .padding()
             } else {
                 ScrollView {
-                    Text("Gönderiler")
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                    ZStack{
+                        HomeHeader()
+                    }
                     LazyVStack{
+                        Text("Gönderiler")
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal)
                         ForEach(viewModel.posts) { post in
                             PostCard(post: post)
                         }

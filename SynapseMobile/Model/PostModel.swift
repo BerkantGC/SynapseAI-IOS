@@ -16,4 +16,7 @@ struct Post: Identifiable, Codable {
     var profile_picture: String?
     var full_name: String?
     var username: String?
+    var liked: Bool?
+    var likes_count: Int?
+    var comments_count: Int?
 }

@@ -37,7 +37,7 @@ struct TabsView: View {
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                 }
-            Background()
+            ProfileView()
                 .onAppear() {
                     self.selectedTab = .profile
                 }
@@ -66,8 +66,4 @@ struct TabsView: View {
         .animation(.easeInOut(duration: 0.2), value: selectedTab)
         .edgesIgnoringSafeArea(.bottom)
     }
-}
-
-#Preview {
-    TabsView()
 }
