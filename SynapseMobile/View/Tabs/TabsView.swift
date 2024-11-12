@@ -30,12 +30,12 @@ struct TabsView: View {
                 .tabItem {
                     Image(systemName: "house")
                 }
-            Background()
+            UploadView()
                 .onAppear() {
                     self.selectedTab = .search
                 }
                 .tabItem {
-                    Image(systemName: "magnifyingglass")
+                    Image(systemName: "plus.viewfinder")
                 }
             ProfileView()
                 .onAppear() {
@@ -66,4 +66,8 @@ struct TabsView: View {
         .animation(.easeInOut(duration: 0.2), value: selectedTab)
         .edgesIgnoringSafeArea(.bottom)
     }
+}
+
+#Preview {
+    Main()
 }

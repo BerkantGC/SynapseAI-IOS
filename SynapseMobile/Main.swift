@@ -29,10 +29,6 @@ struct Main: View {
         }
     }
     
-    init() {
-        // Custom initialization logic if needed
-    }
-    
     var body: some View{
         VStack {
             if isLogged {
@@ -44,4 +40,8 @@ struct Main: View {
             checkToken()
         }
     }
+}
+
+#Preview {
+    Main()
 }
