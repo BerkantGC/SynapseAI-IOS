@@ -9,7 +9,10 @@ import Foundation
 import SwiftUI
 
 struct ProfileHeader : View {
+    @EnvironmentObject var viewModel: ProfileViewModel;
     var profile: ProfileModel;
+    @State var showFollows = false
+    @State var selectedSegment: String = "followers"
     
     init(profile: ProfileModel) {
         self.profile = profile
@@ -40,27 +43,45 @@ struct ProfileHeader : View {
                 }
                 Spacer()
             }
-            HStack {
-                VStack {
-                    Text("Takipçiler")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                    Text("\(profile.followers_count)")
-                        .font(.title)
-                        .fontWeight(.bold)
+            
+                HStack {
+                    Button(action: {
+                        viewModel.getFollowers(status: FollowStatus.ACCEPTED)
+                        self.selectedSegment = "followers"
+                        showFollows.toggle()
+                    }) {
+                        VStack {
+                            Text("Takipçiler")
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                            Text("\(profile.followers_count)")
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .foregroundColor(.text)
+                        }
+                    }
+                    Spacer()
+                    Button(action: {
+                        viewModel.getFollowings(status: FollowStatus.ACCEPTED)
+                        self.selectedSegment = "followings"
+                        showFollows.toggle()
+                    }) { 
+                        VStack {
+                            Text("Takip Edilenler")
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                            Text("\(profile.followings_count)")
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .foregroundColor(.text)
+                        }
+                    }
                 }
-                Spacer()
-                VStack {
-                    Text("Takip Edilenler")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                    Text("\(profile.followings_count)")
-                        .font(.title)
-                        .fontWeight(.bold)
+                .padding(.top, 20).sheet(isPresented: $showFollows) {
+                    FollowsSheet(selectedSegment: $selectedSegment)
                 }
-            }
-            .padding(.top, 20)
         }
         .padding(.horizontal, 20)
     }
 }
+ 

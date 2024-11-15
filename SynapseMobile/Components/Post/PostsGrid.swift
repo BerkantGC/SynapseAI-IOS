@@ -15,7 +15,6 @@ struct PostsGrid: View {
     
     init(posts: [Post]) {
         self.posts = posts
-        print(posts)
     }
     
     var body: some View {
