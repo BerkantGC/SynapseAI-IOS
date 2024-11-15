@@ -10,8 +10,10 @@ import SwiftUI
 
 enum Tab: Int {
     case home = 0
-    case search = 1
-    case profile = 2
+    case explore = 1
+    case upload = 2
+    case messages = 3
+    case profile = 4
 }
 
 struct TabsView: View {
@@ -30,12 +32,26 @@ struct TabsView: View {
                 .tabItem {
                     Image(systemName: "house")
                 }
+            ExploreView()
+                .onAppear() {
+                    self.selectedTab = .explore
+                }
+                .tabItem {
+                    Image(systemName: "globe.europe.africa")
+                }
             UploadView()
                 .onAppear() {
-                    self.selectedTab = .search
+                    self.selectedTab = .upload
                 }
                 .tabItem {
                     Image(systemName: "plus.viewfinder")
+                }
+            Text("Mesajlarım")
+                .onAppear() {
+                    self.selectedTab = .messages
+                }
+                .tabItem {
+                    Image(systemName: "message")
                 }
             ProfileView()
                 .onAppear() {
@@ -49,7 +65,7 @@ struct TabsView: View {
         .overlay(alignment: .bottom) {
             let color = Color.white
             GeometryReader { geometry in
-                let aThird = geometry.size.width / 2.9
+                let aThird = geometry.size.width / 5
             VStack {
                 Spacer()
                 Circle()
