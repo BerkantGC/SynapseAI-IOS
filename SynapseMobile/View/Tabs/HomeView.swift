@@ -7,51 +7,62 @@ struct HomeView: View {
     @Namespace private var animationNamespace
 
     var body: some View {
-        ZStack {
-            Background()
-
+        NavigationStack{
             ZStack {
-                if viewModel.isLoading {
-                    ProgressView("Loading posts...")
-                } else if let errorMessage = viewModel.errorMessage {
-                    Text(errorMessage)
-                        .foregroundColor(.red)
-                        .padding()
-                } else {
-                    ScrollView {
-                        Section(header: Text("Hikayeler")
-                            .font(.title)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal)
-                        ){
-                            StoryList(stories: viewModel.stories,
-                                  selectedStory: $selectedStory,
-                                  showStoryModal: $showStoryModal,
-                                  animationNamespace: animationNamespace)
-                        }
-                        Section(header: Text("Gönderiler")
-                            .font(.title)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal)
-                        ){
-                            LazyVStack {
-                                ForEach(viewModel.posts) { post in
-                                    PostCard(post: post)
+                Background()
+                
+                ZStack {
+                    if viewModel.isLoading {
+                        ProgressView("Loading posts...")
+                    } else if let errorMessage = viewModel.errorMessage {
+                        Text(errorMessage)
+                            .foregroundColor(.red)
+                            .padding()
+                    } else {
+                        ScrollView {
+                            Section(header: Text("Hikayeler")
+                                .font(.title)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.horizontal)
+                            ){
+                                StoryList(stories: viewModel.stories,
+                                          selectedStory: $selectedStory,
+                                          showStoryModal: $showStoryModal,
+                                          animationNamespace: animationNamespace)
+                            }
+                            Section(header: Text("Gönderiler")
+                                .font(.title)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.horizontal)
+                            ){
+                                LazyVStack {
+                                    ForEach(viewModel.posts) { post in
+                                        PostCard(post: post)
+                                    }
                                 }
                             }
                         }
                     }
                 }
+                
+                if showStoryModal {
+                    StoryModalView(story: selectedStory!, showStoryModal: $showStoryModal, animationNamespace: animationNamespace)
+                }
             }
-        
-            if showStoryModal {
-                StoryModalView(story: selectedStory!, showStoryModal: $showStoryModal, animationNamespace: animationNamespace)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Synapse AI")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Image(systemName: "bell")
+                }
             }
-        }.navigationTitle("SynapseAI")
-        .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            viewModel.loadPosts()
-            viewModel.loadStories()
+            .onAppear {
+                viewModel.loadPosts()
+                viewModel.loadStories()
+            }
         }
     }
 }
