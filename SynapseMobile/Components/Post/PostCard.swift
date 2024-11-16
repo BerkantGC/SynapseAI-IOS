@@ -13,7 +13,6 @@ struct PostCard: View {
     
     init(post: Post) {
         self.post = post;
-        print(post)
     }
     
     var body: some View {
