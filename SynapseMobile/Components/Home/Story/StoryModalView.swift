@@ -25,26 +25,13 @@ struct StoryModalView: View {
             
             VStack {
                 Spacer()
-                AsyncImage(url: URL(string: "http://localhost:8080/image/\(story.image).png")) { image in
-                    image
-                        .resizable()
-                        .scaledToFit()
-                        .matchedGeometryEffect(id: story.id, in: animationNamespace)
-                        .frame(width: .infinity, height: .infinity)
-                }placeholder: {
-                    ProgressView()
-                }
-                
-                Text(story.user)
-                    .font(.title)
-                    .foregroundColor(.white)
-                    .padding()
-
+                StoryCarousel(storyList: [story], animationNamespace: animationNamespace)
+                    .frame(width: .infinity, height: .infinity)
                 Spacer()
             }.offset(offset)
                 .scaleEffect( 1 - offset.height/UIScreen.main.bounds.height )
                 .gesture(DragGesture().onChanged(onDrag).onEnded(onEnd))
-        }.toolbarVisibility(.hidden, for: .tabBar)
+        }.toolbarVisibility(.hidden, for: .tabBar, .navigationBar)
         .zIndex(1)
     }
     
