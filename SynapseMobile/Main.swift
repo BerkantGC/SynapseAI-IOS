@@ -8,36 +8,20 @@
 import SwiftUI
 
 struct Main: View {
-    @State var isLogged = false
-    
-    func checkToken(){
-        DispatchQueue.main.async {
-            let stringSession = KeychainService.instance.secureGet(forKey: "user")
-            if let session = stringSession {
-                let user = try? JSONDecoder().decode(User.self, from: session.data(using: .utf8)!)
-                let tokenExpiresAt = user?.expires_at
-                if Date().isTokenValid(expiresAt: tokenExpiresAt!)
-                {
-                    self.isLogged = true;
-                }
-                else {
-                    self.isLogged = false;
-                }
-            } else {
-                self.isLogged = false;
-            }
-        }
-    }
+    @ObservedObject private var authViewModel = LoginViewModel()
     
     var body: some View{
         VStack {
-            if isLogged {
+            if authViewModel.isLogged {
                 TabsView()
+                    .environmentObject(authViewModel)
+                    .navigationTitle("Synapse")
             } else {
                 LoginView()
+                    .environmentObject(authViewModel)
             }
         }.onAppear {
-            checkToken()
+            authViewModel.checkToken()
         }
     }
 }

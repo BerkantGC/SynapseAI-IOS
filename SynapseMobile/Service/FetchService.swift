@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import SwiftUICore
 
 class FetchService{
+    @EnvironmentObject var viewModel: LoginViewModel
     
     func buildUrl(url: String,
                   method: String?,
@@ -46,6 +48,14 @@ class FetchService{
         let request = buildUrl(url: url, method: method, data: data)
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let response = response as? HTTPURLResponse {
+                if response.statusCode == 401 {
+                    DispatchQueue.main.async {
+                        self.viewModel.isLogged = false
+                    }
+                }
+            }
+            
             completion(data, response, error)
         }
         task.resume()
