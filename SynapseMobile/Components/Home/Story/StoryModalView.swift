@@ -25,7 +25,7 @@ struct StoryModalView: View {
             
             VStack {
                 Spacer()
-                StoryCarousel(storyList: [story], animationNamespace: animationNamespace)
+                StoryCarousel(username: story.user, animationNamespace: animationNamespace)
                     .frame(width: .infinity, height: .infinity)
                 Spacer()
             }.offset(offset)
