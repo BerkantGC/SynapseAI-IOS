@@ -20,11 +20,11 @@ struct PostCard: View {
             RoundedRectangle(cornerRadius: 20)
                 .opacity(0.01)
                 .shadow(radius: 10)
-            VStack {
+            VStack(spacing: 0) {
                 HStack {
                     AsyncImage(url: URL(string: "http://localhost:8080/image/\(post.profile_picture ?? "").png")) { image in
                         image.resizable()
-                            .aspectRatio(contentMode: .fit)
+                            .aspectRatio(contentMode: .fill)
                             .clipShape(Circle())
                             .frame(width: 50, height: 50)
                     } placeholder: {
@@ -33,18 +33,22 @@ struct PostCard: View {
                     VStack(alignment: .leading) {
                         Text(post.full_name!)
                             .font(.headline)
-                        Text("11.11.2024")
+                        Text("@\(post.username!)")
                             .font(.subheadline)
                     }
                     Spacer()
                     Image(systemName: "ellipsis")
                         .padding()
-                }.padding(.horizontal)
-                AsyncImage(url: URL(string: "http://localhost:8080/image/\(post.image ?? "").png")) { image in
-                    image.resizable()
-                        .aspectRatio(contentMode: .fit)
-                } placeholder: {
-                    ProgressView()
+                }.padding()
+                VStack{
+                    AsyncImage(url: URL(string: "http://localhost:8080/image/\(post.image ?? "").png")) { image in
+                        image.resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height * 0.60)
+                            .clipped()
+                    } placeholder: {
+                        ProgressView()
+                    }
                 }
                 HStack {
                     Button(){
@@ -89,10 +93,20 @@ struct PostCard: View {
                         Image(systemName: "bookmark").font(.title2)
                     }
                 }.padding()
-            }
+                HStack(spacing: 5){
+                    Text(post.title!)
+                        .font(.headline)
+                    if post.content != nil {
+                        Text(post.content!)
+                            .font(.callout)
+                            .lineLimit(1)
+                            .truncationMode(.tail)
+                    }
+                    Spacer()
+                }.padding(.bottom)
+                .padding(.horizontal)
+            }.background(.ultraThinMaterial)
         }
-        .frame(maxWidth: .infinity,
-                maxHeight: UIScreen.main.bounds.height / 2
-         )
+        .cornerRadius(20)
     }
 }
