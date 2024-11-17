@@ -20,7 +20,7 @@ struct TabsView: View {
     @State var selectedTab: Tab = .home
     
     init() {
-        UITabBar.appearance().unselectedItemTintColor = UIColor.white
+        UITabBar.appearance().unselectedItemTintColor = .systemGray
     }
     
     var body: some View {
@@ -62,25 +62,6 @@ struct TabsView: View {
                 }
         }
         .accentColor(.white)
-        .overlay(alignment: .bottom) {
-            let color = Color.white
-            GeometryReader { geometry in
-                let aThird = geometry.size.width / 5
-            VStack {
-                Spacer()
-                Circle()
-                  .background(color.blur(radius: 20))
-                  .frame(width: aThird, height: 30)
-                  .shadow(color: color, radius: 40)
-                  .offset(
-                    x: CGFloat(selectedTab.rawValue) * aThird,
-                    y: 30
-                  )
-              }
-            }
-        }
-        .animation(.easeInOut(duration: 0.2), value: selectedTab)
-        .edgesIgnoringSafeArea(.bottom)
     }
 }
 
