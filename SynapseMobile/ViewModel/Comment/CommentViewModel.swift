@@ -10,6 +10,7 @@ import Foundation
 class CommentViewModel: ObservableObject {
     @Published var comments: [CommentModel] = []
     @Published var errorMessage: String?
+    @Published var commentText: String = ""
     
     func loadComments(postId: Int) {
         FetchService().executeRequest(url: "/comments?post_id=\(postId)", method: "GET", data: nil) { data, response, error in

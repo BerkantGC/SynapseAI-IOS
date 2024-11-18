@@ -9,7 +9,7 @@ import Foundation
 
 struct CommentModel: Identifiable, Codable {
     var id: Int  // unique identifier
-    var content: String?
+    var content: String
     var created_at: String?
     var profile_picture: String?
     var user: String

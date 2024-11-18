@@ -19,9 +19,6 @@ struct PostCard: View {
     var body: some View {
         ZStack {
             NavigationStack{
-                RoundedRectangle(cornerRadius: 20)
-                    .opacity(0.01)
-                    .shadow(radius: 10)
                 VStack(spacing: 0) {
                     HStack {
                         AsyncImage(url: URL(string: "http://localhost:8080/image/\(post.profile_picture ?? "").png")) { image in
@@ -83,7 +80,7 @@ struct PostCard: View {
                                 Text("\(post.comments_count!)")
                             }
                         }.sheet(isPresented: $showCommentSheet){
-                            CommentView(postId: post.id)
+                            CommentView(parentPost: self.$post)
                         }
                         Button(){
                             print("Share")
