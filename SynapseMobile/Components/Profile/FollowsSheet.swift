@@ -10,7 +10,9 @@ import SwiftUI
 
 struct FollowsSheet : View {
     @Binding var selectedSegment: String;
+    @Binding var isNavigatingProfile: Bool;
     @EnvironmentObject var viewModel: ProfileViewModel;
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         ZStack{
@@ -39,6 +41,9 @@ struct FollowsSheet : View {
                     }else{
                         ForEach(viewModel.followers) { follower in
                             UserFollowCard(follow: follower)
+                                .onTapGesture {
+                                    isNavigatingProfile.toggle()
+                                }
                         }
                     }
                 } else {
@@ -47,6 +52,9 @@ struct FollowsSheet : View {
                     }else{
                         ForEach(viewModel.followings) { follower in
                             UserFollowCard(follow: follower)
+                                .onTapGesture {
+                                    isNavigatingProfile.toggle()
+                                }
                         }
                     }
                 }

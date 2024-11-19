@@ -13,21 +13,22 @@ struct ProfileHeader : View {
     var profile: ProfileModel;
     @State var showFollows = false
     @State var selectedSegment: String = "followers"
+    @State var isNavigatingProfile = false
     
     init(profile: ProfileModel) {
         self.profile = profile
     }
     
     var body: some View {
-        VStack {
-            HStack {
-                AsyncImage(url: URL(string: "http://localhost:8080/image/\(profile.profile_picture ?? "").png")!) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(Color.white, lineWidth: 1))
-                        .shadow(radius: 10)
+            VStack {
+                HStack {
+                    AsyncImage(url: URL(string: "http://localhost:8080/image/\(profile.profile_picture ?? "").png")!) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(Color.white, lineWidth: 1))
+                            .shadow(radius: 10)
                     } placeholder: {
                         Image("placeholder")
                             .resizable()
@@ -36,14 +37,14 @@ struct ProfileHeader : View {
                             .overlay(Circle().stroke(Color.white, lineWidth: 1))
                             .shadow(radius: 10)
                     }.frame(width: 100, height: 100)
-                VStack(alignment: .leading) {
-                    Text(profile.first_name! + " " + profile.last_name!)
-                        .font(.title)
-                        .fontWeight(.bold)
+                    VStack(alignment: .leading) {
+                        Text(profile.first_name! + " " + profile.last_name!)
+                            .font(.title)
+                            .fontWeight(.bold)
+                    }
+                    Spacer()
                 }
-                Spacer()
-            }
-            
+                
                 HStack {
                     Button(action: {
                         viewModel.getFollowers(status: FollowStatus.ACCEPTED)
@@ -65,7 +66,7 @@ struct ProfileHeader : View {
                         viewModel.getFollowings(status: FollowStatus.ACCEPTED)
                         self.selectedSegment = "followings"
                         showFollows.toggle()
-                    }) { 
+                    }) {
                         VStack {
                             Text("Takip Edilenler")
                                 .font(.subheadline)
@@ -77,11 +78,18 @@ struct ProfileHeader : View {
                         }
                     }
                 }
-                .padding(.top, 20).sheet(isPresented: $showFollows) {
-                    FollowsSheet(selectedSegment: $selectedSegment)
+                .padding(.top, 20)
+                .sheet(isPresented: $showFollows) {
+                    FollowsSheet(selectedSegment: $selectedSegment, isNavigatingProfile: $isNavigatingProfile)
                 }
-        }
-        .padding(.horizontal, 20)
+                .navigationDestination(isPresented: self.$isNavigatingProfile) {
+                    ProfileView(username: profile.username)
+                }
+            }.padding(.horizontal, 20)
+        
     }
 }
  
+#Preview {
+    MyProfileView()
+}

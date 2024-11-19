@@ -53,7 +53,7 @@ struct TabsView: View {
                 .tabItem {
                     Image(systemName: "message")
                 }
-            ProfileView()
+            MyProfileView()
                 .onAppear() {
                     self.selectedTab = .profile
                 }

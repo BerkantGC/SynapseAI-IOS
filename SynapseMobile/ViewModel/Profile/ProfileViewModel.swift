@@ -16,15 +16,33 @@ class ProfileViewModel: ObservableObject {
     @Published var followers: [FollowModel] = []
     @Published var followings: [FollowModel] = []
     
-    init() {
-        loadProfileInfo()
-        print("ProfileViewModel initialized")
-    }
-    
-    func loadProfileInfo() {
+    func loadMyDetails(){
         self.isLoading = true
         self.errorMessage = nil
         FetchService().executeRequest(url: "/profile/me", method: "GET", data: nil) { data, response, error in
+            DispatchQueue.main.async {
+                self.isLoading = false
+                if let data = data {
+                    do {
+                        let decodedData = try JSONDecoder().decode(ProfileModel.self, from: data)
+                        self.profile = decodedData
+                        self.loadUserPosts()
+                    } catch {
+                        self.errorMessage = "Error decoding JSON: \(error)"
+                        print(self.errorMessage!)
+                    }
+                } else if let error = error {
+                    self.errorMessage = "Error fetching profile: \(error)"
+                    print(self.errorMessage!)
+                }
+            }
+        }
+    }
+    
+    func loadUserDetails(username: String){
+        self.isLoading = true
+        self.errorMessage = nil
+        FetchService().executeRequest(url: "/profile/\(username)", method: "GET", data: nil) { data, response, error in
             DispatchQueue.main.async {
                 self.isLoading = false
                 if let data = data {

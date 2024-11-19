@@ -8,9 +8,8 @@
 import Foundation
 import SwiftUI
 
-struct ProfileView: View {
-    @StateObject var viewModel:ProfileViewModel = ProfileViewModel()
-    
+struct MyProfileView: View {
+    @StateObject var viewModel: ProfileViewModel = ProfileViewModel()
     var body: some View {
         ZStack {
             Background()
@@ -22,12 +21,14 @@ struct ProfileView: View {
                             .padding(.top, 20)
                     } else if let profile = viewModel.profile {
                         ProfileHeader(profile: profile)
-                            .environmentObject(viewModel) 
+                            .environmentObject(viewModel)
                     }
                     //ProfileStats()
                     PostsGrid(posts: viewModel.userPosts)
                 }
             }
+        }.onAppear {
+            viewModel.loadMyDetails()
         }
     }
 }
