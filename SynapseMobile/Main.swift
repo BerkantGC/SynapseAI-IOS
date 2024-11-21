@@ -10,6 +10,7 @@ import SwiftUI
 struct Main: View {
     @ObservedObject private var authViewModel = LoginViewModel()
     
+     
     var body: some View{
         VStack {
             if authViewModel.isLogged {
@@ -19,7 +20,7 @@ struct Main: View {
             } else {
                 LoginView()
                     .environmentObject(authViewModel)
-            }
+            } 
         }.onAppear {
             authViewModel.checkToken()
         }

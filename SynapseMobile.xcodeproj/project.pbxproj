@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		C01A6A4C2CED3B3000C5FC00 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = C01A6A4B2CED3B3000C5FC00 /* SocketIO */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		C0F98E1E2CE0AF7C0055B6A4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C01A6A4C2CED3B3000C5FC00 /* SocketIO in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = SynapseMobile;
 			packageProductDependencies = (
+				C01A6A4B2CED3B3000C5FC00 /* SocketIO */,
 			);
 			productName = SynapseMobile;
 			productReference = C0F98E0D2CE0AF7A0055B6A4 /* SynapseMobile.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = C0F98E042CE0AF7A0055B6A4;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				C01A6A4A2CED3B3000C5FC00 /* XCRemoteSwiftPackageReference "socket" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = C0F98E0E2CE0AF7A0055B6A4 /* Products */;
 			projectDirPath = "";
@@ -552,6 +561,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C01A6A4A2CED3B3000C5FC00 /* XCRemoteSwiftPackageReference "socket" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 16.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C01A6A4B2CED3B3000C5FC00 /* SocketIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C01A6A4A2CED3B3000C5FC00 /* XCRemoteSwiftPackageReference "socket" */;
+			productName = SocketIO;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C0F98E052CE0AF7A0055B6A4 /* Project object */;
 }

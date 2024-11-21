@@ -46,7 +46,7 @@ struct TabsView: View {
                 .tabItem {
                     Image(systemName: "plus.viewfinder")
                 }
-            Text("Mesajlarım")
+            MessageView()
                 .onAppear() {
                     self.selectedTab = .messages
                 }
