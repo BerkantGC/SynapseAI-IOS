@@ -40,5 +40,8 @@ struct UserChatCard: View {
                 }
             }
         }
+        .padding(.horizontal)
+        Divider()
+        
     }
 }

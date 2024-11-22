@@ -12,23 +12,25 @@ struct MessageView : View {
     @StateObject private var socketManager = SocketManagerService.shared
     
     var body: some View {
-        VStack {
-            Text("Mesajlarım")
-                .font(.title)
-                .padding()
-            List(socketManager.sessions) { session in
-                VStack(alignment: .leading) {
-                    UserChatCard(chat: session)
+        ZStack{
+            Background()
+            ScrollView{
+                VStack {
+                    Text("Mesajlarım")
+                        .font(.title)
+                        .padding()
+                    ForEach(socketManager.sessions) { session in
+                        UserChatCard(chat: session)
+                    }
+                }
+                .onAppear {
+                    socketManager.connect()
                 }
             }
-        }.onAppear {
-            socketManager.connect()
-            
         }
-        
     }
 }
  
 #Preview{
-    Main()
+    MessageView()
 }
