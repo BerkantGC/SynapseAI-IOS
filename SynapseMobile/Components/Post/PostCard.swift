@@ -11,10 +11,7 @@ import SwiftUI
 struct PostCard: View {
     @State var post: Post;
     @State var showCommentSheet: Bool = false;
-    
-    init(post: Post) {
-        self.post = post;
-    }
+    var animationNamespace: Namespace.ID
     
     var body: some View {
         ZStack {
@@ -43,6 +40,7 @@ struct PostCard: View {
                         AsyncImage(url: URL(string: "http://localhost:8080/image/\(post.image ?? "").png")) { image in
                             image.resizable()
                                 .aspectRatio(contentMode: .fill)
+                                .matchedGeometryEffect(id: post.id, in: animationNamespace)
                                 .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height * 0.60)
                                 .clipped()
                         } placeholder: {

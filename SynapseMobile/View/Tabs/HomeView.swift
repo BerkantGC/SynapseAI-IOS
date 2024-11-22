@@ -4,6 +4,9 @@ struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
     @State private var selectedStory: StoryModel?
     @State private var showStoryModal = false
+    
+    @State private var selectedPost: Post?
+    @State private var showPostModal = false
     @Namespace private var animationNamespace
 
     var body: some View {
@@ -37,7 +40,13 @@ struct HomeView: View {
                             ){
                                 LazyVStack {
                                     ForEach(viewModel.posts) { post in
-                                        PostCard(post: post)
+                                        PostCard(post: post, animationNamespace: animationNamespace)
+                                        .onTapGesture {
+                                            withAnimation(.easeIn) {
+                                                showPostModal.toggle()
+                                                selectedPost = post
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -47,6 +56,17 @@ struct HomeView: View {
                 
                 if showStoryModal {
                     StoryModalView(story: selectedStory!, showStoryModal: $showStoryModal, animationNamespace: animationNamespace)
+                } 
+                
+                if showPostModal {
+                    if let post = selectedPost {
+                        PostDetailCard(post: post, animationNamespace: animationNamespace)
+                        .onTapGesture {
+                            withAnimation(.easeInOut) {
+                                selectedPost = nil
+                            }
+                        }
+                    }
                 }
             }
             .toolbar {
