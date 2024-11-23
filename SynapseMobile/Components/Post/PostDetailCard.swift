@@ -27,29 +27,50 @@ struct PostDetailCard: View {
                 ProgressView()
             }
             
-            VStack{
-                
-                Spacer()
             
-                
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text(post.full_name!)
-                            .font(.headline)
-                        Text("@\(post.username!)")
-                            .font(.subheadline)
-                    }
+           
+                VStack{
                     Spacer()
-                }.padding(.horizontal)
                 
-                Text(post.content!)
-                    .font(.title2)
-                    .padding()
-                    .cornerRadius(20)
-                    .shadow(radius: 10)
-                
-            }.background(LinearGradient(gradient: Gradient(colors: [Color.clear, Color.loginBG]), startPoint: .top, endPoint: .bottom))
-                .offset(y: descriptionContainer)
+                    
+                    HStack {
+                        Text(post.title!)
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .padding()
+                            .cornerRadius(20)
+                            .shadow(radius: 10)
+                        Spacer()
+                        VStack(alignment: .leading) {
+                            Text(post.full_name!)
+                                .font(.headline)
+                            Text("@\(post.username!)")
+                                .font(.subheadline)
+                        }
+                    }.padding(.horizontal)
+                    
+                    
+                    if let description = post.content {
+                        Text(description)
+                            .font(.title2)
+                            .padding()
+                            .cornerRadius(20)
+                            .shadow(radius: 10)
+                    }
+                }.background(LinearGradient(gradient: Gradient(colors: [Color.clear, Color.loginBG]), startPoint: .top, endPoint: .bottom))
+                    .offset(y: descriptionContainer)
+                    .gesture(DragGesture().onChanged { value in
+                        if value.translation.height > 0 {
+                            descriptionContainer = value.translation.height
+                        }
+                    }.onEnded { value in
+                        if value.translation.height > 200 {
+                            descriptionContainer = 220
+                        } else {
+                            descriptionContainer = 0
+                        }
+                    })
+            
         }
         .onAppear() {
             withAnimation(.smooth.delay(1)) {
@@ -58,7 +79,7 @@ struct PostDetailCard: View {
         }
         .frame(width: .infinity, height: .infinity)
         .toolbarVisibility(.hidden, for: .tabBar, .navigationBar)
-        .zIndex(1)
+        .zIndex(4)
         
     }
 }
