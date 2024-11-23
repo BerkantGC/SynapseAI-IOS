@@ -17,14 +17,17 @@ class SocketManagerService: ObservableObject {
     @Published var notifications: [NotificationModel] = []
     @Published var sessions: [SessionModel] = []
     
+    @Published var selectedSession: SessionModel?
+    @Published var messages: [MessageModel] = []
+    @Published var newMessage: String = ""
     init() {
         // Replace with your Socket.IO server URL
         let serverURL = URL(string: "ws://localhost:3000")!
-        
+         
         let session = KeychainService.instance.secureGet(forKey: "user")
         
         let user = try? JSONDecoder().decode(User.self, from: Data(session!.utf8))
-        
+         
         // Add token to headers
         manager = SocketManager(
             socketURL: serverURL,
@@ -39,7 +42,7 @@ class SocketManagerService: ObservableObject {
            
         socket = manager.defaultSocket
 
-           
+        
         }
 
         func connect() {
@@ -77,6 +80,23 @@ class SocketManagerService: ObservableObject {
                 }
             }
             
+            socket.on("receive_messages"){ data, ack in
+                DispatchQueue.main.async {
+                    guard let jsonData = try? JSONSerialization.data(withJSONObject: data.first ?? []) else
+                    {
+                        print("Failed to serialize messages data.")
+                        return
+                    }
+                    
+                    do {
+                        let messages = try JSONDecoder().decode([MessageModel].self, from: jsonData)
+                        self.messages = messages
+                    } catch {
+                        print("Failed to decode notifications: \(error)")
+                    }
+                }
+            }
+            
             socket.on("receive_sessions"){ data, ack in
                 DispatchQueue.main.async {
                     guard let jsonData = try? JSONSerialization.data(withJSONObject: data.first ?? []) else
@@ -95,6 +115,12 @@ class SocketManagerService: ObservableObject {
             }
         
             socket.connect()
+        } 
+    
+        func getMessages() {
+            if let session = selectedSession {
+                socket.emit("get_messages", ["session_id": session.id])
+            }
         }
 
         func emit(event: String, with data: [String: Any]) {

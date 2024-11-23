@@ -8,29 +8,41 @@
 import Foundation
 import SwiftUI
 
-struct MessageView : View {
+struct MessageView: View {
     @StateObject private var socketManager = SocketManagerService.shared
-    
+    @State private var isShowing = false
+
     var body: some View {
-        ZStack{
-            Background()
-            ScrollView{
-                VStack {
-                    Text("Mesajlarım")
-                        .font(.title)
-                        .padding()
-                    ForEach(socketManager.sessions) { session in
-                        UserChatCard(chat: session)
+        NavigationStack {
+            ZStack {
+                Background()
+                ScrollView {
+                    VStack {
+                        // Display chat sessions
+                        ForEach(socketManager.sessions) { session in
+                            UserChatCard(chat: session)
+                                .onTapGesture {
+                                    socketManager.selectedSession = session
+                                    isShowing.toggle()
+                                }
+                                // Navigate to ChatView when isShowing is true
+                                .navigationDestination(isPresented: $isShowing) {
+                                    ChatView()
+                                }
+                        }
+                    }
+                    .onAppear {
+                        socketManager.connect()
                     }
                 }
-                .onAppear {
-                    socketManager.connect()
-                }
             }
+            .navigationTitle("Mesajlarım")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
+
  
 #Preview{
-    MessageView()
+    Main()
 }
