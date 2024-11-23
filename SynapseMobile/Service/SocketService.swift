@@ -20,6 +20,7 @@ class SocketManagerService: ObservableObject {
     @Published var selectedSession: SessionModel?
     @Published var messages: [MessageModel] = []
     @Published var newMessage: String = ""
+    
     init() {
         // Replace with your Socket.IO server URL
         let serverURL = URL(string: "ws://localhost:3000")!
@@ -123,17 +124,13 @@ class SocketManagerService: ObservableObject {
             }
         }
 
-        func emit(event: String, with data: [String: Any]) {
-            if (self.socket.status == .connected){
-                socket.emit(event, data)
+        func sendMessage(content: String) {
+            if let session = selectedSession {
+                socket.emit("send_message", ["session_id": session.id, "content": content])
             }
-            else {
-                print("Socket is not connected. Unable to emit event.")
-            }
-        } 
+        }
     
         func disconnect() {
             socket.disconnect()
         }
 }
-

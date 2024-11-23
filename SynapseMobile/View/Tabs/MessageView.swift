@@ -44,5 +44,5 @@ struct MessageView: View {
 
  
 #Preview{
-    Main()
+    MessageView()
 }
