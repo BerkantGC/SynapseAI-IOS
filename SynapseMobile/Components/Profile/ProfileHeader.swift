@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import PhotosUI
 
 struct ProfileHeader : View {
     @EnvironmentObject var viewModel: ProfileViewModel;
@@ -14,6 +15,9 @@ struct ProfileHeader : View {
     @State var showFollows = false
     @State var selectedSegment: String = "followers"
     @State var isNavigatingProfile = false
+    @State var selection: PhotosPickerItem?
+    @State var selectedImageData: UIImage?
+    @State private var isCropperPresented = false
     
     init(profile: ProfileModel) {
         self.profile = profile
@@ -22,21 +26,58 @@ struct ProfileHeader : View {
     var body: some View {
             VStack {
                 HStack {
-                    AsyncImage(url: URL(string: "http://localhost:8080/image/\(profile.profile_picture ?? "").png")!) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .clipShape(Circle())
-                            .overlay(Circle().stroke(Color.white, lineWidth: 1))
-                            .shadow(radius: 10)
-                    } placeholder: {
-                        Image("placeholder")
-                            .resizable()
-                            .frame(width: 100, height: 100)
-                            .clipShape(Circle())
-                            .overlay(Circle().stroke(Color.white, lineWidth: 1))
-                            .shadow(radius: 10)
-                    }.frame(width: 100, height: 100)
+                    PhotosPicker(selection: $selection, preferredItemEncoding: .automatic){
+                    if let fetchedImage = profile.profile_picture{
+                        AsyncImage(url: URL(string: "http://localhost:8080/image/\(fetchedImage).png")!) { image in
+                            image
+                                .resizable()
+                                .frame(width: 100, height: 100)
+                                .aspectRatio(contentMode: .fit)
+                                .clipShape(Circle())
+                                .overlay(Circle().stroke(Color.white, lineWidth: 1))
+                                .shadow(radius: 10)
+                        } placeholder: {
+                            Image("placeholder")
+                                .resizable()
+                                .frame(width: 100, height: 100)
+                                .clipShape(Circle())
+                                .overlay(Circle().stroke(Color.white, lineWidth: 1))
+                                .shadow(radius: 10)
+                        }.frame(width: 100, height: 100)
+                    } else{
+                        if selectedImageData != nil {
+                            Image(uiImage: selectedImageData!)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 100, height: 100)
+                                .clipShape(Circle())
+                                .overlay(Circle().stroke(Color.white, lineWidth: 1))
+                                .shadow(radius: 10)
+                                
+                        }else{
+                            
+                            Image("placeholder")
+                                .resizable()
+                                .frame(width: 100, height: 100)
+                                .clipShape(Circle())
+                                .overlay(Circle().stroke(Color.white, lineWidth: 1))
+                                .shadow(radius: 10)
+                                
+                        }
+                    }
+                    }.onChange(of: selection) {
+                        if let selection = selection {
+                            Task{
+                                if let image = try await selection.loadTransferable(type: Data.self){
+                                    self.selectedImageData = UIImage(data: image)
+                                    self.isCropperPresented.toggle()
+                                }
+                            }
+                        }
+                    }
+                    
+                    
+                    Spacer()
                     VStack(alignment: .leading) {
                         Text(profile.first_name! + " " + profile.last_name!)
                             .font(.title)
@@ -79,6 +120,9 @@ struct ProfileHeader : View {
                     }
                 }
                 .padding(.top, 20)
+                .sheet(isPresented: $isCropperPresented) {
+                    CircularCropView(image: $selectedImageData)
+                }
                 .sheet(isPresented: $showFollows) {
                     FollowsSheet(selectedSegment: $selectedSegment, isNavigatingProfile: $isNavigatingProfile)
                 }
@@ -91,5 +135,6 @@ struct ProfileHeader : View {
 }
  
 #Preview {
-    MyProfileView()
+    Main()
 }
+
