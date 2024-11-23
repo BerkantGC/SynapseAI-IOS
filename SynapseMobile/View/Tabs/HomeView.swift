@@ -66,6 +66,7 @@ struct HomeView: View {
                                 selectedPost = nil
                             }
                         }
+                        .toolbarVisibility(.hidden, for: .tabBar, .navigationBar)
                     }
                 }
             }
@@ -76,7 +77,19 @@ struct HomeView: View {
                         .fontWeight(.bold)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Image(systemName: "bell")
+                    if SocketManagerService.shared.notifications.count > 0 {
+                        Image(systemName: "bell.fill")
+                            .foregroundColor(.text)
+                            .overlay(
+                                Text (String(SocketManagerService.shared.notifications.count))
+                                        .foregroundColor(.white)
+                                        .font(.caption)
+                                        .padding(5)
+                                        .offset(x: 10, y: -10)
+                            )
+                    } else {
+                        Image(systemName: "bell")
+                    }
                 }
             }
             .onAppear {

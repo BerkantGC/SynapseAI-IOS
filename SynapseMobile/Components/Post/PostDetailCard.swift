@@ -78,7 +78,6 @@ struct PostDetailCard: View {
             }
         }
         .frame(width: .infinity, height: .infinity)
-        .toolbarVisibility(.hidden, for: .tabBar, .navigationBar)
         .zIndex(4)
         
     }

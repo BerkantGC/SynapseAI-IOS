@@ -57,38 +57,40 @@ class SocketManagerService: ObservableObject {
                 print("Socket encountered an error: \(data)")
             }
             
-            socket.on("receive_notifications"){ data, ack in
             
-                guard let jsonData = try? JSONSerialization.data(withJSONObject: data.first ?? []) else
-                {
-                    print("Failed to serialize notifications data.")
-                    return
-                }
-
-                do {
-                    let notifications = try JSONDecoder().decode([NotificationModel].self, from: jsonData)
-                    DispatchQueue.main.async {
-                        self.notifications = notifications
+            socket.on("receive_notifications"){ data, ack in
+                DispatchQueue.main.async {
+                    guard let jsonData = try? JSONSerialization.data(withJSONObject: data.first ?? []) else
+                    {
+                        print("Failed to serialize notifications data.")
+                        return
                     }
-                } catch {
-                    print("Failed to decode notifications: \(error)")
+
+                    do {
+                        let notifications = try JSONDecoder().decode([NotificationModel].self, from: jsonData)
+                        
+                            self.notifications = notifications
+                        
+                    } catch {
+                        print("Failed to decode notifications: \(error)")
+                    }
                 }
             }
             
             socket.on("receive_sessions"){ data, ack in
-                guard let jsonData = try? JSONSerialization.data(withJSONObject: data.first ?? []) else
-                {
-                    print("Failed to serialize sessions data.")
-                    return
-                }
-
-                do {
-                    let sessions = try JSONDecoder().decode([SessionModel].self, from: jsonData)
-                    DispatchQueue.main.async {
-                        self.sessions = sessions
+                DispatchQueue.main.async {
+                    guard let jsonData = try? JSONSerialization.data(withJSONObject: data.first ?? []) else
+                    {
+                        print("Failed to serialize sessions data.")
+                        return
                     }
-                } catch {
-                    print("Failed to decode notifications: \(error)")
+                    
+                    do {
+                        let sessions = try JSONDecoder().decode([SessionModel].self, from: jsonData)
+                        self.sessions = sessions
+                    } catch {
+                        print("Failed to decode notifications: \(error)")
+                    }
                 }
             }
         

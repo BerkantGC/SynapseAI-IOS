@@ -18,7 +18,7 @@ enum Tab: Int {
 
 struct TabsView: View {
     @State var selectedTab: Tab = .home
-    
+    @State var notifications: [NotificationModel]?
     init() {
         UITabBar.appearance().unselectedItemTintColor = .systemGray
     }

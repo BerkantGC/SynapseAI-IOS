@@ -10,19 +10,19 @@ import SwiftUI
 struct Main: View {
     @ObservedObject private var authViewModel = LoginViewModel()
     
-     
+    init() {
+        authViewModel.checkToken()
+        SocketManagerService.shared.connect()
+    }
+   
     var body: some View{
-        VStack {
-            if authViewModel.isLogged {
-                TabsView()
-                    .environmentObject(authViewModel)
-                    .navigationTitle("Synapse")
-            } else {
-                LoginView()
-                    .environmentObject(authViewModel)
-            } 
-        }.onAppear {
-            authViewModel.checkToken()
+        if authViewModel.isLogged {
+            TabsView()
+                .environmentObject(authViewModel)
+                .navigationTitle("Synapse")
+        } else {
+            LoginView()
+                .environmentObject(authViewModel)
         }
     }
 }
