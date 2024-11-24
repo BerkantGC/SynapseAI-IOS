@@ -11,6 +11,8 @@ import Foundation
 struct ExploreView: View {
     @State var isSearching: Bool = false
     @State var query: String = ""
+    @StateObject private var viewModel = SearchViewModel()
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -20,9 +22,12 @@ struct ExploreView: View {
                     .searchable(text: $query,
                                 isPresented: $isSearching,
                                 prompt: "Ara..")
+                    .onChange(of: query) {
+                        viewModel.searchUsers(query: query)
+                    }
                     .onSubmit {
                         //submitCurrentSearch()
-                    }
+                    }.environmentObject(viewModel)
                 
                 if !isSearching {
                     VStack(alignment: .leading) {
@@ -45,26 +50,18 @@ struct SearchedView: View {
     var searchText: String
     var isSearching: Bool
 
-    let items = ["a", "b", "c"]
-    var filteredItems: [String] { items.filter { $0 == searchText.lowercased() } }
-
-
     @State  var isPresented = false
     @Environment(\.dismissSearch) private var dismissSearch
-
+    @EnvironmentObject var viewModel: SearchViewModel
 
     var body: some View {
         if isSearching {
             ZStack{
                 Background()
                 VStack{
-                    Spacer()
-                    if let item = filteredItems.first {
-                        Button("Details about \(item)") {
-                            isPresented = true
-                        }
-                        .sheet(isPresented: $isPresented) {
-                            Text("Details about \(item)")
+                    List{
+                        ForEach(viewModel.users) { searchedUser in
+                            UserSearchCard(user: searchedUser)
                         }
                     }
                     Spacer()
@@ -76,5 +73,5 @@ struct SearchedView: View {
 
 
 #Preview {
-    ExploreView()
+    Main()
 }
