@@ -23,17 +23,17 @@ struct LoginView: View {
                     
                     TextField("Kullanıcı Adı", text: $username)
                         .autocapitalization(.none)
-                        .padding()
+                        .padding(15)
                         .background(Color(.secondarySystemBackground))
                         .cornerRadius(5.0)
-                        .padding(.horizontal)
+                        .padding(.horizontal, 5)
                     
                     SecureField("Şifre", text: $password)
                         .autocapitalization(.none)
-                        .padding()
+                        .padding(15)
                         .background(Color(.secondarySystemBackground))
                         .cornerRadius(5.0)
-                        .padding(.horizontal)
+                        .padding(.horizontal, 5)
                     
                     
                     Button(action: {
@@ -42,11 +42,11 @@ struct LoginView: View {
                         Text("Giriş Yap")
                             .font(.headline)
                             .foregroundColor(.white)
-                            .padding()
+                            .padding(15)
                             .frame(maxWidth: .infinity)
                             .background(Color.blue)
                             .cornerRadius(10.0)
-                            .padding(.horizontal)
+                            .padding(.horizontal, 5)
                     }.navigationDestination(isPresented: $viewModel.isLogged){
                         TabsView()
                     }
