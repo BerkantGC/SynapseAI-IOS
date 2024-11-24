@@ -11,6 +11,20 @@ class LoginViewModel: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     
+    init(){
+        NotificationCenter.default.addObserver(self, selector: #selector(handle401), name: .didReceive401, object: nil)
+    }
+    
+    @objc private func handle401() {
+           isLogged = false
+           print("User logged out due to 401 Unauthorized")
+           // Perform any additional logout actions here
+       }
+       
+       deinit {
+           NotificationCenter.default.removeObserver(self, name: .didReceive401, object: nil)
+       }
+    
     func login(username: String, password: String) {
         // Simulate a login request
         guard !username.isEmpty, !password.isEmpty else {

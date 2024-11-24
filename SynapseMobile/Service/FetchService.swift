@@ -23,11 +23,12 @@ class FetchService{
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = method ?? "GET"
         
-        let session = KeychainService.instance.secureGet(forKey: "user");
-        if let session = try? JSONDecoder().decode(User.self, from: Data(session!.utf8))
-        {
-            !url.starts(with: "http://localhost:8080/auth") ?
-            request.setValue("Bearer \(session.token ?? "")", forHTTPHeaderField:  "Authorization") : nil
+        if let session = KeychainService.instance.secureGet(forKey: "user"){
+            if let session = try? JSONDecoder().decode(User.self, from: Data(session.utf8))
+            {
+                !url.starts(with: "http://localhost:8080/auth") ?
+                request.setValue("Bearer \(session.token ?? "")", forHTTPHeaderField:  "Authorization") : nil
+            }
         }
         
         if data == nil {
@@ -99,13 +100,8 @@ class FetchService{
         
         // Upload the data
         URLSession.shared.uploadTask(with: urlRequest, from: formData) { data, response, error in
-            if let response = response as? HTTPURLResponse {
-                if response.statusCode == 401 {
-                    DispatchQueue.main.async {
-                        self.viewModel.isLogged = false
-                    }
-                }
-            }
+            self.handleUnauthorizedResponse(response: response)
+            
             completion(data, response, error)
         }.resume()
     }
@@ -114,16 +110,18 @@ class FetchService{
         let request = buildUrl(url: url, method: method, data: data)
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let response = response as? HTTPURLResponse {
-                if response.statusCode == 401 {
-                    DispatchQueue.main.async {
-                        self.viewModel.isLogged = false
-                    }
-                }
-            }
+            self.handleUnauthorizedResponse(response: response)
             
             completion(data, response, error)
         }
         task.resume()
     }
+    
+    func handleUnauthorizedResponse(response: URLResponse?) {
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 401 {
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: .didReceive401, object: nil)
+                }
+            }
+        }
 }

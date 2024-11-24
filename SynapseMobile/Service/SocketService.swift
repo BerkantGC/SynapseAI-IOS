@@ -24,11 +24,14 @@ class SocketManagerService: ObservableObject {
     init() {
         // Replace with your Socket.IO server URL
         let serverURL = URL(string: "ws://localhost:3000")!
+        var user: User? = nil
          
-        let session = KeychainService.instance.secureGet(forKey: "user")
+        if let session = KeychainService.instance.secureGet(forKey: "user")
+        {
+            user = try? JSONDecoder().decode(User.self, from: Data(session.utf8))
+        }
         
-        let user = try? JSONDecoder().decode(User.self, from: Data(session!.utf8))
-         
+    
         // Add token to headers
         manager = SocketManager(
             socketURL: serverURL,
