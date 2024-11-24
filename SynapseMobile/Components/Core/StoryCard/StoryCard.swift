@@ -14,7 +14,7 @@ struct StoryCard: View {
     
     var body: some View {
         ZStack {
-            AsyncImage(url: URL(string: "http://localhost:8080/image/\(story.image).png")) { image in
+            AsyncImage(url: URL(string: story.image)) { image in
                 image.resizable()
                     .matchedGeometryEffect(id: story.id, in: animationNamespace)
                     .frame(width: UIScreen.main.bounds.width / 3, height: UIScreen.main.bounds.width / 2.5)
@@ -28,7 +28,7 @@ struct StoryCard: View {
             
             
             VStack {
-                AsyncImage(url: URL(string: "http://localhost:8080/image/\(story.profile_picture ?? "").png")) { image in
+                AsyncImage(url: URL(string: story.profile_picture ?? "")) { image in
                     image.resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 60, height: 60)

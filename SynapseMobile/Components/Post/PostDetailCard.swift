@@ -18,7 +18,7 @@ struct PostDetailCard: View {
         ZStack {
             Background()
             
-            AsyncImage(url: URL(string: "http://localhost:8080/image/\(post.image ?? "").png")) { image in
+            AsyncImage(url: URL(string: post.image ?? "")) { image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)

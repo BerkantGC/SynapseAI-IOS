@@ -14,7 +14,7 @@ struct UserCommentCard : View {
     var body: some View {
         VStack {
             HStack {
-                AsyncImage(url: URL(string: "http://localhost:8080/image/\(comment.profile_picture ?? "").png")) { image in
+                AsyncImage(url: URL(string: comment.profile_picture ?? "")) { image in
                     image.resizable()
                         .aspectRatio(contentMode: .fill)
                         .clipShape(Circle())

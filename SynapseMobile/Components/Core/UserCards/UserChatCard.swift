@@ -13,7 +13,7 @@ struct UserChatCard: View {
     
     var body: some View {
         HStack{
-            AsyncImage(url: URL(string: "http://localhost:8080/image/\(chat.image ?? "").png")) { image in
+            AsyncImage(url: URL(string: chat.image ?? "")) { image in
                 image.resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 60, height: 60)

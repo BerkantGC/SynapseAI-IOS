@@ -18,7 +18,7 @@ struct PostCard: View {
             NavigationStack{
                 VStack(spacing: 0) {
                     HStack {
-                        AsyncImage(url: URL(string: "http://localhost:8080/image/\(post.profile_picture ?? "").png")) { image in
+                        AsyncImage(url: URL(string: post.profile_picture ?? "")) { image in
                             image.resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .clipShape(Circle())
@@ -37,7 +37,7 @@ struct PostCard: View {
                             .padding()
                     }.padding()
                     VStack{
-                        AsyncImage(url: URL(string: "http://localhost:8080/image/\(post.image ?? "").png")) { image in
+                        AsyncImage(url: URL(string: post.image ?? "")) { image in
                             image.resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .matchedGeometryEffect(id: post.id, in: animationNamespace)

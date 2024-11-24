@@ -27,7 +27,7 @@ struct StoryCarousel: View {
             ScrollView(.horizontal) {
                 HStack(spacing: 0) {
                     ForEach(0..<totalPages, id: \.self) { index in
-                        let imageURL = "http://localhost:8080/image/\(viewModel.stories[index].image).png"
+                        let imageURL = (viewModel.stories[index].image)
                         AsyncImage(url: URL(string: imageURL)!) { image in
                             image
                                 .resizable()

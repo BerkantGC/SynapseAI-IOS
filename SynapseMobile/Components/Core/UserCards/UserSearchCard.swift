@@ -12,7 +12,7 @@ struct UserSearchCard: View {
     var body: some View {
         HStack{
             if user.profile_picture != nil {
-                let pp_url = "http://localhost:8080/image/\(user.profile_picture!).png"
+                let pp_url = user.profile_picture!
                 AsyncImage(url: URL(string: pp_url)) { image in
                     image.resizable()
                         .aspectRatio(contentMode: .fill)

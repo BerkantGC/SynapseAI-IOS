@@ -25,8 +25,7 @@ struct Main: View {
                 .environmentObject(authViewModel)
         }
     }
-} 
-
+}
 #Preview {
     Main()
 }

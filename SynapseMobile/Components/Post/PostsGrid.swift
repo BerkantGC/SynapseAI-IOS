@@ -21,7 +21,7 @@ struct PostsGrid: View {
         ScrollView {
             LazyVGrid(columns: Array(repeating: GridItem(), count: 2)) {
                 ForEach(self.posts) { post in
-                    AsyncImage(url: URL(string: "http://localhost:8080/image/\(post.image ?? "").png")!) { image in
+                    AsyncImage(url: URL(string: post.image ?? "")!) { image in
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fill)

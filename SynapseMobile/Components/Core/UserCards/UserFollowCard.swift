@@ -13,7 +13,7 @@ struct UserFollowCard : View {
     
     var body: some View {
         HStack {
-            AsyncImage(url: URL(string: "http://localhost:8080/image/\(follow.profile_picture ?? "").png")!) { image in
+            AsyncImage(url: URL(string: follow.profile_picture ?? "")!) { image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fill)

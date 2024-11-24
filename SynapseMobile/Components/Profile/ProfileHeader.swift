@@ -28,7 +28,7 @@ struct ProfileHeader : View {
                 HStack {
                     PhotosPicker(selection: $selection, preferredItemEncoding: .automatic){
                     if let fetchedImage = profile.profile_picture{
-                        AsyncImage(url: URL(string: "http://localhost:8080/image/\(fetchedImage).png")!) { image in
+                        AsyncImage(url: URL(string: fetchedImage)) { image in
                             image
                                 .resizable()
                                 .frame(width: 100, height: 100)
