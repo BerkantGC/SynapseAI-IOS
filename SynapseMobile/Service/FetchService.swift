@@ -18,7 +18,7 @@ class FetchService{
         var url = url
         
         if !url.starts(with: "http://"){
-            url = "http://localhost:8080" + url
+            url = "http://34.118.19.87" + url
         }
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = method ?? "GET"
@@ -26,7 +26,7 @@ class FetchService{
         if let session = KeychainService.instance.secureGet(forKey: "user"){
             if let session = try? JSONDecoder().decode(User.self, from: Data(session.utf8))
             {
-                !url.starts(with: "http://localhost:8080/auth") ?
+                !url.starts(with: "http://34.118.19.87/auth") ?
                 request.setValue("Bearer \(session.token ?? "")", forHTTPHeaderField:  "Authorization") : nil
             }
         }
@@ -56,7 +56,7 @@ class FetchService{
         
         var url = url
         if !url.starts(with: "http://") {
-            url = "http://localhost:8080" + url
+            url = "http://34.118.19.87" + url
         }
         
         var urlRequest = URLRequest(url: URL(string: url)!)
@@ -71,7 +71,7 @@ class FetchService{
         // Add Authorization Header
         let session = KeychainService.instance.secureGet(forKey: "user")
         if let session = try? JSONDecoder().decode(User.self, from: Data(session!.utf8)) {
-            if !url.starts(with: "http://localhost:8080/auth") {
+            if !url.starts(with: "http://34.118.19.87/auth") {
                 urlRequest.setValue("Bearer \(session.token ?? "")", forHTTPHeaderField: "Authorization")
             }
         }

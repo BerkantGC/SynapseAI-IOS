@@ -17,11 +17,11 @@ struct Main: View {
    
     var body: some View{
         if authViewModel.isLogged {
-            TabsView()
+            TabsView() 
                 .environmentObject(authViewModel)
                 .navigationTitle("Synapse")
         } else {
-            LoginView()
+            LoginView() 
                 .environmentObject(authViewModel)
         }
     }

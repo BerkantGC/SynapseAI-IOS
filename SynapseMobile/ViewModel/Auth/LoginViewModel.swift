@@ -37,6 +37,7 @@ class LoginViewModel: ObservableObject {
                                       method: "POST",
                                       data: ["username": username, "password": password]
         ) { data, response, error in
+            print(error)
             if let error = error {
                 self.errorMessage = error.localizedDescription
             }

@@ -92,7 +92,7 @@ struct PostCard: View {
                             Image(systemName: "bookmark").font(.title2)
                         }
                     }.padding()
-                    HStack(spacing: 5){
+                    VStack(spacing: 5){
                         Text(post.title!)
                             .font(.headline)
                         if post.content != nil {
@@ -101,7 +101,6 @@ struct PostCard: View {
                                 .lineLimit(1)
                                 .truncationMode(.tail)
                         }
-                        Spacer()
                     }.padding(.bottom)
                         .padding(.horizontal)
                 }.background(.ultraThinMaterial)
