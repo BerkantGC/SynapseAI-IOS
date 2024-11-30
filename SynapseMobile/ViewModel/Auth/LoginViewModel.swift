@@ -5,7 +5,9 @@ import Combine
 import SwiftUI
 
 class LoginViewModel: ObservableObject {
-    var user: User? = nil
+    @Published var user: User? = nil
+    @Published var username: String = ""
+    @Published var password: String = ""
     @Published var errorMessage: String? = nil
     @Published var isLogged: Bool = false
     
@@ -25,9 +27,9 @@ class LoginViewModel: ObservableObject {
            NotificationCenter.default.removeObserver(self, name: .didReceive401, object: nil)
        }
     
-    func login(username: String, password: String) {
+    func login() {
         // Simulate a login request
-        guard !username.isEmpty, !password.isEmpty else {
+        guard !self.username.isEmpty, !self.password.isEmpty else {
             errorMessage = "Email and password are required."
             return
         }
@@ -37,7 +39,6 @@ class LoginViewModel: ObservableObject {
                                       method: "POST",
                                       data: ["username": username, "password": password]
         ) { data, response, error in
-            print(error)
             if let error = error {
                 self.errorMessage = error.localizedDescription
             }

@@ -8,11 +8,11 @@
 import Foundation
 import SwiftUI
 
-struct MessageView: View {
+struct ChatListView: View {
     @StateObject private var socketManager = SocketManagerService.shared
     @State var isShowing = false
-    
     @State var selectedUser: Int?
+    
     var body: some View {
         NavigationStack {
             ZStack {

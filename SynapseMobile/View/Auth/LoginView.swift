@@ -1,9 +1,6 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State var username: String = ""
-    @State var password: String = ""
-    
     @ObservedObject var viewModel: LoginViewModel = LoginViewModel()
     
     var body: some View {
@@ -21,14 +18,14 @@ struct LoginView: View {
                         .padding(.horizontal)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    TextField("Kullanıcı Adı", text: $username)
+                    TextField("Kullanıcı Adı", text: $viewModel.username)
                         .autocapitalization(.none)
                         .padding(15)
                         .background(Color(.secondarySystemBackground))
                         .cornerRadius(5.0)
                         .padding(.horizontal, 5)
                     
-                    SecureField("Şifre", text: $password)
+                    SecureField("Şifre", text: $viewModel.password)
                         .autocapitalization(.none)
                         .padding(15)
                         .background(Color(.secondarySystemBackground))
@@ -37,7 +34,7 @@ struct LoginView: View {
                     
                     
                     Button(action: {
-                        viewModel.login(username: username, password: password)
+                        viewModel.login()
                     }) {
                         Text("Giriş Yap")
                             .font(.headline)
