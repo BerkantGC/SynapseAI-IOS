@@ -10,6 +10,8 @@ import SwiftUICore
 
 class FetchService{
     @EnvironmentObject var viewModel: LoginViewModel
+    @EnvironmentKey("BASE_URL")
+    var baseUrl: String
     
     func buildUrl(url: String,
                   method: String?,
@@ -18,7 +20,7 @@ class FetchService{
         var url = url
         
         if !url.starts(with: "http://"){
-            url = "http://34.118.19.87" + url
+            url = baseUrl  + url
         }
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = method ?? "GET"
@@ -26,7 +28,7 @@ class FetchService{
         if let session = KeychainService.instance.secureGet(forKey: "user"){
             if let session = try? JSONDecoder().decode(User.self, from: Data(session.utf8))
             {
-                !url.starts(with: "http://34.118.19.87/auth") ?
+                !url.starts(with: "\(baseUrl)/auth") ?
                 request.setValue("Bearer \(session.token ?? "")", forHTTPHeaderField:  "Authorization") : nil
             }
         }
@@ -56,7 +58,7 @@ class FetchService{
         
         var url = url
         if !url.starts(with: "http://") {
-            url = "http://34.118.19.87" + url
+            url = baseUrl + url
         }
         
         var urlRequest = URLRequest(url: URL(string: url)!)
@@ -71,7 +73,7 @@ class FetchService{
         // Add Authorization Header
         let session = KeychainService.instance.secureGet(forKey: "user")
         if let session = try? JSONDecoder().decode(User.self, from: Data(session!.utf8)) {
-            if !url.starts(with: "http://34.118.19.87/auth") {
+            if !url.starts(with: "\(baseUrl)/auth") {
                 urlRequest.setValue("Bearer \(session.token ?? "")", forHTTPHeaderField: "Authorization")
             }
         }

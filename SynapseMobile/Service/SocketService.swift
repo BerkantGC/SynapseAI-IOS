@@ -11,7 +11,7 @@ import SocketIO
 
 class SocketManagerService: ObservableObject {
     static let shared = SocketManagerService() // Singleton for global access
-
+    
     private let manager: SocketManager
     private var socket: SocketIOClient
     @Published var notifications: [NotificationModel] = []
@@ -22,8 +22,10 @@ class SocketManagerService: ObservableObject {
     @Published var newMessage: String = ""
     
     init() {
+        @EnvironmentKey("SOCKET_URL")
+        var socketURL: String
         // Replace with your Socket.IO server URL
-        let serverURL = URL(string: "ws://localhost:3000")!
+        let serverURL = URL(string: socketURL)!
         var user: User? = nil
          
         if let session = KeychainService.instance.secureGet(forKey: "user")
