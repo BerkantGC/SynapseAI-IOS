@@ -10,6 +10,7 @@ import SwiftUI
 
 struct MessageInput: View {
     @StateObject var socketManager = SocketManagerService.shared
+    @Binding var selectedUserId: Int?
     
     var body: some View {
         ZStack{
@@ -19,7 +20,7 @@ struct MessageInput: View {
                 .cornerRadius(10)
                 .foregroundColor(.text)
             Button(action: {
-                self.socketManager.sendMessage(content: self.socketManager.newMessage)
+                self.socketManager.sendMessage(content: self.socketManager.newMessage, user_id: selectedUserId)
                 self.socketManager.newMessage = ""
             }) {
                 Image(systemName: "paperplane.fill")

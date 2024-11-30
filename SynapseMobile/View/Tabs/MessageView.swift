@@ -10,14 +10,17 @@ import SwiftUI
 
 struct MessageView: View {
     @StateObject private var socketManager = SocketManagerService.shared
-    @State private var isShowing = false
-
+    @State var isShowing = false
+    
+    @State var selectedUser: Int?
     var body: some View {
         NavigationStack {
             ZStack {
                 Background()
                 ScrollView {
                     VStack {
+                        ChatsHeader(isNavigating: $isShowing, selectedUser: $selectedUser)
+                        
                         // Display chat sessions
                         ForEach(socketManager.sessions) { session in
                             UserChatCard(chat: session)
@@ -25,11 +28,11 @@ struct MessageView: View {
                                     socketManager.selectedSession = session
                                     isShowing.toggle()
                                 }
-                                // Navigate to ChatView when isShowing is true
-                                .navigationDestination(isPresented: $isShowing) {
-                                    ChatView()
-                                }
                         }
+                    }
+                    // Navigate to ChatView when isShowing is true
+                    .navigationDestination(isPresented: $isShowing) {
+                        ChatView(selectedUserId: $selectedUser)
                     }
                     .onAppear {
                         socketManager.connect()
@@ -37,12 +40,11 @@ struct MessageView: View {
                 }
             }
             .navigationTitle("Mesajlarım")
-            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
 
  
 #Preview{
-    MessageView()
+    Main()
 }

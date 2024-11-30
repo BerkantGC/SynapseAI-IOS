@@ -13,15 +13,22 @@ struct UserChatCard: View {
     
     var body: some View {
         HStack{
-            AsyncImage(url: URL(string: chat.image ?? "")) { image in
-                image.resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 60, height: 60)
+            if let pp = chat.image{
+                AsyncImage(url: URL(string: pp)) { image in
+                    image.resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 50, height: 50)
+                        .clipShape(Circle())
+                } placeholder: {
+                    ProgressView()
+                }
+            }else{
+                Image(systemName: "person.crop.circle")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 50, height: 50)
                     .clipShape(Circle())
-            } placeholder: {
-                ProgressView()
             }
-                
         
             VStack(alignment: .leading){
                 Text(chat.user)

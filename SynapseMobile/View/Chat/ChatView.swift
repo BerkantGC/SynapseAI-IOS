@@ -11,7 +11,8 @@ import SwiftUI
 struct ChatView: View {
     @Environment(\.presentationMode) var presentationMode
     @StateObject private var socketManager = SocketManagerService.shared
-
+    @Binding var selectedUserId: Int?
+    
     var body: some View {
         ZStack {
             Background()
@@ -27,6 +28,7 @@ struct ChatView: View {
                         }.padding(.horizontal, 5)
                     }
                     .onAppear {
+                        configureNavigationAppearance()
                         socketManager.getMessages()
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -35,14 +37,10 @@ struct ChatView: View {
                     }
                 } 
                 
-                MessageInput()
+                MessageInput(selectedUserId: $selectedUserId)
                     .padding()
-            }
-        } 
-        .toolbar(.hidden, for: .tabBar)
-        .navigationTitle(socketManager.selectedSession?.user ?? "")
-        .onAppear {
-            configureNavigationAppearance()
+            }.toolbar(.hidden, for: .tabBar)
+            .navigationTitle(socketManager.selectedSession?.user ?? "")
         }
     }
 
@@ -55,7 +53,6 @@ struct ChatView: View {
     private func configureNavigationAppearance() {
         UINavigationBar.appearance().backIndicatorImage = UIImage(systemName: "arrow.left")
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage(systemName: "arrow.left")
-        UINavigationBar.appearance().isTranslucent = true
         UINavigationController().interactivePopGestureRecognizer?.isEnabled = true
     }
 }

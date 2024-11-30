@@ -127,13 +127,16 @@ class SocketManagerService: ObservableObject {
             }
         }
 
-        func sendMessage(content: String) {
-            if let session = selectedSession {
-                socket.emit("send_message", ["session_id": session.id, "content": content])
-            }
+    func sendMessage(content: String, user_id: Int? = nil) {
+        if let session = selectedSession {
+            socket.emit("send_message", ["session_id": session.id, "content": content])
+        } else {
+            socket.emit("send_message", ["content": content, "participant_id": user_id!])
         }
-    
-        func disconnect() {
-            socket.disconnect()
-        }
+    }
+
+    func disconnect() {
+        socket.disconnect()
+    }
 }
+
