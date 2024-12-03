@@ -59,3 +59,7 @@ struct ChatView: View {
         UINavigationController().interactivePopGestureRecognizer?.isEnabled = true
     }
 }
+
+#Preview {
+    Main()
+}

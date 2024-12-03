@@ -20,7 +20,8 @@ struct MessageInput: View {
                 .cornerRadius(10)
                 .foregroundColor(.text)
             Button(action: {
-                
+                socketManager.send(body: ["message": socketManager.newMessage, "session_id": "\(socketManager.selectedSession?.session_id ?? 1)"], to: "/app/chat/private")
+                socketManager.newMessage = ""
             }) {
                 Image(systemName: "paperplane.fill")
                     .foregroundStyle(.text)

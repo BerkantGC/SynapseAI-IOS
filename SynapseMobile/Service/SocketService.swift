@@ -64,6 +64,10 @@ class SocketManagerService: ObservableObject, SwiftStompDelegate {
         swiftStomp?.send(body: body, to: topic)
     }
     
+    func send(body: [String : String], to: String){
+        swiftStomp?.send(body: body, to: to)
+    }
+    
     // MARK: - SwiftStompDelegate Methods
     
     func onDisconnect(swiftStomp: SwiftStomp, disconnectType: StompDisconnectType) {
@@ -95,16 +99,19 @@ class SocketManagerService: ObservableObject, SwiftStompDelegate {
         
         
         if(destination == "/user/topic/private/\(self.selectedSession?.session_id ?? 0)"){
-            print("alo")
-
             DispatchQueue.main.async {
-                print(message)
+                
                 if let messageListResponse = try? JSONDecoder().decode(MessageResponse.self, from: Data(message.utf8)){
-                   
                     self.messages = messageListResponse.messages
+                }
+                
+                if let newMessageResponse = try? JSONDecoder().decode(MessageModel.self, from: Data(message.utf8))
+                {
+                    self.messages.append(newMessageResponse)
                 }
             }
         }
+        
         
     }
 
