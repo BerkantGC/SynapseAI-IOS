@@ -36,8 +36,14 @@ struct ExploreView: View {
                             .fontWeight(.bold)
                             .foregroundColor(.text)
                             .padding(.horizontal, 10)
+                        HStack{
+                            ForEach(0...5, id: \.self){ index in
+                                CategoryCard(category: Category.future)
+                            }
+                        }
                         Spacer()
                         // Other content for "Explore" goes here
+                                        
                     }
                 }
                 

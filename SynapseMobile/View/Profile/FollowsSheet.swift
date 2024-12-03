@@ -10,7 +10,7 @@ import SwiftUI
 
 struct FollowsSheet : View {
     @Binding var selectedSegment: String;
-    @Binding var isNavigatingProfile: Bool;
+    @Binding var selectedUser: String?;
     @EnvironmentObject var viewModel: ProfileViewModel;
     @Environment(\.dismiss) var dismiss
     
@@ -42,7 +42,8 @@ struct FollowsSheet : View {
                         ForEach(viewModel.followers) { follower in
                             UserFollowCard(follow: follower)
                                 .onTapGesture {
-                                    isNavigatingProfile.toggle()
+                                    selectedUser=follower.username
+                                    dismiss()
                                 }
                         }
                     }
@@ -53,7 +54,8 @@ struct FollowsSheet : View {
                         ForEach(viewModel.followings) { follower in
                             UserFollowCard(follow: follower)
                                 .onTapGesture {
-                                    isNavigatingProfile.toggle()
+                                    selectedUser=follower.username
+                                    dismiss()
                                 }
                         }
                     }

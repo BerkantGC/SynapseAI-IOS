@@ -16,7 +16,7 @@ struct MessageCard: View {
             if message.me {
                 Spacer()
                 VStack(alignment: .trailing){
-                    Text(message.content)
+                    Text(message.message)
                         .padding(.horizontal, 10)
                         .padding(.vertical, 10)
                         .background(Color.blue)
@@ -25,7 +25,7 @@ struct MessageCard: View {
                 }
             } else {
                 VStack(alignment: .leading){
-                    Text(message.content)
+                    Text(message.message)
                         .padding(.horizontal, 10)
                         .padding(.vertical, 10)
                         .background(Color.gray)

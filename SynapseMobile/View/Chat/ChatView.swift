@@ -29,8 +29,11 @@ struct ChatView: View {
                     }
                     .onAppear {
                         configureNavigationAppearance()
-                        socketManager.getMessages()
-                        
+                        if let session_id = socketManager.selectedSession?.session_id{
+                            socketManager.subscribe(to: "/user/topic/private/\(session_id)")
+                            socketManager.send(body: "\(session_id)",to: "/app/chat/get-private-messages")
+                        }
+                       
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                             scrollToLatestMessage(using: proxy)
                         }

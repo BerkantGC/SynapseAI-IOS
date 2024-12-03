@@ -20,8 +20,7 @@ struct MessageInput: View {
                 .cornerRadius(10)
                 .foregroundColor(.text)
             Button(action: {
-                self.socketManager.sendMessage(content: self.socketManager.newMessage, user_id: selectedUserId)
-                self.socketManager.newMessage = ""
+                
             }) {
                 Image(systemName: "paperplane.fill")
                     .foregroundStyle(.text)

@@ -7,13 +7,23 @@
 
 import Foundation
 
-struct SessionModel:  Identifiable,Codable {
-    var id: String
-    var last_message: String?
-    var last_message_date: String?
-    var user: String
-    var image: String?
-    var group_id: String?
-    var created_at: String?
+import Foundation
+
+struct SessionResponse: Codable {
+    let total: Int
+    let sessions: [SessionModel]
+}
+
+struct SessionModel: Identifiable, Codable {
+    let id = UUID() // Unique identifier for SwiftUI's `ForEach
+    let session_id: Int
+    let user: String
+    let groupName: String?
+    let image: String?
+    let last_message: String
+    let last_message_date: String
     
+    enum CodingKeys: String, CodingKey {
+        case session_id, user, groupName, image, last_message, last_message_date
+    }
 }

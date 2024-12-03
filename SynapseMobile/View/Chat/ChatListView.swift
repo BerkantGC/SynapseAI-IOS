@@ -22,12 +22,14 @@ struct ChatListView: View {
                         ChatsHeader(isNavigating: $isShowing, selectedUser: $selectedUser)
                         
                         // Display chat sessions
-                        ForEach(socketManager.sessions) { session in
-                            UserChatCard(chat: session)
-                                .onTapGesture {
-                                    socketManager.selectedSession = session
-                                    isShowing.toggle()
-                                }
+                        if let sessions = socketManager.sessions?.sessions{
+                            ForEach(sessions) { session in
+                                UserChatCard(chat: session)
+                                    .onTapGesture {
+                                        socketManager.selectedSession = session
+                                        isShowing.toggle()
+                                    }
+                            }
                         }
                     }
                     // Navigate to ChatView when isShowing is true
@@ -35,7 +37,7 @@ struct ChatListView: View {
                         ChatView(selectedUserId: $selectedUser)
                     }
                     .onAppear {
-                        socketManager.connect()
+                        socketManager.send(to: "/app/get-sessions")
                     }
                 }
             }

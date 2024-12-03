@@ -7,11 +7,25 @@
 
 import Foundation
 
+struct MessageResponse: Codable {
+    let total: Int
+    let messages: [MessageModel]
+}
+
 struct MessageModel: Identifiable, Codable {
-    var id: String
-    var content: String
-    var from: String
+    var id: Int
+    var message: String
+    var session_id: Int
     var sent_at: String
-    var profile_picture: String
+    var sender: String
     var me: Bool
+    
+    enum CodingKeys: CodingKey {
+        case id
+        case message
+        case session_id
+        case sent_at
+        case sender
+        case me
+    }
 }

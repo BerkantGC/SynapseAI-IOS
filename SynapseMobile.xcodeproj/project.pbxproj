@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C01A6A4C2CED3B3000C5FC00 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = C01A6A4B2CED3B3000C5FC00 /* SocketIO */; };
+		C08DC72E2CFE5EF500AD0E60 /* SwiftStomp in Frameworks */ = {isa = PBXBuildFile; productRef = C08DC72D2CFE5EF500AD0E60 /* SwiftStomp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,7 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C01A6A4C2CED3B3000C5FC00 /* SocketIO in Frameworks */,
+				C08DC72E2CFE5EF500AD0E60 /* SwiftStomp in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,12 +90,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C08DC72C2CFE5EF400AD0E60 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C0F98E042CE0AF7A0055B6A4 = {
 			isa = PBXGroup;
 			children = (
 				C0F98E0F2CE0AF7A0055B6A4 /* SynapseMobile */,
 				C0F98E202CE0AF7C0055B6A4 /* SynapseMobileTests */,
 				C0F98E2A2CE0AF7C0055B6A4 /* SynapseMobileUITests */,
+				C08DC72C2CFE5EF400AD0E60 /* Frameworks */,
 				C0F98E0E2CE0AF7A0055B6A4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -130,7 +138,7 @@
 			);
 			name = SynapseMobile;
 			packageProductDependencies = (
-				C01A6A4B2CED3B3000C5FC00 /* SocketIO */,
+				C08DC72D2CFE5EF500AD0E60 /* SwiftStomp */,
 			);
 			productName = SynapseMobile;
 			productReference = C0F98E0D2CE0AF7A0055B6A4 /* SynapseMobile.app */;
@@ -215,7 +223,7 @@
 			mainGroup = C0F98E042CE0AF7A0055B6A4;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				C01A6A4A2CED3B3000C5FC00 /* XCRemoteSwiftPackageReference "socket" */,
+				C08DC72B2CFE5CCA00AD0E60 /* XCRemoteSwiftPackageReference "SwiftStomp" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = C0F98E0E2CE0AF7A0055B6A4 /* Products */;
@@ -578,21 +586,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C01A6A4A2CED3B3000C5FC00 /* XCRemoteSwiftPackageReference "socket" */ = {
+		C08DC72B2CFE5CCA00AD0E60 /* XCRemoteSwiftPackageReference "SwiftStomp" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/socketio/socket.io-client-swift";
+			repositoryURL = "https://github.com/Romixery/SwiftStomp";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 16.1.1;
+				minimumVersion = 1.0.4;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C01A6A4B2CED3B3000C5FC00 /* SocketIO */ = {
+		C08DC72D2CFE5EF500AD0E60 /* SwiftStomp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C01A6A4A2CED3B3000C5FC00 /* XCRemoteSwiftPackageReference "socket" */;
-			productName = SocketIO;
+			package = C08DC72B2CFE5CCA00AD0E60 /* XCRemoteSwiftPackageReference "SwiftStomp" */;
+			productName = SwiftStomp;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

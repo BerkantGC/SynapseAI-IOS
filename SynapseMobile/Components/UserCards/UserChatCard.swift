@@ -41,7 +41,7 @@ struct UserChatCard: View {
             Spacer()
             
             if chat.last_message_date != nil{
-                if let last_message_date = Date().convertDateToString(date: chat.last_message_date!){
+                if let last_message_date = Date().convertDateToString(date: chat.last_message_date){
                     Text(last_message_date)
                        .font(.subheadline)
                 }

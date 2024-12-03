@@ -1,144 +1,118 @@
 //
-//  SocketService.swift
+//  SocketManagerService.swift
 //  SynapseMobile
 //
 //  Created by Berkant Gürcan on 20.11.2024.
 //
 
 import Foundation
-import SwiftUI
-import SocketIO
+import SwiftStomp
 
-class SocketManagerService: ObservableObject {
-    static let shared = SocketManagerService() // Singleton for global access
+class SocketManagerService: ObservableObject, SwiftStompDelegate {
     
-    private let manager: SocketManager
-    private var socket: SocketIOClient
+    static let shared = SocketManagerService()
+    
     @Published var notifications: [NotificationModel] = []
-    @Published var sessions: [SessionModel] = []
-    
+    @Published var sessions: SessionResponse?;
     @Published var selectedSession: SessionModel?
     @Published var messages: [MessageModel] = []
     @Published var newMessage: String = ""
     
+    private var swiftStomp: SwiftStomp?
+    
     init() {
+        setupSocketConnection()
+        
+        if((swiftStomp?.isConnected) == nil) {
+            connect();
+        }
+    }
+    
+    private func setupSocketConnection() {
         @EnvironmentKey("SOCKET_URL")
-        var socketURL: String
-        // Replace with your Socket.IO server URL
-        let serverURL = URL(string: socketURL)!
-        var user: User? = nil
-         
-        if let session = KeychainService.instance.secureGet(forKey: "user")
-        {
-            user = try? JSONDecoder().decode(User.self, from: Data(session.utf8))
+        var socketURLString :String;
+        
+        guard let serverURL = URL(string: socketURLString),
+              let userSession = KeychainService.instance.secureGet(forKey: "user"),
+              let user = try? JSONDecoder().decode(User.self, from: Data(userSession.utf8))
+        else {
+            print("Failed to retrieve WebSocket URL or User Token.")
+            return
         }
         
-    
-        // Add token to headers
-        manager = SocketManager(
-            socketURL: serverURL,
-            config: [
-                .log(true), // Enable logging
-               .reconnects(true),
-               .reconnectAttempts(-1), // Infinite  reconnect attempts
-               .reconnectWait(5), // Wait 5 seconds between reconnects
-            .extraHeaders(["Authorization": "Bearer \(user?.token ?? "")"]) // Add the token here
-            ]
-        )
-           
-        socket = manager.defaultSocket
-
         
-        }
-
-        func connect() {
-            // Setup event listeners
-            socket.on(clientEvent: .connect) { [weak self] data, ack in
-                print("Socket connected.")
-            }
-
-
-            socket.on(clientEvent: .disconnect) { _, _ in
-                print("Socket disconnected!")
-            }
-
-            socket.on(clientEvent: .error) { data, _ in
-                print("Socket encountered an error: \(data)")
-            }
-            
-            
-            socket.on("receive_notifications"){ data, ack in
-                DispatchQueue.main.async {
-                    guard let jsonData = try? JSONSerialization.data(withJSONObject: data.first ?? []) else
-                    {
-                        print("Failed to serialize notifications data.")
-                        return
-                    }
-
-                    do {
-                        let notifications = try JSONDecoder().decode([NotificationModel].self, from: jsonData)
-                        
-                            self.notifications = notifications
-                        
-                    } catch {
-                        print("Failed to decode notifications: \(error)")
-                    }
-                }
-            }
-            
-            socket.on("receive_messages"){ data, ack in
-                DispatchQueue.main.async {
-                    guard let jsonData = try? JSONSerialization.data(withJSONObject: data.first ?? []) else
-                    {
-                        print("Failed to serialize messages data.")
-                        return
-                    }
-                    
-                    do {
-                        let messages = try JSONDecoder().decode([MessageModel].self, from: jsonData)
-                        self.messages = messages
-                    } catch {
-                        print("Failed to decode notifications: \(error)")
-                    }
-                }
-            }
-            
-            socket.on("receive_sessions"){ data, ack in
-                DispatchQueue.main.async {
-                    guard let jsonData = try? JSONSerialization.data(withJSONObject: data.first ?? []) else
-                    {
-                        print("Failed to serialize sessions data.")
-                        return
-                    }
-                    
-                    do {
-                        let sessions = try JSONDecoder().decode([SessionModel].self, from: jsonData)
-                        self.sessions = sessions
-                    } catch {
-                        print("Failed to decode notifications: \(error)")
-                    }
-                }
-            }
-        
-            socket.connect()
-        } 
-    
-        func getMessages() {
-            if let session = selectedSession {
-                socket.emit("get_messages", ["session_id": session.id])
-            }
-        }
-
-    func sendMessage(content: String, user_id: Int? = nil) {
-        if let session = selectedSession {
-            socket.emit("send_message", ["session_id": session.id, "content": content])
-        } else {
-            socket.emit("send_message", ["content": content, "participant_id": user_id!])
-        }
+        swiftStomp = SwiftStomp(host: serverURL, headers: ["Authorization" : "Bearer \(user.token ?? "")"])
+        swiftStomp?.autoReconnect = true
+        swiftStomp?.delegate = self
     }
-
+    
+    func connect() {
+        swiftStomp?.connect()
+        
+    }
+     
     func disconnect() {
-        socket.disconnect()
+        swiftStomp?.disconnect()
     }
-}
+    
+    func subscribe(to topic: String) {
+        swiftStomp?.subscribe(to: topic)
+    }
+    
+    func send(body: String? = "", to topic: String)
+    {
+        swiftStomp?.send(body: body, to: topic)
+    }
+    
+    // MARK: - SwiftStompDelegate Methods
+    
+    func onDisconnect(swiftStomp: SwiftStomp, disconnectType: StompDisconnectType) {
+        print("Disconnected from WebSocket.")
+    }
+    
+    func onConnect(swiftStomp: SwiftStomp, connectType: StompConnectType) {
+       
+        subscribe(to: "/user/queue/notifications")
+        subscribe(to: "/user/topic/private")
+        
+        swiftStomp.send(body: "", to: "/app/get-notifications") // Ensure your server accepts empty payloads here
+    }
 
+    func onMessageReceived(swiftStomp: SwiftStomp, message: Any?, messageId: String, destination: String, headers: [String: String]) {
+        guard let message = message as? String else {
+            print("Received invalid message format")
+            return
+        }
+        
+        if(destination == "/user/topic/private"){
+            DispatchQueue.main.async {
+                if let sessionResponse = try? JSONDecoder().decode(SessionResponse.self, from: Data(message.utf8)){
+                    self.sessions = sessionResponse
+                }
+                
+            }
+        }
+        
+        
+        if(destination == "/user/topic/private/\(self.selectedSession?.session_id ?? 0)"){
+            print("alo")
+
+            DispatchQueue.main.async {
+                print(message)
+                if let messageListResponse = try? JSONDecoder().decode(MessageResponse.self, from: Data(message.utf8)){
+                   
+                    self.messages = messageListResponse.messages
+                }
+            }
+        }
+        
+    }
+
+    func onReceipt(swiftStomp: SwiftStomp, receiptId: String) {
+        print(receiptId)
+    }
+    func onError(swiftStomp: SwiftStomp, briefDescription: String, fullDescription: String?, receiptId: String?, type: StompErrorType) {
+        print("Error: \(briefDescription), Details: \(String(describing: fullDescription))")
+    }
+    
+}

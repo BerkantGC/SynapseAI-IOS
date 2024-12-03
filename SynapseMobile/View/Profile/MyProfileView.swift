@@ -11,20 +11,23 @@ import SwiftUI
 struct MyProfileView: View {
     @StateObject var viewModel: ProfileViewModel = ProfileViewModel()
     var body: some View {
-        ZStack {
-            Background()
-            ScrollView {
-                VStack {
-                    if viewModel.isLoading {
-                        ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle())
-                            .padding(.top, 20)
-                    } else if let profile = viewModel.profile {
-                        ProfileHeader(profile: profile)
-                            .environmentObject(viewModel)
+        NavigationStack{
+            ZStack {
+                Background()
+
+                ScrollView {
+                    VStack {
+                        if viewModel.isLoading {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle())
+                                .padding(.top, 20)
+                        } else if let profile = viewModel.profile {
+                            ProfileHeader(profile: profile)
+                                .environmentObject(viewModel)
+                        }
+                        //ProfileStats()
+                        PostsGrid(posts: viewModel.userPosts)
                     }
-                    //ProfileStats()
-                    PostsGrid(posts: viewModel.userPosts)
                 }
             }
         }.onAppear {
@@ -34,5 +37,5 @@ struct MyProfileView: View {
 }
 
 #Preview {
-    Main()
+    MyProfileView()
 }
