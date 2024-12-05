@@ -12,6 +12,7 @@ struct ExploreView: View {
     @State var isSearching: Bool = false
     @State var query: String = ""
     @StateObject private var viewModel = SearchViewModel()
+    var categoryList: [Category] = Category.allCases;
     
     var body: some View {
         NavigationStack {
@@ -36,9 +37,11 @@ struct ExploreView: View {
                             .fontWeight(.bold)
                             .foregroundColor(.text)
                             .padding(.horizontal, 10)
-                        HStack{
-                            ForEach(0...5, id: \.self){ index in
-                                CategoryCard(category: Category.future)
+                        ScrollView(.horizontal, showsIndicators: false){
+                            HStack{
+                                ForEach(0...(categoryList.count - 1), id: \.self){ index in
+                                    CategoryCard(category: categoryList[index])
+                                }
                             }
                         }
                         Spacer()
@@ -75,9 +78,4 @@ struct SearchedView: View {
             }.frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
-}
-
-
-#Preview {
-    Main()
 }

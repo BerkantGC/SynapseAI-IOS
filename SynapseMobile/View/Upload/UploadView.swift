@@ -10,33 +10,68 @@ import SwiftUI
 import PhotosUI
 
 struct UploadView: View {
-    @State var isSelected = false
-    @State var selectedImageData: Data?
-    @State var selection: PhotosPickerItem?
+    @StateObject var viewModel = UploadViewModel.shared
     
     var body: some View{
         ZStack{
             Background()
             NavigationStack{
                 VStack{
+                Spacer()
+                
+                HStack{
                     if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-                        PhotosPicker(selection: $selection, preferredItemEncoding: .automatic){
-                            Text("foto")
-                        }.onChange(of: selection) {
-                            if let selection = selection {
+                        PhotosPicker(selection: $viewModel.selection, preferredItemEncoding: .automatic){
+                            VStack{
+                                Image(systemName: "photo.stack")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 70)
+                                    .foregroundColor(.text)
+                                Text("Fotoğraf Yükle")
+                                    .font(.title2)
+                                    .foregroundColor(.text)
+                                    .padding()
+                            }
+                            
+                        }.onChange(of: viewModel.selection) {
+                            if let selection = viewModel.selection {
                                 Task{
                                     if let image = try await selection.loadTransferable(type: Data.self){
-                                        self.selectedImageData = image
-                                        self.isSelected = true
+                                        viewModel.selectedImageData = image
+                                        viewModel.isSelected = true
                                     }
                                 }
                             }
-                        }.navigationDestination(isPresented: $isSelected){
-                            PostUploadView(image: selectedImageData)
+                        }.navigationDestination(isPresented: $viewModel.isSelected){
+                            PostUploadView(image: viewModel.selectedImageData)
                         }
                     }
+                    
+                    VStack{
+                        Image(systemName: "apple.image.playground")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 70)
+                            .foregroundColor(.text)
+                        Text("Yapay zeka ile üret")
+                            .font(.title2)
+                            .foregroundColor(.text)
+                            .padding()
+                    }.onTapGesture {
+                        viewModel.navigateImageGenerator()
+                    }.navigationDestination(isPresented: $viewModel.isShowingImageGenerator){
+                        ImageGeneratorView()
+                    }
+                }
+                
+                Spacer()
                 }
             }
         }
     }
+}
+
+#Preview {
+    Main()
 }
