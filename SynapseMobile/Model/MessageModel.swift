@@ -8,8 +8,8 @@
 import Foundation
 
 struct MessageResponse: Codable {
-    let total: Int
-    let messages: [MessageModel]
+    var total: Int
+    var messages: [MessageModel]
 }
 
 struct MessageModel: Identifiable, Codable {
@@ -18,6 +18,7 @@ struct MessageModel: Identifiable, Codable {
     var session_id: Int
     var sent_at: String
     var sender: String
+    var seen_at: String?
     var me: Bool
     
     enum CodingKeys: CodingKey {
@@ -25,6 +26,7 @@ struct MessageModel: Identifiable, Codable {
         case message
         case session_id
         case sent_at
+        case seen_at
         case sender
         case me
     }

@@ -38,7 +38,7 @@ struct ChatView: View {
                             scrollToLatestMessage(using: proxy)
                         }
                     }
-                } 
+                }
                 
                 MessageInput(selectedUserId: $selectedUserId)
                     .padding()

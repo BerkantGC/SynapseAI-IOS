@@ -40,7 +40,7 @@ class SocketManagerService: ObservableObject, SwiftStompDelegate {
             return
         }
         
-        
+    
         swiftStomp = SwiftStomp(host: serverURL, headers: ["Authorization" : "Bearer \(user.token ?? "")"])
         swiftStomp?.autoReconnect = true
         swiftStomp?.delegate = self
@@ -66,6 +66,12 @@ class SocketManagerService: ObservableObject, SwiftStompDelegate {
     
     func send(body: [String : String], to: String){
         swiftStomp?.send(body: body, to: to)
+    }
+    
+    func setSeen() {
+        if let session_id = self.selectedSession?.session_id {
+            self.send(body: "\(session_id)", to: "/app/chat/set-seen")
+        }
     }
     
     // MARK: - SwiftStompDelegate Methods
@@ -100,14 +106,27 @@ class SocketManagerService: ObservableObject, SwiftStompDelegate {
         
         if(destination == "/user/topic/private/\(self.selectedSession?.session_id ?? 0)"){
             DispatchQueue.main.async {
+                if let readResponse = try? JSONDecoder().decode(ReadResponse.self, from: Data(message.utf8)) {
+                    if !readResponse.me{
+                        self.messages = self.messages.map { message in
+                            var updatedMessage = message
+                            if message.me && message.seen_at == nil {
+                                updatedMessage.seen_at = readResponse.seen_at
+                            }
+                            return updatedMessage
+                        }
+                    }
+                }
                 
                 if let messageListResponse = try? JSONDecoder().decode(MessageResponse.self, from: Data(message.utf8)){
                     self.messages = messageListResponse.messages
+                    self.setSeen()
                 }
                 
                 if let newMessageResponse = try? JSONDecoder().decode(MessageModel.self, from: Data(message.utf8))
                 {
                     self.messages.append(newMessageResponse)
+                    self.setSeen()
                 }
             }
         }

@@ -22,6 +22,9 @@ struct MessageCard: View {
                         .background(Color.blue)
                         .cornerRadius(10)
                         .foregroundColor(.white)
+                    Image(systemName: message.seen_at != nil ? "checkmark.seal.fill" : "checkmark.seal")
+                        .foregroundColor(.white)
+                        .font(.callout)
                 }
             } else {
                 VStack(alignment: .leading){
@@ -34,6 +37,6 @@ struct MessageCard: View {
                 }
                 Spacer()
             }
-        }
+        }.padding(.vertical, 5)
     }
 }
