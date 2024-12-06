@@ -29,14 +29,16 @@ struct ChatView: View {
                     }
                     .onAppear {
                         configureNavigationAppearance()
-                        if let session_id = socketManager.selectedSession?.session_id{
-                            socketManager.subscribe(to: "/user/topic/private/\(session_id)")
-                            socketManager.send(body: "\(session_id)",to: "/app/chat/get-private-messages")
+                        socketManager.proxy = proxy
+                        DispatchQueue.main.async {
+                            if let session_id = socketManager.selectedSession?.session_id{
+                                socketManager.subscribe(to: "/user/topic/private/\(session_id)")
+                                socketManager.send(body: "\(session_id)",to: "/app/chat/get-private-messages")
+                            }
                         }
-                       
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            scrollToLatestMessage(using: proxy)
-                        }
+                    }
+                    .onDisappear(){
+                        socketManager.unsubscribe()
                     }
                 }
                 
@@ -44,12 +46,6 @@ struct ChatView: View {
                     .padding()
             }.toolbar(.hidden, for: .tabBar)
             .navigationTitle(socketManager.selectedSession?.user ?? "")
-        }
-    }
-
-    private func scrollToLatestMessage(using proxy: ScrollViewProxy) {
-        if let lastMessageID = socketManager.messages.last?.id {
-            proxy.scrollTo(lastMessageID, anchor: .bottom)
         }
     }
 

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftStomp
+import SwiftUI
 
 class SocketManagerService: ObservableObject, SwiftStompDelegate {
     
@@ -17,6 +18,7 @@ class SocketManagerService: ObservableObject, SwiftStompDelegate {
     @Published var selectedSession: SessionModel?
     @Published var messages: [MessageModel] = []
     @Published var newMessage: String = ""
+    @Published var proxy: ScrollViewProxy?
     
     private var swiftStomp: SwiftStomp?
     
@@ -48,7 +50,6 @@ class SocketManagerService: ObservableObject, SwiftStompDelegate {
     
     func connect() {
         swiftStomp?.connect()
-        
     }
      
     func disconnect() {
@@ -57,6 +58,13 @@ class SocketManagerService: ObservableObject, SwiftStompDelegate {
     
     func subscribe(to topic: String) {
         swiftStomp?.subscribe(to: topic)
+    }
+    
+    func unsubscribe() {
+        if let session_id = self.selectedSession?.session_id {
+            swiftStomp?.unsubscribe(from: "/user/topic/private/\(session_id)")
+            self.messages = []
+        }
     }
     
     func send(body: String? = "", to topic: String)
@@ -71,6 +79,14 @@ class SocketManagerService: ObservableObject, SwiftStompDelegate {
     func setSeen() {
         if let session_id = self.selectedSession?.session_id {
             self.send(body: "\(session_id)", to: "/app/chat/set-seen")
+        }
+    }
+    
+    func scrollToLatestMessage() {
+        if !messages.isEmpty && proxy != nil {
+            withAnimation {
+                self.proxy!.scrollTo(messages.last?.id, anchor: .bottom)
+            }
         }
     }
     
@@ -105,19 +121,19 @@ class SocketManagerService: ObservableObject, SwiftStompDelegate {
         
         
         if(destination == "/user/topic/private/\(self.selectedSession?.session_id ?? 0)"){
-            DispatchQueue.main.async {
-                if let readResponse = try? JSONDecoder().decode(ReadResponse.self, from: Data(message.utf8)) {
-                    if !readResponse.me{
-                        self.messages = self.messages.map { message in
-                            var updatedMessage = message
-                            if message.me && message.seen_at == nil {
-                                updatedMessage.seen_at = readResponse.seen_at
-                            }
-                            return updatedMessage
+            if let readResponse = try? JSONDecoder().decode(ReadResponse.self, from: Data(message.utf8)) {
+                if !readResponse.me{
+                    self.messages = self.messages.map { message in
+                        var updatedMessage = message
+                        if message.me && message.seen_at == nil {
+                            updatedMessage.seen_at = readResponse.seen_at
                         }
+                        return updatedMessage
                     }
                 }
-                
+            }
+
+            DispatchQueue.main.async {
                 if let messageListResponse = try? JSONDecoder().decode(MessageResponse.self, from: Data(message.utf8)){
                     self.messages = messageListResponse.messages
                     self.setSeen()
@@ -128,6 +144,8 @@ class SocketManagerService: ObservableObject, SwiftStompDelegate {
                     self.messages.append(newMessageResponse)
                     self.setSeen()
                 }
+                
+                self.scrollToLatestMessage()
             }
         }
         

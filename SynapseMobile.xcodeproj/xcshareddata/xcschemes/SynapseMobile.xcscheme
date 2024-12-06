@@ -82,7 +82,7 @@
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "SOCKET_URL"
-            value = "ws://localhost:8080/live"
+            value = "ws://34.118.19.87/live"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
