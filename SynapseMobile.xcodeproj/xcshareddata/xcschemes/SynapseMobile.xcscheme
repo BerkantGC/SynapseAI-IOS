@@ -77,12 +77,12 @@
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "BASE_URL"
-            value = "http://34.118.19.87"
+            value = "http://localhost:8080"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "SOCKET_URL"
-            value = "ws://34.118.19.87/live"
+            value = "ws://localhost:8080/live"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>

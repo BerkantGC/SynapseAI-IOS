@@ -11,7 +11,7 @@ import SwiftUI
 struct ChatView: View {
     @Environment(\.presentationMode) var presentationMode
     @StateObject private var socketManager = SocketManagerService.shared
-    @Binding var selectedUserId: Int?
+    @Binding var selectedUser: String?
     
     var body: some View {
         ZStack {
@@ -42,7 +42,7 @@ struct ChatView: View {
                     }
                 }
                 
-                MessageInput(selectedUserId: $selectedUserId)
+                MessageInput(selectedUser: $selectedUser)
                     .padding()
             }.toolbar(.hidden, for: .tabBar)
             .navigationTitle(socketManager.selectedSession?.user ?? "")

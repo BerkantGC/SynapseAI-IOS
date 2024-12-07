@@ -13,7 +13,7 @@ struct ChatsHeader: View {
     @StateObject var socket = SocketManagerService.shared;
     @FocusState private var isSearching: Bool
     @Binding var isNavigating: Bool
-    @Binding var selectedUser: Int?
+    @Binding var selectedUser: String?
     @State var searchText: String = ""
     
     var body: some View {
@@ -48,7 +48,7 @@ struct ChatsHeader: View {
                                         Image(systemName: "plus.circle")
                                             .foregroundColor(.blue)
                                             .onTapGesture {
-                                                selectedUser = user.id
+                                                selectedUser = user.username
                                                 socket.selectedSession = nil
                                                 socket.messages.removeAll()
                                                 isNavigating.toggle()

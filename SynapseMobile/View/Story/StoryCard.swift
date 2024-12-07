@@ -16,7 +16,7 @@ struct StoryCard: View {
         ZStack {
             AsyncImage(url: URL(string: story.image)) { image in
                 image.resizable()
-                    .matchedGeometryEffect(id: story.id, in: animationNamespace)
+                    .matchedGeometryEffect(id: "story\(story.id)", in: animationNamespace)
                     .frame(width: UIScreen.main.bounds.width / 3, height: UIScreen.main.bounds.width / 2.5)
                     .clipped()
                     .cornerRadius(10)

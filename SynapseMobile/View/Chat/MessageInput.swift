@@ -10,7 +10,7 @@ import SwiftUI
 
 struct MessageInput: View {
     @StateObject var socketManager = SocketManagerService.shared
-    @Binding var selectedUserId: Int?
+    @Binding var selectedUser: String?
     
     var body: some View {
         ZStack{
@@ -20,7 +20,19 @@ struct MessageInput: View {
                 .cornerRadius(10)
                 .foregroundColor(.text)
             Button(action: {
-                socketManager.send(body: ["message": socketManager.newMessage, "session_id": "\(socketManager.selectedSession?.session_id ?? 1)"], to: "/app/chat/private")
+                if let session_id = socketManager.selectedSession?.session_id{
+                    socketManager.send(body:
+                                        ["message": socketManager.newMessage,
+                                         "session_id": "\(session_id)",
+                                        ],
+                                       to: "/app/chat/private")
+                }
+                else {
+                    if let selectedUser = selectedUser{
+                        socketManager.send(body: ["message": socketManager.newMessage,
+                                                  "newMessageTo": selectedUser], to: "/app/chat/private")
+                    }
+                }
                 socketManager.newMessage = ""
             }) {
                 Image(systemName: "paperplane.fill")

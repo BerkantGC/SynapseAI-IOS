@@ -1,84 +1,93 @@
-//
-//  PostDetailView.swift
-//  SynapseMobile
-//
-//  Created by Berkant Gürcan on 22.11.2024.
-//
-
 import Foundation
 import SwiftUI
 
 struct PostDetailCard: View {
     var post: Post
     var animationNamespace: Namespace.ID
-    @State var descriptionContainer: CGFloat = UIScreen.main.bounds.height
-    
+    @State private var descriptionOffset: CGFloat = UIScreen.main.bounds.height
+    @State private var dragOffset: CGFloat = 0
     
     var body: some View {
         ZStack {
-            Background()
+            // Dynamic Background
+            LinearGradient(gradient: Gradient(colors: [.black.opacity(0.8), .clear]),
+                           startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
+                .opacity(0.8)
+                .animation(.easeInOut, value: descriptionOffset)
             
+            // Main Post Image
             AsyncImage(url: URL(string: post.image ?? "")) { image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .matchedGeometryEffect(id: post.id, in: animationNamespace)
+                    .scaleEffect(descriptionOffset == 0 ? 1 : 1.05)
+                    .animation(.spring(response: 0.5, dampingFraction: 0.7, blendDuration: 0.3), value: descriptionOffset)
             } placeholder: {
                 ProgressView()
             }
+            .zIndex(1)
             
-            
-           
-                VStack{
-                    Spacer()
+            // Description Container
+            VStack(spacing: 10) {
+                Spacer()
                 
-                    
-                    HStack {
-                        Text(post.title!)
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .padding()
-                            .cornerRadius(20)
-                            .shadow(radius: 10)
-                        Spacer()
-                        VStack(alignment: .leading) {
-                            Text(post.full_name!)
-                                .font(.headline)
-                            Text("@\(post.username!)")
-                                .font(.subheadline)
-                        }
-                    }.padding(.horizontal)
-                    
-                    
-                    if let description = post.content {
-                        Text(description)
-                            .font(.title2)
-                            .padding()
-                            .cornerRadius(20)
-                            .shadow(radius: 10)
+                HStack {
+                    Text(post.title ?? "")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                    Spacer()
+                    VStack(alignment: .leading) {
+                        Text(post.full_name ?? "")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                        Text("@\(post.username ?? "")")
+                            .font(.subheadline)
+                            .foregroundColor(.white.opacity(0.8))
                     }
-                }.background(LinearGradient(gradient: Gradient(colors: [Color.clear, Color.loginBG]), startPoint: .top, endPoint: .bottom))
-                    .offset(y: descriptionContainer)
-                    .gesture(DragGesture().onChanged { value in
-                        if value.translation.height > 0 {
-                            descriptionContainer = value.translation.height
-                        }
-                    }.onEnded { value in
-                        if value.translation.height > 200 {
-                            descriptionContainer = 220
-                        } else {
-                            descriptionContainer = 0
-                        }
-                    })
-            
-        }
-        .onAppear() {
-            withAnimation(.smooth.delay(1)) {
-                descriptionContainer = 0
+                }
+                .padding()
+                
+                if let description = post.content {
+                    Text(description)
+                        .font(.body)
+                        .foregroundColor(.white.opacity(0.9))
+                        .padding()
+                        .lineLimit(nil)
+                        .multilineTextAlignment(.leading)
+                }
             }
+            .padding(.bottom)
+            .background(LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.7), Color.clear]),
+                                       startPoint: .bottom, endPoint: .top))
+            .cornerRadius(30)
+            .offset(y: descriptionOffset + dragOffset)
+            .gesture(
+                DragGesture()
+                    .onChanged { gesture in
+                        dragOffset = gesture.translation.height > 0 ? gesture.translation.height : 0
+                    }
+                    .onEnded { gesture in
+                        if dragOffset > 200 {
+                            withAnimation(.easeInOut) {
+                                descriptionOffset = UIScreen.main.bounds.height
+                            }
+                        } else {
+                            withAnimation(.spring()) {
+                                dragOffset = 0
+                            }
+                        }
+                    }
+            )
+            .onAppear {
+                withAnimation(.spring(response: 0.5, dampingFraction: 0.8, blendDuration: 0.3)) {
+                    descriptionOffset = 0
+                }
+            }
+            .zIndex(2)
         }
-        .frame(width: .infinity, height: .infinity)
-        .zIndex(4)
-        
+        .ignoresSafeArea()
     }
 }

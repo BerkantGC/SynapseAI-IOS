@@ -11,7 +11,7 @@ import SwiftUI
 struct ChatListView: View {
     @StateObject private var socketManager = SocketManagerService.shared
     @State var isShowing = false
-    @State var selectedUser: Int?
+    @State var selectedUser: String?
     
     var body: some View {
         NavigationStack {
@@ -34,7 +34,7 @@ struct ChatListView: View {
                     }
                     // Navigate to ChatView when isShowing is true
                     .navigationDestination(isPresented: $isShowing) {
-                        ChatView(selectedUserId: $selectedUser)
+                        ChatView(selectedUser: $selectedUser)
                     }
                     .onAppear {
                         socketManager.send(to: "/app/get-sessions")

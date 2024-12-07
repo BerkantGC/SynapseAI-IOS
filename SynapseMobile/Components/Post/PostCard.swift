@@ -36,17 +36,18 @@ struct PostCard: View {
                         Image(systemName: "ellipsis")
                             .padding()
                     }.padding()
-                    VStack{
+                    
                         AsyncImage(url: URL(string: post.image ?? "")) { image in
                             image.resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .matchedGeometryEffect(id: post.id, in: animationNamespace)
                                 .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height * 0.60)
                                 .clipped()
+                                .zIndex(4)
                         } placeholder: {
                             ProgressView()
-                        }
-                    }
+                        }.zIndex(4)
+                        
                     HStack {
                         Button(){
                             FetchService().executeRequest(url: "/posts/\(post.id)/like", method: "PUT", data: nil){ response,data,error in

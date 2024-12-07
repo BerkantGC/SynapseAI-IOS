@@ -10,24 +10,26 @@ struct HomeView: View {
     @Namespace private var animationNamespace
 
     var body: some View {
-        NavigationStack{
+        NavigationStack {
             ZStack {
                 Background()
                 
-                ZStack {
-                    if viewModel.isLoading {
-                        ProgressView("Loading posts...")
-                    } else if let errorMessage = viewModel.errorMessage {
-                        Text(errorMessage)
-                            .foregroundColor(.red)
-                            .padding()
-                    } else {
+                if viewModel.isLoading {
+                    ProgressView("Loading posts...")
+                        .transition(.opacity.animation(.easeInOut))
+                } else if let errorMessage = viewModel.errorMessage {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                        .padding()
+                        .transition(.opacity.animation(.easeInOut))
+                } else {
+                    ScrollViewReader { scrollView in
                         ScrollView {
                             Section(header: Text("Hikayeler")
                                 .font(.title)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.horizontal)
-                            ){
+                            ) {
                                 StoryList(stories: viewModel.stories,
                                           selectedStory: $selectedStory,
                                           showStoryModal: $showStoryModal,
@@ -37,15 +39,17 @@ struct HomeView: View {
                                 .font(.title)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.horizontal)
-                            ){
+                            ) {
                                 LazyVStack {
                                     ForEach(viewModel.posts) { post in
                                         PostCard(post: post, animationNamespace: animationNamespace)
-                                        .onTapGesture {
-                                            withAnimation(.easeIn) {
-                                                showPostModal.toggle()
-                                                selectedPost = post
-                                            }
+                                            .onTapGesture {
+                                                scrollView.scrollTo(post.id, anchor: .center)
+                                                withAnimation(.spring(response: 0.5, dampingFraction: 0.8)
+                                                    .delay(0.1)) {
+                                                    selectedPost = post
+                                                    showPostModal.toggle()
+                                                }
                                         }
                                     }
                                 }
@@ -54,20 +58,21 @@ struct HomeView: View {
                     }
                 }
                 
+                // Story Modal with Smooth Transition
                 if showStoryModal {
                     StoryModalView(story: selectedStory!, showStoryModal: $showStoryModal, animationNamespace: animationNamespace)
-                } 
+                }
                 
-                if showPostModal {
-                    if let post = selectedPost {
-                        PostDetailCard(post: post, animationNamespace: animationNamespace)
+                // Post Modal with Smooth Transition
+                if showPostModal, let post = selectedPost {
+                    PostDetailCard(post: post, animationNamespace: animationNamespace)
                         .onTapGesture {
-                            withAnimation(.easeInOut) {
+                            withAnimation(.spring()) {
                                 selectedPost = nil
                             }
                         }
-                        .toolbarVisibility(.hidden, for: .tabBar, .navigationBar)
-                    }
+                        .transition(.opacity.animation(.easeInOut))
+                        .toolbarVisibility(.hidden, for: .tabBar)
                 }
             }
             .toolbar {
@@ -81,11 +86,11 @@ struct HomeView: View {
                         Image(systemName: "bell.fill")
                             .foregroundColor(.text)
                             .overlay(
-                                Text (String(SocketManagerService.shared.notifications.count))
-                                        .foregroundColor(.white)
-                                        .font(.caption)
-                                        .padding(5)
-                                        .offset(x: 10, y: -10)
+                                Text(String(SocketManagerService.shared.notifications.count))
+                                    .foregroundColor(.white)
+                                    .font(.caption)
+                                    .padding(5)
+                                    .offset(x: 10, y: -10)
                             )
                     } else {
                         Image(systemName: "bell")
@@ -99,6 +104,7 @@ struct HomeView: View {
         }
     }
 }
+
 
 
 #Preview {
