@@ -35,7 +35,7 @@ class SocketManagerService: ObservableObject, SwiftStompDelegate {
         var socketURLString :String;
         
         guard let serverURL = URL(string: socketURLString),
-              let userSession = KeychainService.instance.secureGet(forKey: "user"),
+              let userSession = KeychainService.instance.secureGet(forKey: "SESSION"),
               let user = try? JSONDecoder().decode(User.self, from: Data(userSession.utf8))
         else {
             print("Failed to retrieve WebSocket URL or User Token.")

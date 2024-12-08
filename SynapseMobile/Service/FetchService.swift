@@ -25,7 +25,7 @@ class FetchService{
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = method ?? "GET"
         
-        if let session = KeychainService.instance.secureGet(forKey: "user"){
+        if let session = KeychainService.instance.secureGet(forKey: "SESSION"){
             if let session = try? JSONDecoder().decode(User.self, from: Data(session.utf8))
             {
                 !url.starts(with: "\(baseUrl)/auth") ?
@@ -71,7 +71,7 @@ class FetchService{
         urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         
         // Add Authorization Header
-        let session = KeychainService.instance.secureGet(forKey: "user")
+        let session = KeychainService.instance.secureGet(forKey: "SESSION")
         if let session = try? JSONDecoder().decode(User.self, from: Data(session!.utf8)) {
             if !url.starts(with: "\(baseUrl)/auth") {
                 urlRequest.setValue("Bearer \(session.token ?? "")", forHTTPHeaderField: "Authorization")

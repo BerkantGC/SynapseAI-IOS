@@ -59,4 +59,12 @@ final class KeychainService {
         }
         return nil
     }
+    
+    func clear(forKey key: String) {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrAccount as String: key
+        ]
+        SecItemDelete(query as CFDictionary)
+    }
 }

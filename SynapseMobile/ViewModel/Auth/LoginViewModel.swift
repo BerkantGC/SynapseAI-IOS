@@ -51,7 +51,7 @@ class LoginViewModel: ObservableObject {
                     
                     // Save the user to the keychain
                     do {
-                        try KeychainService.instance.secureStore(user, forKey: "user")
+                        try KeychainService.instance.secureStore(user, forKey: "SESSION")
                     } catch {
                         self.errorMessage = "Failed to save user to keychain."
                     }
@@ -64,7 +64,7 @@ class LoginViewModel: ObservableObject {
         
     func checkToken(){
         DispatchQueue.main.async {
-            let stringSession = KeychainService.instance.secureGet(forKey: "user")
+            let stringSession = KeychainService.instance.secureGet(forKey: "SESSION")
             if let session = stringSession {
                 let user = try? JSONDecoder().decode(User.self, from: session.data(using: .utf8)!)
                 let tokenExpiresAt = user?.expires_at

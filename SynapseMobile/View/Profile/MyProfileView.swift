@@ -10,6 +10,8 @@ import SwiftUI
 
 struct MyProfileView: View {
     @StateObject var viewModel: ProfileViewModel = ProfileViewModel()
+    @State var isShowingSettings: Bool = false
+
     var body: some View {
         NavigationStack{
             ZStack {
@@ -29,6 +31,19 @@ struct MyProfileView: View {
                         PostsGrid(posts: viewModel.userPosts)
                     }
                 }
+                
+                if isShowingSettings {
+                    SettingsView(isOpen: self.$isShowingSettings)
+                        .toolbarVisibility(.hidden, for: .tabBar)
+                }
+            }.toolbar{
+                ToolbarItem(placement: .navigationBarTrailing){
+                    Button(action:{
+                        isShowingSettings.toggle()
+                    }){
+                        Image(systemName: "line.3.horizontal")
+                    }
+                }
             }
         }.onAppear {
             viewModel.loadMyDetails()
@@ -37,5 +52,5 @@ struct MyProfileView: View {
 }
 
 #Preview {
-    MyProfileView()
+    Main()
 }
