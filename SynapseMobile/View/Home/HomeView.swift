@@ -50,10 +50,13 @@ struct HomeView: View {
                                                     selectedPost = post
                                                     showPostModal.toggle()
                                                 }
-                                        }
+                                            }
                                     }
                                 }
                             }
+                        }
+                        .refreshable {
+                            await refreshContent()
                         }
                     }
                 }
@@ -103,9 +106,13 @@ struct HomeView: View {
             }
         }
     }
+    
+    private func refreshContent() async {
+        // Load posts and stories
+        viewModel.loadStories()
+        viewModel.loadPosts()
+    }
 }
-
-
 
 #Preview {
     Main()
