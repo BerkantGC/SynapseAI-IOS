@@ -10,10 +10,8 @@ struct PostDetailCard: View {
     var body: some View {
         ZStack {
             // Dynamic Background
-            LinearGradient(gradient: Gradient(colors: [.black.opacity(0.8), .clear]),
-                           startPoint: .top, endPoint: .bottom)
+            Background()
                 .ignoresSafeArea()
-                .opacity(0.8)
                 .animation(.easeInOut, value: descriptionOffset)
             
             // Main Post Image
@@ -82,7 +80,7 @@ struct PostDetailCard: View {
                     }
             )
             .onAppear {
-                withAnimation(.spring(response: 0.5, dampingFraction: 0.8, blendDuration: 0.3)) {
+                withAnimation(.smooth) {
                     descriptionOffset = 0
                 }
             }
