@@ -26,7 +26,6 @@ struct CategoryCard : View {
                 .font(.subheadline)
                 .fontWeight(.bold)
                 .foregroundColor(.white)
-                .background(Color.black.opacity(0.5))
         }.frame(width: .infinity, height: 100)
     }
 }

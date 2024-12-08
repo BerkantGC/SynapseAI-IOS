@@ -8,11 +8,17 @@
 import SwiftUI
 
 struct Background: View {
+    // Access the current color scheme environment value
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         LinearGradient(colors: [
-            Color.black,
-            Color("LoginBG").opacity(1),
-        ], startPoint: .top, endPoint: .bottom).frame(width: .infinity, height: .infinity)
-            .ignoresSafeArea(.all)
+            colorScheme == .dark
+            ? Color.black
+            : Color.white,
+            Color("LoginBG")
+        ], startPoint: .top, endPoint: .bottom)
+        .frame(width: .infinity, height: .infinity)
+        .ignoresSafeArea(.all)
     }
 }

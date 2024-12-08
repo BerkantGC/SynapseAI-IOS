@@ -21,6 +21,7 @@ struct TabsView: View {
     @State var notifications: [NotificationModel]?
     init() {
         UITabBar.appearance().unselectedItemTintColor = .systemGray
+        UITabBar.appearance().backgroundColor = .bgGradientStart
     }
     
     var body: some View {
@@ -61,7 +62,7 @@ struct TabsView: View {
                     Image(systemName: "person")
                 }
         }
-        .accentColor(.white)
+        .accentColor(.text)
     }
 }
 

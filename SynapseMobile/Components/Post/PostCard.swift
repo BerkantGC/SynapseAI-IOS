@@ -18,14 +18,22 @@ struct PostCard: View {
             NavigationStack{
                 VStack(spacing: 0) {
                     HStack {
-                        AsyncImage(url: URL(string: post.profile_picture ?? "")) { image in
-                            image.resizable()
+                        if let profile_picture = post.profile_picture{
+                            AsyncImage(url: URL(string: profile_picture)) { image in
+                                image.resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .clipShape(Circle())
+                                    .frame(width: 50, height: 50)
+                            } placeholder: {
+                                ProgressView()
+                            }
+                        }else{
+                            Image(systemName: "person.fill")
+                                .resizable()
                                 .aspectRatio(contentMode: .fill)
-                                .clipShape(Circle())
-                                .frame(width: 50, height: 50)
-                        } placeholder: {
-                            ProgressView()
+                                .frame(width: 20, height: 20)
                         }
+                        
                         VStack(alignment: .leading) {
                             Text(post.full_name!)
                                 .font(.headline)
