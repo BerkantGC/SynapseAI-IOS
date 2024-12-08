@@ -38,9 +38,12 @@ struct PostCard: View {
                     }.padding()
                     
                         AsyncImage(url: URL(string: post.image ?? "")) { image in
-                            image.resizable()
+                            image
+                                .resizable()
+                                .matchedGeometryEffect(id: post.id,
+                                                       in: animationNamespace)
                                 .aspectRatio(contentMode: .fill)
-                                .matchedGeometryEffect(id: post.id, in: animationNamespace)
+                                
                                 .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height * 0.60)
                                 .clipped()
                                 .zIndex(4)

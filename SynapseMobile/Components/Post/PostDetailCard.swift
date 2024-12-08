@@ -13,13 +13,14 @@ struct PostDetailCard: View {
             Background()
                 .ignoresSafeArea()
                 .animation(.easeInOut, value: descriptionOffset)
-            
+           
             // Main Post Image
             AsyncImage(url: URL(string: post.image ?? "")) { image in
                 image
                     .resizable()
+                    .matchedGeometryEffect(id: post.id,
+                                           in: animationNamespace)
                     .aspectRatio(contentMode: .fit)
-                    .matchedGeometryEffect(id: post.id, in: animationNamespace)
                     .scaleEffect(descriptionOffset == 0 ? 1 : 1.05)
                     .animation(.spring(response: 0.5, dampingFraction: 0.7, blendDuration: 0.3), value: descriptionOffset)
             } placeholder: {
@@ -86,6 +87,7 @@ struct PostDetailCard: View {
             }
             .zIndex(2)
         }
+        .frame(alignment: .center)
         .ignoresSafeArea()
     }
 }
