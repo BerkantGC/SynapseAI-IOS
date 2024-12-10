@@ -109,7 +109,16 @@ class SocketManagerService: ObservableObject, SwiftStompDelegate {
             print("Received invalid message format")
             return
         }
-        
+                
+        if(destination == "/user/queue/notifications"){
+            DispatchQueue.main.async {
+                if let notificationsRes = try? JSONDecoder().decode(NotificationsReponse.self, from: Data(message.utf8)){
+                    
+                    self.notifications = notificationsRes.notifications
+                }
+            }
+            
+        }
         if(destination == "/user/topic/private"){
             DispatchQueue.main.async {
                 if let sessionResponse = try? JSONDecoder().decode(SessionResponse.self, from: Data(message.utf8)){
@@ -118,7 +127,6 @@ class SocketManagerService: ObservableObject, SwiftStompDelegate {
                 
             }
         }
-        
         
         if(destination == "/user/topic/private/\(self.selectedSession?.session_id ?? 0)"){
             if let readResponse = try? JSONDecoder().decode(ReadResponse.self, from: Data(message.utf8)) {
