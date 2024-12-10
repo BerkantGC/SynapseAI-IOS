@@ -23,8 +23,8 @@ struct MyProfileView: View {
                             ProgressView()
                                 .progressViewStyle(CircularProgressViewStyle())
                                 .padding(.top, 20)
-                        } else if let profile = viewModel.profile {
-                            ProfileHeader(profile: profile)
+                        } else if viewModel.profile != nil {
+                            ProfileHeader(isMe: true)
                                 .environmentObject(viewModel)
                         }
                         //ProfileStats()

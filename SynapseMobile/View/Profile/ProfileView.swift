@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @StateObject var viewModel: ProfileViewModel = ProfileViewModel()
+
     var username: String
     var body: some View {
         NavigationStack{
@@ -21,8 +22,8 @@ struct ProfileView: View {
                             ProgressView()
                                 .progressViewStyle(CircularProgressViewStyle())
                                 .padding(.top, 20)
-                        } else if let profile = viewModel.profile {
-                            ProfileHeader(profile: profile)
+                        } else if viewModel.profile != nil {
+                            ProfileHeader()
                                 .environmentObject(viewModel)
                         }
                         

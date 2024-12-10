@@ -10,25 +10,24 @@ import SwiftUI
 import PhotosUI
 
 struct ProfileHeader : View {
-    @EnvironmentObject var viewModel: ProfileViewModel;
-    var profile: ProfileModel;
-    
+    @EnvironmentObject var viewModel: ProfileViewModel
     @State var showFollows = false
     @State var selectedSegment: String = "followers"
     @State var selection: PhotosPickerItem?
     @State var selectedImageData: UIImage?
     @State private var isCropperPresented = false
     @State private var selectedUser: String?
+    var isMe: Bool
     
-    init(profile: ProfileModel) {
-        self.profile = profile
+    init(isMe: Bool = false) {
+        self.isMe = isMe
     }
     
     var body: some View {
         VStack {
             HStack {
                 PhotosPicker(selection: $selection, preferredItemEncoding: .automatic){
-                    if let fetchedImage = profile.profile_picture{
+                    if let fetchedImage = viewModel.profile!.profile_picture{
                         AsyncImage(url: URL(string: fetchedImage)) { image in
                             image
                                 .resizable()
@@ -80,9 +79,23 @@ struct ProfileHeader : View {
                 
                 Spacer()
                 VStack(alignment: .leading) {
-                    Text(profile.first_name! + " " + profile.last_name!)
+                    Text("\(viewModel.profile?.first_name ?? "") \(viewModel.profile?.last_name ?? "")")
                         .font(.title)
                         .fontWeight(.bold)
+                    if !self.isMe {
+                        Button(action: {
+                            viewModel.handleFollow()
+                        }, label: {
+                            Text(viewModel.profile?.follow_status == .ACCEPTED
+                                 ? "Takipten Çık"
+                                 : viewModel.profile?.follow_status == .PENDING
+                                 ? "İstek Gönderildi"
+                                 : "Takip Et")
+                            .foregroundColor(.text)
+                            .padding(10)
+                            .background(.ultraThinMaterial)
+                        })
+                    }
                 }
                 Spacer()
             }
@@ -97,7 +110,7 @@ struct ProfileHeader : View {
                         Text("Takipçiler")
                             .font(.subheadline)
                             .foregroundColor(.gray)
-                        Text("\(profile.followers_count)")
+                        Text("\(viewModel.profile?.followers_count ?? 0)")
                             .font(.title)
                             .fontWeight(.bold)
                             .foregroundColor(.text)
@@ -114,7 +127,7 @@ struct ProfileHeader : View {
                         Text("Takip Edilenler")
                             .font(.subheadline)
                             .foregroundColor(.gray)
-                        Text("\(profile.followings_count)")
+                        Text("\(viewModel.profile?.followings_count ?? 0)")
                             .font(.title)
                             .fontWeight(.bold)
                             .foregroundColor(.text)
@@ -133,6 +146,7 @@ struct ProfileHeader : View {
             }
         }.padding(.horizontal, 20)
     }
+
 }
  
 #Preview {

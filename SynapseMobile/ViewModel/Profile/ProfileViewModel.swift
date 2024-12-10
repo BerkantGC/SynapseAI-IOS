@@ -13,8 +13,10 @@ class ProfileViewModel: ObservableObject {
     @Published var userPosts: [Post] = []
     @Published var isLoading: Bool = false
     @Published var errorMessage: String? = nil
+    @Published var followStatus: FollowStatus?
     @Published var followers: [FollowModel] = []
     @Published var followings: [FollowModel] = []
+    static let shared = ProfileViewModel()
     
     func loadMyDetails(){
         self.isLoading = true
@@ -120,5 +122,35 @@ class ProfileViewModel: ObservableObject {
                 }
             }
         }
+    }
+    
+    func handleFollow(){
+        FetchService().executeRequest(url: "/profile/\(self.profile!.user_id)/follow", method: "POST", data: nil){ data, response, error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    self.errorMessage = "Error following user: \(error)"
+                }
+                if data != nil {
+                    if self.profile?.follow_status == .ACCEPTED {
+                        self.profile?.follow_status = nil
+                        self.profile?.followers_count -= 1
+                        self.followStatus = .none
+                    }else if self.profile?.follow_status == .PENDING {
+                        self.profile?.follow_status = nil
+                        self.followStatus = .none
+                    }else{
+                        self.profile?.follow_status = .PENDING
+                        self.followStatus = .PENDING
+                    }
+                }
+            }
+        }
+    }
+    
+    func clearProfile(){
+        self.profile = nil
+        self.userPosts = []
+        self.followers = []
+        self.followings = []
     }
 }
