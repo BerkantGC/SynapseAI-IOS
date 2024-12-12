@@ -20,4 +20,20 @@ final class NotificationViewModel: ObservableObject {
         total_count = socketManager.notifications.count
         isLoading = false
     }
+    
+    func handleFollowReq (notification_id: Int,status: FollowStatus) {
+        let index = notifications.firstIndex(where: { $0.id == notification_id })!
+        
+        FetchService().executeRequest(url: "/profile/\(notifications[index].from.user_id)/follow-request", method: "PUT", data: ["status": status.rawValue]){
+            data, response, error in
+            
+            if let error = error {
+                self.error = error.localizedDescription
+            }
+            
+            if data != nil {
+                self.notifications.remove(at: index)
+            }
+        }
+    }
 }

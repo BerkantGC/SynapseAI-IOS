@@ -24,6 +24,7 @@ struct NotificationsView: View {
                     ScrollView {
                         ForEach(notificationViewModel.notifications) { notification in
                             NotificationItem(notification: notification)
+                                .environmentObject(notificationViewModel)
                         }
                     }
                 }
@@ -35,7 +36,6 @@ struct NotificationsView: View {
     }
 }
 
-
 #Preview {
-    HomeView()
+    Main()
 }
