@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C052093D2D0BAB10009ACB88 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C052093C2D0BAB09009ACB88 /* .gitignore */; };
 		C08DC72E2CFE5EF500AD0E60 /* SwiftStomp in Frameworks */ = {isa = PBXBuildFile; productRef = C08DC72D2CFE5EF500AD0E60 /* SwiftStomp */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C052093C2D0BAB09009ACB88 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		C0F98E0D2CE0AF7A0055B6A4 /* SynapseMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SynapseMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0F98E1D2CE0AF7C0055B6A4 /* SynapseMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SynapseMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0F98E272CE0AF7C0055B6A4 /* SynapseMobileUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SynapseMobileUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,6 +102,7 @@
 		C0F98E042CE0AF7A0055B6A4 = {
 			isa = PBXGroup;
 			children = (
+				C052093C2D0BAB09009ACB88 /* .gitignore */,
 				C0F98E0F2CE0AF7A0055B6A4 /* SynapseMobile */,
 				C0F98E202CE0AF7C0055B6A4 /* SynapseMobileTests */,
 				C0F98E2A2CE0AF7C0055B6A4 /* SynapseMobileUITests */,
@@ -242,6 +245,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C052093D2D0BAB10009ACB88 /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
