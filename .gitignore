@@ -18,3 +18,5 @@ DerivedData
 *.xccheckout
 *.xcworkspace
 !default.xcworkspace
+
+SynapseMobile.xcworkspace/xcuserdata/berkantgurcan.xcuserdatad/UserInterfaceState.xcuserstate
