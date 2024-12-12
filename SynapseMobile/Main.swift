@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Main: View {
-    @ObservedObject private var authViewModel = LoginViewModel()
+    @ObservedObject private var authViewModel = LoginViewModel.shared
     
     init() {
         authViewModel.checkToken()
@@ -17,7 +17,7 @@ struct Main: View {
    
     var body: some View{
         if authViewModel.isLogged {
-            TabsView() 
+            TabsView()
                 .environmentObject(authViewModel)
                 .navigationTitle("Synapse")
         } else {

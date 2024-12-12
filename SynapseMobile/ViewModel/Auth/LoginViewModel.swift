@@ -9,7 +9,10 @@ class LoginViewModel: ObservableObject {
     @Published var username: String = ""
     @Published var password: String = ""
     @Published var errorMessage: String? = nil
-    @Published var isLogged: Bool = false
+    @AppStorage("isLogged") var isLogged: Bool = false
+    @Published var loading: Bool = false
+    
+    static let shared = LoginViewModel()
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -17,15 +20,15 @@ class LoginViewModel: ObservableObject {
         NotificationCenter.default.addObserver(self, selector: #selector(handle401), name: .didReceive401, object: nil)
     }
     
+   deinit {
+       NotificationCenter.default.removeObserver(self, name: .didReceive401, object: nil)
+   }
+    
     @objc private func handle401() {
            isLogged = false
            print("User logged out due to 401 Unauthorized")
            // Perform any additional logout actions here
-       }
-       
-       deinit {
-           NotificationCenter.default.removeObserver(self, name: .didReceive401, object: nil)
-       }
+   }
     
     func login() {
         // Simulate a login request
@@ -33,7 +36,7 @@ class LoginViewModel: ObservableObject {
             errorMessage = "Email and password are required."
             return
         }
-        
+        loading = true
         
         FetchService().executeRequest(url: "/auth/login",
                                       method: "POST",
@@ -58,6 +61,8 @@ class LoginViewModel: ObservableObject {
                 } catch {
                     self.errorMessage = "Invalid username or password."
                 }
+                
+                self.loading = false
             }
         }
     }

@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @ObservedObject var viewModel: LoginViewModel = LoginViewModel()
+    @ObservedObject var viewModel: LoginViewModel = LoginViewModel.shared
     
     var body: some View {
         NavigationStack {
@@ -36,16 +36,24 @@ struct LoginView: View {
                     Button(action: {
                         viewModel.login()
                     }) {
-                        Text("Giriş Yap")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding(15)
-                            .frame(maxWidth: .infinity)
-                            .background(Color.blue)
-                            .cornerRadius(10.0)
-                            .padding(.horizontal, 5)
-                    }.navigationDestination(isPresented: $viewModel.isLogged){
-                        TabsView()
+                        if viewModel.loading {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle())
+                                .padding(15)
+                                .frame(maxWidth: .infinity)
+                                .background(Color.blue)
+                                .cornerRadius(10.0)
+                                .padding(.horizontal, 5)
+                        } else{
+                            Text("Giriş Yap")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding(15)
+                                .frame(maxWidth: .infinity)
+                                .background(Color.blue)
+                                .cornerRadius(10.0)
+                                .padding(.horizontal, 5)
+                        }
                     }
                     
                     

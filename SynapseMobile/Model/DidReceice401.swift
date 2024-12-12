@@ -9,4 +9,5 @@ import Foundation
 
 extension Notification.Name {
     static let didReceive401 = Notification.Name("didReceive401")
+    static let didLoggedIn = Notification.Name("didLoggedIn")
 }
