@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Main: View {
-    @ObservedObject private var authViewModel = LoginViewModel.shared
+    @StateObject private var authViewModel = LoginViewModel.shared
     
     init() {
         authViewModel.checkToken()

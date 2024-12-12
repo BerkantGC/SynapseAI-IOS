@@ -5,14 +5,14 @@ import Combine
 import SwiftUI
 
 class LoginViewModel: ObservableObject {
+    static let shared = LoginViewModel()
+    
     @Published var user: User? = nil
     @Published var username: String = ""
     @Published var password: String = ""
     @Published var errorMessage: String? = nil
-    @AppStorage("isLogged") var isLogged: Bool = false
+    @Published var isLogged: Bool = false
     @Published var loading: Bool = false
-    
-    static let shared = LoginViewModel()
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -49,21 +49,22 @@ class LoginViewModel: ObservableObject {
             if let data = data {
                 do {
                     let user = try JSONDecoder().decode(User.self, from: data)
-                    self.user = user
-                    self.isLogged = true
-                    
                     // Save the user to the keychain
                     do {
                         try KeychainService.instance.secureStore(user, forKey: "SESSION")
+                        DispatchQueue.main.async {
+                            self.user = user
+                            self.isLogged = true
+                        }
                     } catch {
                         self.errorMessage = "Failed to save user to keychain."
                     }
                 } catch {
                     self.errorMessage = "Invalid username or password."
                 }
-                
-                self.loading = false
             }
+        
+            self.loading = false
         }
     }
         

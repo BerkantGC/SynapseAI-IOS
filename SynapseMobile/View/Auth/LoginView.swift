@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @ObservedObject var viewModel: LoginViewModel = LoginViewModel.shared
+    @EnvironmentObject var viewModel: LoginViewModel
     
     var body: some View {
         NavigationStack {

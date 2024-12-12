@@ -10,6 +10,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @StateObject var viewModel: SettingsViewModel = SettingsViewModel()
+    @EnvironmentObject var authViewModel: LoginViewModel
     @Binding var isOpen: Bool
     @State var widthSize: CGFloat = .zero
     @State var isLogginOut: Bool = false
@@ -27,15 +28,13 @@ struct SettingsView: View {
                 Button(action: {
                     viewModel.logout()
                     isLogginOut.toggle()
+                    authViewModel.isLogged = false
                 }, label: {
                     Text("Çıkış Yap")
                         .foregroundColor(.red)
                         .padding()
                 })
-            }).navigationDestination(isPresented: self.$isLogginOut){
-                LoginView()
-                    .navigationBarBackButtonHidden()
-            }
+            })
             .background(.thinMaterial)
             .frame(width: self.widthSize,
                    height: proxy.size.height,
