@@ -22,6 +22,7 @@ struct TabsView: View {
     init() {
         UITabBar.appearance().unselectedItemTintColor = .systemGray
         UITabBar.appearance().backgroundColor = .bgGradientStart
+        SocketManagerService.shared.connect()
     }
     
     var body: some View {

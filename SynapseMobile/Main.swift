@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct Main: View {
-    @StateObject private var authViewModel = LoginViewModel.shared
+    @StateObject private var authViewModel = LoginViewModel()
     
     init() {
         authViewModel.checkToken()
-        SocketManagerService.shared.connect()
     }
    
     var body: some View{
