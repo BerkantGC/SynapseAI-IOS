@@ -10,6 +10,7 @@ import Foundation
 extension Date{
     func isTokenValid(expiresAt: Int) -> Bool {
         let currentDate = Int(Date().timeIntervalSince1970)
+        
         return currentDate < expiresAt/1000
     }
     

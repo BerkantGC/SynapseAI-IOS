@@ -9,7 +9,7 @@ class LoginViewModel: ObservableObject {
     @Published var username: String = ""
     @Published var password: String = ""
     @Published var errorMessage: String? = nil
-    @Published var isLogged: Bool = false
+    @AppStorage("isLogged") var isLogged: Bool = false
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -22,7 +22,7 @@ class LoginViewModel: ObservableObject {
    }
     
     @objc private func handle401() {
-        var stringSession = KeychainService.instance.secureGet(forKey: "SESSION")
+        let stringSession = KeychainService.instance.secureGet(forKey: "SESSION")
         if let session = stringSession {
             do {
                 let user = try JSONDecoder().decode(User.self, from: session.data(using: .utf8)!)
@@ -80,7 +80,6 @@ class LoginViewModel: ObservableObject {
             
             if let data = data {
                 do {
-                    KeychainService.instance.clear(forKey: "SESSION")
                     let user = try JSONDecoder().decode(User.self, from: data)
                     // Save the user to the keychain
                     do {
@@ -101,24 +100,24 @@ class LoginViewModel: ObservableObject {
     }
         
     func checkToken(){
-        DispatchQueue.main.async {
+        
             let stringSession = KeychainService.instance.secureGet(forKey: "SESSION")
             if let session = stringSession {
                 let user = try? JSONDecoder().decode(User.self, from: session.data(using: .utf8)!)
-                
-                if let tokenExpiresAt = user?.expires_at {
-                    if Date().isTokenValid(expiresAt: tokenExpiresAt)
-                    {
-                        self.isLogged = true;
-                    }
-                    else {
-                        self.isLogged = false;
+                if let tokenExpiresAt = user?.refresh_expires_at {
+                    DispatchQueue.main.async {
+                        if Date().isTokenValid(expiresAt: tokenExpiresAt)
+                        {
+                            self.isLogged = true;
+                        }
+                        else {
+                            self.isLogged = false;
+                        }
                     }
                 }
             } else {
                 self.isLogged = false;
             }
-        }
     }
 }
 
