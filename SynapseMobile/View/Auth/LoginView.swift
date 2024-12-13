@@ -36,7 +36,7 @@ struct LoginView: View {
                     Button(action: {
                         viewModel.login()
                     }) {
-                        if viewModel.loading {
+                        if false {
                             ProgressView()
                                 .progressViewStyle(CircularProgressViewStyle())
                                 .padding(15)

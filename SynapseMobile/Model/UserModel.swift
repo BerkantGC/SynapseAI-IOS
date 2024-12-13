@@ -9,12 +9,13 @@ import Foundation
 
 struct User: Codable {
     var username: String
-    var full_name: String?
-    var email: String?
+    var full_name: String
+    var email: String
     var gender: String?
-    var password: String?
-    var token: String?
-    var expires_at: Int?
+    var token: String
+    var refresh_token: String
+    var expires_at: Int
+    var refresh_expires_at: Int
     
     enum CodingKeys: String, CodingKey {
         case username
@@ -22,6 +23,8 @@ struct User: Codable {
         case email
         case gender
         case token
+        case refresh_token
         case expires_at
+        case refresh_expires_at
     }
 }

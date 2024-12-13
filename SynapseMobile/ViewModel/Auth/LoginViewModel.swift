@@ -5,14 +5,11 @@ import Combine
 import SwiftUI
 
 class LoginViewModel: ObservableObject {
-    static let shared = LoginViewModel()
-    
     @Published var user: User? = nil
     @Published var username: String = ""
     @Published var password: String = ""
     @Published var errorMessage: String? = nil
     @Published var isLogged: Bool = false
-    @Published var loading: Bool = false
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -25,9 +22,45 @@ class LoginViewModel: ObservableObject {
    }
     
     @objc private func handle401() {
-           isLogged = false
-           print("User logged out due to 401 Unauthorized")
-           // Perform any additional logout actions here
+        var stringSession = KeychainService.instance.secureGet(forKey: "SESSION")
+        if let session = stringSession {
+            do {
+                let user = try JSONDecoder().decode(User.self, from: session.data(using: .utf8)!)
+                
+                FetchService().executeRequest(url: "/auth/refresh",
+                                              method: "PUT",
+                                              data: ["refresh_token": user.refresh_token]
+                ) { data, response, error in
+                    if let error = error {
+                        self.errorMessage = error.localizedDescription
+                    }
+                    
+                    if let data = data {
+                        do {
+                            let user = try JSONDecoder().decode(User.self, from: data)
+                            // Save the user to the keychain
+                            do {
+                                try KeychainService.instance.secureStore(user, forKey: "SESSION")
+                                DispatchQueue.main.async {
+                                    self.user = user
+                                    self.isLogged = true
+                                }
+                                print("Token refreshed")
+                            } catch {
+                                self.errorMessage = "Failed to save user to keychain."
+                                self.isLogged = false
+                            }
+                        } catch {
+                            self.errorMessage = "Invalid username or password."
+                            self.isLogged = false
+                        }
+                    }
+                }
+            } catch {
+                self.isLogged = false
+                print("Failed to clear token")
+            }
+        }
    }
     
     func login() {
@@ -36,7 +69,6 @@ class LoginViewModel: ObservableObject {
             errorMessage = "Email and password are required."
             return
         }
-        loading = true
         
         FetchService().executeRequest(url: "/auth/login",
                                       method: "POST",
@@ -48,6 +80,7 @@ class LoginViewModel: ObservableObject {
             
             if let data = data {
                 do {
+                    KeychainService.instance.clear(forKey: "SESSION")
                     let user = try JSONDecoder().decode(User.self, from: data)
                     // Save the user to the keychain
                     do {
@@ -64,7 +97,6 @@ class LoginViewModel: ObservableObject {
                 }
             }
         
-            self.loading = false
         }
     }
         
@@ -73,13 +105,15 @@ class LoginViewModel: ObservableObject {
             let stringSession = KeychainService.instance.secureGet(forKey: "SESSION")
             if let session = stringSession {
                 let user = try? JSONDecoder().decode(User.self, from: session.data(using: .utf8)!)
-                let tokenExpiresAt = user?.expires_at
-                if Date().isTokenValid(expiresAt: tokenExpiresAt!)
-                {
-                    self.isLogged = true;
-                }
-                else {
-                    self.isLogged = false;
+                
+                if let tokenExpiresAt = user?.expires_at {
+                    if Date().isTokenValid(expiresAt: tokenExpiresAt)
+                    {
+                        self.isLogged = true;
+                    }
+                    else {
+                        self.isLogged = false;
+                    }
                 }
             } else {
                 self.isLogged = false;
