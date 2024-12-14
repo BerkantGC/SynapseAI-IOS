@@ -8,22 +8,23 @@
 import SwiftUI
 
 struct Main: View {
-    @StateObject private var authViewModel = LoginViewModel()
-    
-    init() {
-        authViewModel.checkToken()
-    }
+    @StateObject private var authViewModel = LoginViewModel.shared
    
     var body: some View{
-        if authViewModel.isLogged {
-            TabsView()
-                .environmentObject(authViewModel)
-                .navigationTitle("Synapse")
-        } else {
-            LoginView() 
-                .environmentObject(authViewModel)
+        ZStack{
+            if authViewModel.isLogged {
+                TabsView()
+                    .environmentObject(authViewModel)
+                    .navigationTitle("Synapse")
+            } else {
+                LoginView()
+                    .environmentObject(authViewModel)
+                
+            }
+        }.onAppear {
+            authViewModel.checkToken()
         }
-    } 
+    }
 }
 #Preview {
     Main()

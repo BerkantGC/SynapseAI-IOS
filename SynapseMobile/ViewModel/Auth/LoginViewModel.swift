@@ -5,6 +5,7 @@ import Combine
 import SwiftUI
 
 class LoginViewModel: ObservableObject {
+    static let shared = LoginViewModel()
     @Published var user: User? = nil
     @Published var username: String = ""
     @Published var password: String = ""
@@ -45,7 +46,6 @@ class LoginViewModel: ObservableObject {
                                     self.user = user
                                     self.isLogged = true
                                 }
-                                print("Token refreshed")
                             } catch {
                                 self.errorMessage = "Failed to save user to keychain."
                                 self.isLogged = false
@@ -100,7 +100,6 @@ class LoginViewModel: ObservableObject {
     }
         
     func checkToken(){
-        
             let stringSession = KeychainService.instance.secureGet(forKey: "SESSION")
             if let session = stringSession {
                 let user = try? JSONDecoder().decode(User.self, from: session.data(using: .utf8)!)
