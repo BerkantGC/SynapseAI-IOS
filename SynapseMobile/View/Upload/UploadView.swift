@@ -62,6 +62,7 @@ struct UploadView: View {
                         viewModel.navigateImageGenerator()
                     }.navigationDestination(isPresented: $viewModel.isShowingImageGenerator){
                         ImageGeneratorView()
+                            .toolbarVisibility(.hidden, for: .tabBar)
                     }
                 }
                 

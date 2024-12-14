@@ -47,7 +47,7 @@ struct ExploreView: View {
                                     ForEach(0...(categoryList.count - 1), id: \.self){ index in
                                         CategoryCard(category: categoryList[index])
                                     }
-                                }
+                                }.padding(.horizontal)
                             }
                             PostsGrid(posts: viewModel.posts, scrollDisabled: true)
                         }

@@ -13,6 +13,7 @@ struct PostsGrid: View {
     var screenWidth = UIScreen.main.bounds.width
     var screenHeight = UIScreen.main.bounds.height
     var scrollDisabled: Bool
+    @Namespace var animationNamespace: Namespace.ID
     
     init(posts: [Post], scrollDisabled: Bool = false) {
         self.posts = posts
@@ -23,22 +24,25 @@ struct PostsGrid: View {
         ScrollView{
             LazyVGrid(columns: Array(repeating: GridItem(), count: 2)) {
                 ForEach(self.posts) { post in
-                    AsyncImage(url: URL(string: post.image ?? "")!) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                            .clipped()
-                            .aspectRatio(1, contentMode: .fit)
-                            .cornerRadius(10)
-                    } placeholder: {
-                        Image("placeholder")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                            .clipped()
-                            .aspectRatio(1, contentMode: .fit)
-                            .cornerRadius(10)
+                    NavigationLink(destination: PostDetailCard(post: post, animationNamespace: animationNamespace)
+                    ) {
+                        AsyncImage(url: URL(string: post.image ?? "")!) { image in
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                                .clipped()
+                                .aspectRatio(1, contentMode: .fit)
+                                .cornerRadius(10)
+                        } placeholder: {
+                            Image("placeholder")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                                .clipped()
+                                .aspectRatio(1, contentMode: .fit)
+                                .cornerRadius(10)
+                        }
                     }
                 }
             }

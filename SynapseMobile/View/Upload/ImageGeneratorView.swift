@@ -59,7 +59,6 @@ struct ImageGeneratorView: View {
                 }
             }
         }
-        .navigationBarBackButtonHidden()
         .navigationTitle("Yapay Zeka ile Üret")
         .toolbar {
             // Hack: To show back title for navigation bar
