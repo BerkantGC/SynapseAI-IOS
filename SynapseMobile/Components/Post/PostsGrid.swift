@@ -12,13 +12,15 @@ struct PostsGrid: View {
     var posts: [Post];
     var screenWidth = UIScreen.main.bounds.width
     var screenHeight = UIScreen.main.bounds.height
+    var scrollDisabled: Bool
     
-    init(posts: [Post]) {
+    init(posts: [Post], scrollDisabled: Bool = false) {
         self.posts = posts
+        self.scrollDisabled = scrollDisabled
     }
     
     var body: some View {
-        ScrollView {
+        ScrollView{
             LazyVGrid(columns: Array(repeating: GridItem(), count: 2)) {
                 ForEach(self.posts) { post in
                     AsyncImage(url: URL(string: post.image ?? "")!) { image in
@@ -41,6 +43,6 @@ struct PostsGrid: View {
                 }
             }
             .padding()
-        }
+        }.scrollDisabled(scrollDisabled)
     }
 }

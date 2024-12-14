@@ -16,7 +16,7 @@ class HomeViewModel: ObservableObject {
     @Published var stories: [StoryModel] = []
     
     func loadPosts() {
-        FetchService().executeRequest(url: "/posts", method: "GET", data: nil) { data, response, error in
+        FetchService().executeRequest(url: "/feed", method: "GET", data: nil) { data, response, error in
             DispatchQueue.main.async {
                 if let error = error {
                     self.errorMessage = "Failed to load posts: \(error.localizedDescription)"

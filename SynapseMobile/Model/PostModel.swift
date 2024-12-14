@@ -12,7 +12,7 @@ struct Post: Identifiable, Codable {
     var title: String?
     var content: String?
     var image: String?
-    var created_at: String?
+    var created_at: String
     var profile_picture: String?
     var full_name: String?
     var username: String?

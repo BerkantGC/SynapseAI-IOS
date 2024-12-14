@@ -35,23 +35,28 @@ struct ExploreView: View {
                     }.environmentObject(viewModel)
                 
                 if !isSearching {
-                    VStack(alignment: .leading) {
-                        Text("Keşfet")
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .foregroundColor(.text)
-                            .padding(.horizontal, 10)
-                        ScrollView(.horizontal, showsIndicators: false){
-                            HStack{
-                                ForEach(0...(categoryList.count - 1), id: \.self){ index in
-                                    CategoryCard(category: categoryList[index])
+                    ScrollView{
+                        VStack(alignment: .leading) {
+                            Text("Keşfet")
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .foregroundColor(.text)
+                                .padding(.horizontal, 10)
+                            ScrollView(.horizontal, showsIndicators: false){
+                                HStack{
+                                    ForEach(0...(categoryList.count - 1), id: \.self){ index in
+                                        CategoryCard(category: categoryList[index])
+                                    }
                                 }
                             }
+                            PostsGrid(posts: viewModel.posts, scrollDisabled: true)
                         }
-                        Spacer()
                     }
                 }
-            }.navigationDestination(item: self.$selectedUser, destination: { user in
+            }.onAppear(){
+                viewModel.fetchExplorePosts()
+            }
+            .navigationDestination(item: self.$selectedUser, destination: { user in
                 ProfileView(username: user)
             })
         }
