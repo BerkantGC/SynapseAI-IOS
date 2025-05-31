@@ -19,7 +19,7 @@ struct PostUploadView: View {
                 if let image = image {
                     MediaEditor(image: UIImage(data: image)!)
                 }
-            }
+            }.toolbarVisibility(.hidden, for: .tabBar)
         }
     }
 }

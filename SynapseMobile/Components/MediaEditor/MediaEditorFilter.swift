@@ -10,22 +10,25 @@ import SwiftUI
 
 struct MediaEditorFilter: View {
     @Binding var image: UIImage?
-    
+
     var body: some View {
-        ScrollView(.horizontal) {
-            HStack {
-                ForEach(FilterNames.allCases){filter in
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 12) {
+                ForEach(FilterNames.allCases) { filter in
                     Button(action: {
-                        // Apply filter
                         image = image?.applyFilter(filterName: filter)
                     }) {
                         Text(filter.displayName)
                             .font(.system(size: 16))
                             .foregroundColor(.white)
-                            .padding()
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
+                            .background(Color.blue.opacity(0.7))
+                            .cornerRadius(10)
                     }
                 }
             }
-        }.padding()
+            .padding()
+        }
     }
 }

@@ -1,72 +1,91 @@
-//
-//  ImageGeneratorView.swift
-//  SynapseMobile
-//
-//  Created by Berkant Gürcan on 12/5/24.
-//
-
-import Foundation
 import SwiftUI
 
 struct ImageGeneratorView: View {
-    @ObservedObject var viewModel = UploadViewModel.shared // Ensure this is an @ObservedObject for bindings
+    @ObservedObject var viewModel = UploadViewModel.shared
     
-    @State var prompt = ""
-    @State var image: UIImage?
-    
+    @State private var prompt = ""
+    @State private var image: UIImage?
+    @State private var isLoading = false
+
     var body: some View {
         ZStack {
             Background()
-            
-            VStack {
+
+            VStack(spacing: 16) {
                 ZStack {
-                    // Dark grey background for placeholder
-                    Rectangle()
-                        .fill(Color(.systemGray6)) // Dark grey color
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color(.systemGray6))
                         .frame(width: .infinity, height: UIScreen.main.bounds.height / 2)
-                        .cornerRadius(10)
                         .overlay(
-                            Text("Preview")
-                                .bold()
-                                .font(.title)
+                            Group {
+                                if let img = image {
+                                    Image(uiImage: img)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .transition(.opacity)
+                                        .animation(.easeInOut(duration: 0.3), value: image)
+                                } else {
+                                    Text("Preview")
+                                        .font(.title2.bold())
+                                        .foregroundColor(.gray)
+                                }
+                            }
                         )
-                    
-                    // Show image if available, otherwise dark grey rectangle remains
-                    if let img = image {
-                        Image(uiImage: img)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: .infinity, height: UIScreen.main.bounds.height / 2)
-                            .cornerRadius(10)
-                            .clipped()
-                    }
-                }.padding(.horizontal)
-                
-                TextField("Enter prompt..", text: $prompt, axis: .vertical)
-                    .lineLimit(5)
-                    .frame(maxHeight: UIScreen.main.bounds.height/6) // Adjust height for multi-line input
+
+                }
+                .padding(.horizontal)
+
+                TextField("Enter prompt...", text: $prompt, axis: .vertical)
+                    .lineLimit(3...6)
                     .padding()
                     .background(.ultraThinMaterial)
-                    .cornerRadius(10)
-                    .padding(.horizontal)
+                    .cornerRadius(12)
                     .shadow(radius: 5)
-                Button("Generate") {
-                    Task {
-                        if let img = await viewModel.generateImage(prompt: prompt) {
-                            image = img
+                    .padding(.horizontal)
+
+                Button(action: {
+                    generateImage()
+                }) {
+                    HStack {
+                        if isLoading {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle(tint: .primary))
+                        } else {
+                            Image(systemName: "wand.and.stars")
+                            Text("Generate")
+                                .fontWeight(.semibold)
                         }
                     }
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.secondary)
+                    .foregroundColor(.primary)
+                    .cornerRadius(12)
+                    .shadow(radius: 5)
                 }
+                .padding(.horizontal)
+
+                Spacer()
             }
+            .padding(.top)
         }
         .navigationTitle("Generate")
         .toolbar {
-            // Hack: To show back title for navigation bar
             ToolbarItem(placement: .primaryAction) {
-                Button { } label: {
-                    Color.clear
-                }
+                Button {} label: { Color.clear }
             }
+        }
+    }
+
+    private func generateImage() {
+        guard !prompt.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
+        isLoading = true
+        Task {
+            let generated = await viewModel.generateImage(prompt: prompt)
+            withAnimation {
+                image = generated
+            }
+            isLoading = false
         }
     }
 }
