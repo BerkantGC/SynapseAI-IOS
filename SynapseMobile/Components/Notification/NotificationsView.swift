@@ -32,7 +32,7 @@ struct NotificationsView: View {
         }
         .onAppear {
             //notificationViewModel.fetchNotifications()
-        }.navigationTitle("Bildirimler")
+        }.navigationTitle("Notifications")
     }
 }
 

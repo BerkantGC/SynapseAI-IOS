@@ -25,7 +25,7 @@ struct HomeView: View {
                 } else {
                     ScrollViewReader { scrollView in
                         ScrollView {
-                            Section(header: Text("Hikayeler")
+                            Section(header: Text("Stories")
                                 .font(.title)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.horizontal)
@@ -35,7 +35,7 @@ struct HomeView: View {
                                           showStoryModal: $showStoryModal,
                                           animationNamespace: animationNamespace)
                             }
-                            Section(header: Text("Gönderiler")
+                            Section(header: Text("Posts")
                                 .font(.title)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.horizontal)
@@ -80,7 +80,7 @@ struct HomeView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Synapse AI")
+                    Text("Synapse")
                         .font(.title2)
                         .fontWeight(.bold)
                 }

@@ -19,10 +19,10 @@ struct FollowsSheet : View {
             Background()
             VStack{
                 Picker(selection: $selectedSegment, label: Text("Picker")) {
-                    Text("Takipçiler")
+                    Text("Followers")
                         .tag("followers")
                     
-                    Text("Takip Edilenler")
+                    Text("Followings")
                         .tag("followings")
                 }.onChange(of: selectedSegment, {
                     if selectedSegment == "followers" {
@@ -37,7 +37,7 @@ struct FollowsSheet : View {
                 
                 if selectedSegment == "followers" {
                     if viewModel.followers.isEmpty {
-                        Text("Takipçi Bulunamadı")
+                        Text("Follower not found.")
                     }else{
                         ForEach(viewModel.followers) { follower in
                             UserFollowCard(follow: follower)
@@ -49,7 +49,7 @@ struct FollowsSheet : View {
                     }
                 } else {
                     if viewModel.followings.isEmpty {
-                        Text("Takipçi Bulunamadı")
+                        Text("Following not found.")
                     }else{
                         ForEach(viewModel.followings) { follower in
                             UserFollowCard(follow: follower)

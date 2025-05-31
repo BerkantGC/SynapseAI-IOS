@@ -80,6 +80,6 @@ struct MediaEditor: View {
                 Spacer()
             }
         }
-        .navigationBarTitle("Medya Düzenleyici", displayMode: .inline)
+        .navigationBarTitle("Media Editor", displayMode: .inline)
     }
 }

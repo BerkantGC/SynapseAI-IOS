@@ -107,7 +107,7 @@ struct ProfileHeader : View {
                     showFollows.toggle()
                 }) {
                     VStack {
-                        Text("Takipçiler")
+                        Text("Followers")
                             .font(.subheadline)
                             .foregroundColor(.gray)
                         Text("\(viewModel.profile?.followers_count ?? 0)")
@@ -124,7 +124,7 @@ struct ProfileHeader : View {
                     showFollows.toggle()
                 }) {
                     VStack {
-                        Text("Takip Edilenler")
+                        Text("Followings")
                             .font(.subheadline)
                             .foregroundColor(.gray)
                         Text("\(viewModel.profile?.followings_count ?? 0)")

@@ -18,14 +18,14 @@ struct LoginView: View {
                         .padding(.horizontal)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    TextField("Kullanıcı Adı", text: $viewModel.username)
+                    TextField("Username", text: $viewModel.username)
                         .autocapitalization(.none)
                         .padding(15)
                         .background(Color(.secondarySystemBackground))
                         .cornerRadius(5.0)
                         .padding(.horizontal, 5)
                     
-                    SecureField("Şifre", text: $viewModel.password)
+                    SecureField("Password", text: $viewModel.password)
                         .autocapitalization(.none)
                         .padding(15)
                         .background(Color(.secondarySystemBackground))
@@ -45,7 +45,7 @@ struct LoginView: View {
                                 .cornerRadius(10.0)
                                 .padding(.horizontal, 5)
                         } else{
-                            Text("Giriş Yap")
+                            Text("Login")
                                 .font(.headline)
                                 .foregroundColor(.white)
                                 .padding(15)

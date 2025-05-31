@@ -41,7 +41,7 @@ struct ChatListView: View {
                     }
                 }
             }
-            .navigationTitle("Mesajlarım")
+            .navigationTitle("Messages")
         }
     }
 }

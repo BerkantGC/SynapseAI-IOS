@@ -26,7 +26,7 @@ struct ImageGeneratorView: View {
                         .frame(width: .infinity, height: UIScreen.main.bounds.height / 2)
                         .cornerRadius(10)
                         .overlay(
-                            Text("Önizleme")
+                            Text("Preview")
                                 .bold()
                                 .font(.title)
                         )
@@ -42,7 +42,7 @@ struct ImageGeneratorView: View {
                     }
                 }.padding(.horizontal)
                 
-                TextField("Prompt giriniz..", text: $prompt, axis: .vertical)
+                TextField("Enter prompt..", text: $prompt, axis: .vertical)
                     .lineLimit(5)
                     .frame(maxHeight: UIScreen.main.bounds.height/6) // Adjust height for multi-line input
                     .padding()
@@ -50,7 +50,7 @@ struct ImageGeneratorView: View {
                     .cornerRadius(10)
                     .padding(.horizontal)
                     .shadow(radius: 5)
-                Button("Üret") {
+                Button("Generate") {
                     Task {
                         if let img = await viewModel.generateImage(prompt: prompt) {
                             image = img
@@ -59,7 +59,7 @@ struct ImageGeneratorView: View {
                 }
             }
         }
-        .navigationTitle("Yapay Zeka ile Üret")
+        .navigationTitle("Generate")
         .toolbar {
             // Hack: To show back title for navigation bar
             ToolbarItem(placement: .primaryAction) {

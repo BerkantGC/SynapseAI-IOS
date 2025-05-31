@@ -19,7 +19,7 @@ struct UploadView: View {
                 VStack{
                 Spacer()
                 
-                HStack{
+                    HStack(spacing: 30){
                     if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
                         PhotosPicker(selection: $viewModel.selection, preferredItemEncoding: .automatic){
                             VStack{
@@ -28,7 +28,7 @@ struct UploadView: View {
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 70)
                                     .foregroundColor(.text)
-                                Text("Fotoğraf Yükle")
+                                Text("Upload")
                                     .font(.title2)
                                     .foregroundColor(.text)
                                     .padding()
@@ -54,7 +54,7 @@ struct UploadView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 70)
                             .foregroundColor(.text)
-                        Text("Yapay zeka ile üret")
+                        Text("Generate")
                             .font(.title2)
                             .foregroundColor(.text)
                             .padding()

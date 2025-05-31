@@ -26,7 +26,7 @@ struct ExploreView: View {
                              selectedUser: self.$selectedUser)
                     .searchable(text: $query,
                                 isPresented: $isSearching,
-                                prompt: "Ara..")
+                                prompt: "Search..")
                     .onChange(of: query) {
                         viewModel.searchUsers(query: query)
                     }
@@ -37,7 +37,7 @@ struct ExploreView: View {
                 if !isSearching {
                     ScrollView{
                         VStack(alignment: .leading) {
-                            Text("Keşfet")
+                            Text("Explore")
                                 .font(.title)
                                 .fontWeight(.bold)
                                 .foregroundColor(.text)
@@ -80,7 +80,7 @@ struct SearchedView: View {
                 .overlay(
                     ScrollView{
                         VStack{
-                            Text("Sonuçlar")
+                            Text("Results")
                                 .font(.title)
                                 .padding()
                             ForEach(viewModel.users) { searchedUser in

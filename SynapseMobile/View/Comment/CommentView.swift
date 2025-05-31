@@ -14,7 +14,7 @@ struct CommentView : View {
     
     var body: some View{
         VStack{
-            Text("Yorumlar")
+            Text("Comments")
                 .font(.title)
                 .fontWeight(.bold)
                 .padding()
@@ -28,7 +28,7 @@ struct CommentView : View {
             }
             Spacer()
             HStack{
-                TextField("Yorum yap", text: $viewModel.commentText)
+                TextField("Comment", text: $viewModel.commentText)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.leading)
                 .background(Color(.systemGray6))
