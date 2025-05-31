@@ -19,7 +19,6 @@ struct Main: View {
             } else {
                 LoginView()
                     .environmentObject(authViewModel)
-                
             }
         }.onAppear {
             authViewModel.checkToken()

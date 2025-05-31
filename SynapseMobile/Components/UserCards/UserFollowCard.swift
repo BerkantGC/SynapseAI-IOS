@@ -19,21 +19,30 @@ struct UserFollowCard : View {
     
     var body: some View {
         HStack {
-            AsyncImage(url: URL(string: follow.profile_picture ?? "")) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.white, lineWidth: 1))
-                    .shadow(radius: 10)
-            } placeholder: {
-                Image("placeholder")
+            if let profile_picture = follow.profile_picture {
+                AsyncImage(url: URL(string: profile_picture)) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(Color.white, lineWidth: 1))
+                        .shadow(radius: 10)
+                } placeholder: {
+                    Image("placeholder")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(Color.white, lineWidth: 1))
+                        .shadow(radius: 10)
+                }.frame(width: 50, height: 50)
+            } else {
+                Image(systemName: "person.circle.fill")
                     .resizable()
                     .frame(width: 50, height: 50)
                     .clipShape(Circle())
                     .overlay(Circle().stroke(Color.white, lineWidth: 1))
                     .shadow(radius: 10)
-            }.frame(width: 50, height: 50)
+            }
             VStack(alignment: .leading) {
                 Text(follow.fullname!)
                     .font(.title3)

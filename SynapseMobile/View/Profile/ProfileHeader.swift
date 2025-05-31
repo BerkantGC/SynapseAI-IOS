@@ -17,80 +17,63 @@ struct ProfileHeader : View {
     @State var selectedImageData: UIImage?
     @State private var isCropperPresented = false
     @State private var selectedUser: String?
-    var isMe: Bool
+    
+    private var currentSession: User?
+    private var isMe: Bool
     
     init(isMe: Bool = false) {
         self.isMe = isMe
+        
+        let stringSession = KeychainService.instance.secureGet(forKey: "SESSION")
+        if let session = stringSession {
+            let user = try? JSONDecoder().decode(User.self, from: session.data(using: .utf8)!)
+            self.currentSession = user;
+        }
     }
     
     var body: some View {
         VStack {
             HStack {
-                PhotosPicker(selection: $selection, preferredItemEncoding: .automatic){
-                    if let fetchedImage = viewModel.profile!.profile_picture{
-                        AsyncImage(url: URL(string: fetchedImage)) { image in
-                            image
-                                .resizable()
-                                .frame(width: 100, height: 100)
-                                .aspectRatio(contentMode: .fit)
-                                .clipShape(Circle())
-                                .overlay(Circle().stroke(Color.white, lineWidth: 1))
-                                .shadow(radius: 10)
-                        } placeholder: {
-                            Image("placeholder")
-                                .resizable()
-                                .frame(width: 100, height: 100)
-                                .clipShape(Circle())
-                                .overlay(Circle().stroke(Color.white, lineWidth: 1))
-                                .shadow(radius: 10)
-                        }.frame(width: 100, height: 100)
-                    } else{
-                        if selectedImageData != nil {
-                            Image(uiImage: selectedImageData!)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 100, height: 100)
-                                .clipShape(Circle())
-                                .overlay(Circle().stroke(Color.white, lineWidth: 1))
-                                .shadow(radius: 10)
-                            
-                        }else{
-                            
-                            Image("placeholder")
-                                .resizable()
-                                .frame(width: 100, height: 100)
-                                .clipShape(Circle())
-                                .overlay(Circle().stroke(Color.white, lineWidth: 1))
-                                .shadow(radius: 10)
-                            
+                Group {
+                    if isMe {
+                        PhotosPicker(selection: $selection, preferredItemEncoding: .automatic) {
+                            ProfileImageView(
+                                imageData: selectedImageData,
+                                imageUrl: viewModel.profile?.profile_picture
+                            )
                         }
-                    }
-                }.onChange(of: selection) {
-                    if let selection = selection {
-                        Task{
-                            if let image = try await selection.loadTransferable(type: Data.self){
-                                self.selectedImageData = UIImage(data: image)
-                                self.isCropperPresented.toggle()
+                        .onChange(of: selection) { oldValue, newValue in
+                            guard let newValue = newValue else { return }
+                            Task {
+                                if let imageData = try? await newValue.loadTransferable(type: Data.self) {
+                                    self.selectedImageData = UIImage(data: imageData)
+                                    self.isCropperPresented.toggle()
+                                }
                             }
                         }
+                    } else {
+                        ProfileImageView(
+                            imageData: nil,
+                            imageUrl: viewModel.profile?.profile_picture
+                        )
                     }
                 }
-                
                 
                 Spacer()
                 VStack(alignment: .leading) {
                     Text("\(viewModel.profile?.first_name ?? "") \(viewModel.profile?.last_name ?? "")")
                         .font(.title)
                         .fontWeight(.bold)
-                    if !self.isMe {
+                    
+                    if (!self.isMe && currentSession?.username != viewModel.profile?.username) {
                         Button(action: {
                             viewModel.handleFollow()
                         }, label: {
                             Text(viewModel.profile?.follow_status == .ACCEPTED
-                                 ? "Takipten Çık"
+                                 ? "Unfollow"
                                  : viewModel.profile?.follow_status == .PENDING
-                                 ? "İstek Gönderildi"
-                                 : "Takip Et")
+                                 ? "Follow Requested"
+                                 : "Follow")
                             .foregroundColor(.text)
                             .padding(10)
                             .background(.ultraThinMaterial)
@@ -149,6 +132,36 @@ struct ProfileHeader : View {
 
 }
  
+struct ProfileImageView: View {
+    let imageData: UIImage?
+    let imageUrl: String?
+
+    var body: some View {
+        ZStack {
+            if let image = imageData {
+                Image(uiImage: image)
+                    .resizable()
+            } else if let imageUrl = imageUrl,
+                      let url = URL(string: imageUrl) {
+                AsyncImage(url: url) { image in
+                    image.resizable()
+                } placeholder: {
+                    Image("placeholder")
+                        .resizable()
+                }
+            } else {
+                Image(systemName: "person.circle.fill")
+                    .resizable()
+            }
+        }
+        .aspectRatio(contentMode: .fill)
+        .frame(width: 100, height: 100)
+        .clipShape(Circle())
+        .overlay(Circle().stroke(Color.white, lineWidth: 1))
+        .shadow(radius: 10)
+    }
+}
+
 #Preview {
     Main()
 }

@@ -13,6 +13,7 @@ class ProfileViewModel: ObservableObject {
     @Published var userPosts: [Post] = []
     @Published var isLoading: Bool = false
     @Published var errorMessage: String? = nil
+    @Published var isPrivate: Bool = false
     @Published var followStatus: FollowStatus?
     @Published var followers: [FollowModel] = []
     @Published var followings: [FollowModel] = []
@@ -68,6 +69,13 @@ class ProfileViewModel: ObservableObject {
         self.isLoading = true
         self.errorMessage = nil
         FetchService().executeRequest(url: "/profile/\(self.profile!.user_id)/posts", method: "GET", data: nil) { data, response, error in
+            
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 403 {
+                self.isPrivate = true
+                self.isLoading = false
+                return
+            }
+            
             DispatchQueue.main.async {
                 self.isLoading = false
                 if let data = data {
@@ -152,5 +160,6 @@ class ProfileViewModel: ObservableObject {
         self.userPosts = []
         self.followers = []
         self.followings = []
+        self.isPrivate = false
     }
 }
