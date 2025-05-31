@@ -40,7 +40,7 @@ struct FollowsSheet : View {
                         Text("Follower not found.")
                     }else{
                         ForEach(viewModel.followers) { follower in
-                            UserFollowCard(follow: follower)
+                            UserFollowCard(follow: follower, isFollower: true)
                                 .onTapGesture {
                                     selectedUser=follower.username
                                     dismiss()

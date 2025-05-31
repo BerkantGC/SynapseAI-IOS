@@ -43,12 +43,15 @@ class SocketManagerService: ObservableObject, SwiftStompDelegate {
         }
         
     
-        swiftStomp = SwiftStomp(host: serverURL, headers: ["Authorization" : "Bearer \(user.token ?? "")"])
+        swiftStomp = SwiftStomp(host: serverURL, headers: ["Authorization" : "Bearer \(user.token)"])
         swiftStomp?.autoReconnect = true
         swiftStomp?.delegate = self
     }
     
     func connect() {
+        notifications = [];
+        sessions = SessionResponse(total: 0, sessions: []);
+        messages = [];
         swiftStomp?.connect()
     }
      

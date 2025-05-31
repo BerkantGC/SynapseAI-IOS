@@ -10,6 +10,12 @@ import SwiftUI
 
 struct UserFollowCard : View {
     var follow: FollowModel
+    var isFollower: Bool;
+    
+    init(follow: FollowModel, isFollower: Bool = false) {
+        self.follow = follow
+        self.isFollower = isFollower
+    }
     
     var body: some View {
         HStack {
@@ -37,15 +43,19 @@ struct UserFollowCard : View {
                     .foregroundColor(.gray)
             }
             Spacer()
-            Button(action: {
-                print("Takip ediliyor")
-            }) {
-                Text("Takip Ediliyor")
-                    .font(.subheadline)
-                    .foregroundColor(.text)
-                    .padding()
-                    .background(Color.loginBG)
-                    .cornerRadius(10)
+            
+            if !isFollower {
+                Button(action: {
+                    print("Following")
+                }) {
+                    Text("Following")
+                        .font(.subheadline)
+                        .foregroundColor(.text)
+                        .padding(.horizontal, 15)
+                        .padding(.vertical, 10)
+                        .background(Color.loginBG)
+                        .cornerRadius(10)
+                }
             }
         }.padding()
     }
