@@ -277,10 +277,13 @@ struct PostDetailCard: View {
     private var contentCard: some View {
         VStack(spacing: 0) {
             // User Info Header
-            userInfoHeader
-                .padding(.horizontal, 24)
-                .padding(.top, 24)
             
+            NavigationLink(destination: ProfileView(username: post.profile.username)) {
+                userInfoHeader
+                    .padding(.horizontal, 24)
+                    .padding(.top, 24)
+            }
+
             // Post Content
             postContent
                 .padding(.horizontal, 24)
