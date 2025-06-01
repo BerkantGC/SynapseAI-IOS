@@ -81,17 +81,41 @@ struct HomeView: View {
                             )
                         }
 
-                    Section(header: Text("Posts")
-                        .font(.title)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.horizontal)) {
-                            LazyVStack(spacing: 20) {
-                                ForEach(viewModel.posts) { post in
-                                    PostCard(post: post, animationNamespace: animationNamespace)
-                                        .id(post.id)
+                    Group {
+                        if viewModel.posts.isEmpty {
+                            VStack(spacing: 16) {
+                                Image(systemName: "doc.text.magnifyingglass")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 60, height: 60)
+                                    .foregroundColor(.gray)
+
+                                Text("No Posts Yet")
+                                    .font(.title3)
+                                    .foregroundColor(.gray)
+                                    .multilineTextAlignment(.center)
+                            }
+                            .frame(maxWidth: .infinity, minHeight: 200)
+                            .padding()
+                            .transition(.opacity)
+                            
+                        } else {
+                            Section(header: Text("Posts")
+                                .font(.title)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.horizontal)) {
+
+                                LazyVStack(spacing: 20) {
+                                    ForEach(viewModel.posts) { post in
+                                        PostCard(post: post, animationNamespace: animationNamespace)
+                                            .id(post.id)
+                                    }
                                 }
+                                .transition(.opacity)
                             }
                         }
+                    }
+
                 }
                 .padding(.bottom, 20)
             }

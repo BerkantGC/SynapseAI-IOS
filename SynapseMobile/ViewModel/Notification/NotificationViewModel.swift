@@ -6,21 +6,30 @@
 //
 
 import SwiftUI
+import Combine
 
 final class NotificationViewModel: ObservableObject {
+    let socketManager = SocketManagerService.shared
+    private var cancellables = Set<AnyCancellable>()
+
     @Published var notifications: [NotificationModel] = []
     @Published var total_count: Int = 0
     @Published var isLoading: Bool = true
     @Published var error: String = ""
-    
+
     init(){
-        let socketManager = SocketManagerService.shared
         socketManager.connect()
-        notifications = socketManager.notifications
-        total_count = socketManager.notifications.count
-        isLoading = false
+
+        socketManager.$notifications
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] updated in
+                self?.notifications = updated
+                self?.total_count = updated.count
+                self?.isLoading = false
+            }
+            .store(in: &cancellables)
     }
-    
+
     func handleFollowReq (notification_id: Int,status: FollowStatus) {
         let index = notifications.firstIndex(where: { $0.id == notification_id })
         

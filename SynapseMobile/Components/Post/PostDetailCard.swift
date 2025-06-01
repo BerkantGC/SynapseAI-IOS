@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Kingfisher
 
 struct PostDetailCard: View {
     @ObservedObject private var viewModel: PostViewModel
@@ -101,35 +102,8 @@ struct PostDetailCard: View {
     // MARK: - Hero Image Section
     private var heroImageSection: some View {
         GeometryReader { geometry in
-            AsyncImage(url: URL(string: post.image ?? "")) { image in
-                image
-                    .resizable()
-                    .matchedGeometryEffect(id: "post-image-\(post.id)", in: animationNamespace)
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: geometry.size.width, height: geometry.size.height)
-                    .clipped()
-                    .scaleEffect(imageScale)
-                    .offset(y: imageOffset)
-                    .overlay(
-                        // Enhanced gradient overlay
-                        LinearGradient(
-                            gradient: Gradient(stops: [
-                                .init(color: Color.black.opacity(0.3), location: 0.0),
-                                .init(color: Color.clear, location: 0.3),
-                                .init(color: Color.clear, location: 0.7),
-                                .init(color: Color.black.opacity(0.5), location: 1.0)
-                            ]),
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
-                    )
-                    .onTapGesture {
-                        withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
-                            isImageFullscreen.toggle()
-                        }
-                    }
-                    .animation(.spring(response: 0.4, dampingFraction: 0.8), value: imageScale)
-            } placeholder: {
+            KFImage(URL(string: post.image ?? ""))
+            .placeholder {
                 Rectangle()
                     .fill(
                         LinearGradient(
@@ -150,6 +124,32 @@ struct PostDetailCard: View {
                         }
                     )
             }
+            .resizable()
+            .matchedGeometryEffect(id: "post-image-\(post.id)", in: animationNamespace)
+            .aspectRatio(contentMode: .fill)
+            .frame(width: geometry.size.width, height: geometry.size.height)
+            .clipped()
+            .scaleEffect(imageScale)
+            .offset(y: imageOffset)
+            .overlay(
+                // Enhanced gradient overlay
+                LinearGradient(
+                    gradient: Gradient(stops: [
+                        .init(color: Color.black.opacity(0.3), location: 0.0),
+                        .init(color: Color.clear, location: 0.3),
+                        .init(color: Color.clear, location: 0.7),
+                        .init(color: Color.black.opacity(0.5), location: 1.0)
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            )
+            .onTapGesture {
+                withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
+                    isImageFullscreen.toggle()
+                }
+            }
+            .animation(.spring(response: 0.4, dampingFraction: 0.8), value: imageScale)
         }
         .frame(height: isImageFullscreen ? UIScreen.main.bounds.height : UIScreen.main.bounds.height * 0.6)
         .overlay(alignment: .topLeading) {
@@ -326,8 +326,7 @@ struct PostDetailCard: View {
                     .foregroundColor(.primary)
             }
             
-            profileImageView
-                .frame(width: 36, height: 36)
+            ProfileImageView(imageData: nil, imageUrl: post.profile.profile_picture, size: 50)
             
             VStack(alignment: .leading, spacing: 2) {
                 Text("\(post.profile.first_name) \(post.profile.last_name)")
@@ -375,7 +374,7 @@ struct PostDetailCard: View {
     
     private var userInfoHeader: some View {
         HStack(spacing: 12) {
-            profileImageView
+            ProfileImageView(imageData: nil, imageUrl: post.profile.profile_picture, size: 50)
             
             VStack(alignment: .leading, spacing: 4) {
                 Text("\(post.profile.first_name) \(post.profile.last_name)")
@@ -421,36 +420,6 @@ struct PostDetailCard: View {
                 }
             }
         }
-    }
-    
-    private var profileImageView: some View {
-        Group {
-            if let profilePicture = post.profile.profile_picture {
-                AsyncImage(url: URL(string: profilePicture)) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                } placeholder: {
-                    Circle()
-                        .fill(Color.gray.opacity(0.3))
-                        .overlay(
-                            ProgressView()
-                                .scaleEffect(0.8)
-                        )
-                }
-            } else {
-                Circle()
-                    .fill(Color.gray.opacity(0.2))
-                    .overlay(
-                        Image(systemName: "person.fill")
-                            .font(.title3)
-                            .foregroundColor(.secondary)
-                    )
-            }
-        }
-        .frame(width: 40, height: 40)
-        .clipShape(Circle())
-        .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 2)
     }
     
     // MARK: - Post Content

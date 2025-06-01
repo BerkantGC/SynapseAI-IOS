@@ -14,24 +14,7 @@ struct NotificationItem : View {
     var body: some View {
         VStack(alignment: .leading){
             HStack(spacing: 10){
-                if let profileImage = notification.from.profile_picture {
-                    AsyncImage(url: URL(string: profileImage)){ image in
-                        image
-                            .resizable()
-                            .frame(width: 50, height: 50)
-                            .clipShape(Circle())
-                    } placeholder: {
-                        Image(systemName: "person.circle")
-                            .resizable()
-                            .frame(width: 50, height: 50)
-                            .clipShape(Circle())
-                    }
-                } else {
-                    Image(systemName: "person.circle")
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                        .clipShape(Circle())
-                }
+                ProfileImageView(imageData: nil, imageUrl: notification.from.profile_picture, size: 50)
                 
                 VStack(alignment: .leading){
                     Text(notification.title)

@@ -49,9 +49,6 @@ class SocketManagerService: ObservableObject, SwiftStompDelegate {
     }
     
     func connect() {
-        notifications = [];
-        sessions = SessionResponse(total: 0, sessions: []);
-        messages = [];
         swiftStomp?.connect()
     }
      
