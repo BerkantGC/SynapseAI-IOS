@@ -132,11 +132,11 @@ struct PostCard: View {
         } label: {
             HStack(spacing: 5) {
                 Image(systemName: post.liked == true ? "heart.fill" : "heart")
-                    .font(.title2)
+                    .font(.system(size: 25))
                     .foregroundColor(post.liked == true ? .red : .primary)
                 
                 Text("\(post.likes_count ?? 0)")
-                    .font(.caption)
+                    .font(.subheadline)
             }
         }
         .disabled(isLiking)
@@ -149,10 +149,10 @@ struct PostCard: View {
         } label: {
             HStack(spacing: 5) {
                 Image(systemName: "bubble.left")
-                    .font(.title2)
+                    .font(.system(size: 23))
                 
                 Text("\(post.comments_count ?? 0)")
-                    .font(.caption)
+                    .font(.subheadline)
             }
         }
         .sheet(isPresented: $showCommentSheet) {
@@ -166,7 +166,7 @@ struct PostCard: View {
             //
         } label: {
             Image(systemName: "paperplane")
-                .font(.title2)
+                .font(.system(size: 25))
         }
     }
     
@@ -175,7 +175,7 @@ struct PostCard: View {
             viewModel.toggleBookmark()
         } label: {
             Image(systemName: post.favorite ? "bookmark.fill" : "bookmark")
-                .font(.title2)
+                .font(.system(size: 25))
         }
     }
     

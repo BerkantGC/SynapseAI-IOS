@@ -50,6 +50,7 @@ struct CommentView : View {
                                 let comment = try JSONDecoder().decode(CommentModel.self, from: data)
                                 viewModel.comments.append(comment)
                                 parentPost.comments_count! += 1
+                                parentPost.top_comments?.append(comment)
                                 viewModel.commentText = ""
                             } catch {
                                 print(error.localizedDescription)
