@@ -14,14 +14,14 @@ struct PostsGrid: View {
     var screenWidth = UIScreen.main.bounds.width
     var screenHeight = UIScreen.main.bounds.height
     var scrollDisabled: Bool
-    var isProfileFeed: Bool = false
+    var pageTitle: String
     
     @Namespace var animationNamespace: Namespace.ID
     
-    init(posts: [Post], scrollDisabled: Bool = false, isProfileFeed: Bool = false) {
+    init(posts: [Post], scrollDisabled: Bool = false, pageTitle: String = "Explore") {
         self.posts = posts
         self.scrollDisabled = scrollDisabled
-        self.isProfileFeed = isProfileFeed
+        self.pageTitle = pageTitle
     }
     
     var body: some View {
@@ -33,7 +33,7 @@ struct PostsGrid: View {
                             posts: posts,
                             selectedPost: post,
                             animationNamespace: animationNamespace,
-                            title: isProfileFeed ? post.profile.username : nil
+                            title: pageTitle
                         )
                     ) {
                         KFImage(URL(string: post.image ?? "")!)

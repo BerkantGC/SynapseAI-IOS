@@ -47,7 +47,7 @@ struct ProfileView: View {
                             }
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                         } else {
-                            PostsGrid(posts: viewModel.userPosts, isProfileFeed: true)
+                            PostsGrid(posts: viewModel.userPosts, pageTitle: viewModel.profile?.username ?? "")
                         }
 
                     }

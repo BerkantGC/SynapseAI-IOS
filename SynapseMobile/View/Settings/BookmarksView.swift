@@ -9,9 +9,28 @@ import SwiftUI
 import Foundation
 
 struct BookmarksView: View {
+    @ObservedObject var viewModel: BookmarksViewModel = BookmarksViewModel();
+    
     var body: some View {
-        VStack {
-            Text("Bookmarks")
+        ZStack {
+            Background()
+            
+            ScrollView {
+                VStack{
+                    PostsGrid(posts: viewModel.favorites, scrollDisabled: true, pageTitle: "Favorites")
+                }
+            }
+        }
+        .navigationTitle("Favorites")
+        .navigationBarTitleDisplayMode(.large)
+        .onAppear() {
+            Task{
+                await viewModel.getFavorites()
+            }
         }
     }
+}
+
+#Preview {
+    Main()
 }
