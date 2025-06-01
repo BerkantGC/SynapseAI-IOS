@@ -104,7 +104,7 @@ struct PostDetailCard: View {
             AsyncImage(url: URL(string: post.image ?? "")) { image in
                 image
                     .resizable()
-                    .matchedGeometryEffect(id: post.id, in: animationNamespace)
+                    .matchedGeometryEffect(id: "post-image-\(post.id)", in: animationNamespace)
                     .aspectRatio(contentMode: .fill)
                     .frame(width: geometry.size.width, height: geometry.size.height)
                     .clipped()

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Kingfisher
 
 struct PostsGrid: View {
     var posts: [Post];
@@ -24,26 +25,29 @@ struct PostsGrid: View {
         ScrollView{
             LazyVGrid(columns: Array(repeating: GridItem(), count: 2)) {
                 ForEach(self.posts) { post in
-                    NavigationLink(destination: PostDetailCard(viewModel: PostViewModel(post: post), animationNamespace: animationNamespace))
-                    {
-                        AsyncImage(url: URL(string: post.image ?? "")!) { image in
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                                .clipped()
+                    NavigationLink(destination:
+                        VerticalPostFeedView(
+                            posts: posts,
+                            selectedPost: post,
+                            animationNamespace: animationNamespace
+                        )
+                    ) {
+                        KFImage(URL(string: post.image ?? "")!)
+                        .placeholder{
+                            Color.gray
                                 .aspectRatio(1, contentMode: .fit)
                                 .cornerRadius(10)
-                        } placeholder: {
-                            Image("placeholder")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                                .clipped()
-                                .aspectRatio(1, contentMode: .fit)
-                                .cornerRadius(10)
+                                .matchedGeometryEffect(id: "post-image-\(post.id)", in: animationNamespace)
                         }
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                        .aspectRatio(1, contentMode: .fit)
+                        .clipped()
+                        .cornerRadius(10)
+                        .matchedGeometryEffect(id: "post-image-\(post.id)", in: animationNamespace)
                     }
+
                 }
             }
             .padding()

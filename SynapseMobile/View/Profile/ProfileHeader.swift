@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import PhotosUI
+import Kingfisher
 
 struct ProfileHeader : View {
     @EnvironmentObject var viewModel: ProfileViewModel
@@ -130,36 +131,6 @@ struct ProfileHeader : View {
         }.padding(.horizontal, 20)
     }
 
-}
- 
-struct ProfileImageView: View {
-    let imageData: UIImage?
-    let imageUrl: String?
-
-    var body: some View {
-        ZStack {
-            if let image = imageData {
-                Image(uiImage: image)
-                    .resizable()
-            } else if let imageUrl = imageUrl,
-                      let url = URL(string: imageUrl) {
-                AsyncImage(url: url) { image in
-                    image.resizable()
-                } placeholder: {
-                    Image("placeholder")
-                        .resizable()
-                }
-            } else {
-                Image(systemName: "person.circle.fill")
-                    .resizable()
-            }
-        }
-        .aspectRatio(contentMode: .fill)
-        .frame(width: 100, height: 100)
-        .clipShape(Circle())
-        .overlay(Circle().stroke(Color.white, lineWidth: 1))
-        .shadow(radius: 10)
-    }
 }
 
 #Preview {

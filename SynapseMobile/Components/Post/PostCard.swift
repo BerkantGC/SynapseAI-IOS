@@ -7,22 +7,25 @@
 
 import Foundation
 import SwiftUI
+import Kingfisher
 
 struct PostCard: View {
     @ObservedObject private var viewModel: PostViewModel
     @State private var showCommentSheet = false
     @State private var isLiking = false
     @State private var showOptions = false
-
+    
     private var post: Post {
         get { viewModel.post }
         set { viewModel.post = newValue }
     }
     let animationNamespace: Namespace.ID
+    let onImageLoad: (() -> Void)? // optional callback
 
-    init(post: Post, animationNamespace: Namespace.ID) {
+    init(post: Post, animationNamespace: Namespace.ID, onImageLoad: (() -> Void)? = nil) {
         self.viewModel = PostViewModel(post: post);
         self.animationNamespace = animationNamespace
+        self.onImageLoad = onImageLoad
     }
     
     var body: some View {
@@ -121,21 +124,16 @@ struct PostCard: View {
     // MARK: - Post Image Section
     private var postImageSection: some View {
         NavigationLink(destination: PostDetailCard(viewModel: viewModel, animationNamespace: animationNamespace)) {
-            AsyncImage(url: URL(string: post.image ?? "")) { image in
-                image
-                    .resizable()
-                    .matchedGeometryEffect(id: post.id, in: animationNamespace)
-                    .aspectRatio(contentMode: .fill)
-                    .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height * 0.6)
-                    .clipped()
-            } placeholder: {
-                Rectangle()
-                    .fill(Color.gray.opacity(0.3))
-                    .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height * 0.6)
-                    .overlay(
-                        ProgressView()
-                    )
-            }
+            KFImage(URL(string: post.image ?? ""))
+                .placeholder {
+                    ProgressView().frame(height: 300)
+                }
+                .resizable()
+                .matchedGeometryEffect(id: post.id, in: animationNamespace)
+                .aspectRatio(contentMode: .fit)
+                .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height * 0.6)
+                .clipped()
+            
         }
     }
     

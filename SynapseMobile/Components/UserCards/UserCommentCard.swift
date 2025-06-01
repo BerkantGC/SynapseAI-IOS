@@ -15,23 +15,7 @@ struct UserCommentCard: View {
         VStack(alignment: .leading, spacing: 12) {
             // User Info Row
             HStack(alignment: .top, spacing: 12) {
-                if let profile_picture = comment.profile_picture {
-                    AsyncImage(url: URL(string: profile_picture)) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                    } placeholder: {
-                        Circle()
-                            .fill(Color.gray.opacity(0.3))
-                            .overlay(ProgressView())
-                    }.frame(width: 40, height: 40)
-                    .clipShape(Circle())
-                } else {
-                    Image(systemName: "person.circle.fill")
-                        .resizable()
-                        .frame(width: 40, height: 40)
-                        .clipShape(Circle())
-                }
+                ProfileImageView(imageData: nil, imageUrl: comment.profile_picture, size: 40)
                 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(comment.user)

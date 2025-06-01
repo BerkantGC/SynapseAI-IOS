@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C84F3712DEC8B1A009335DF /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 2C84F3702DEC8B1A009335DF /* Kingfisher */; };
 		C052093D2D0BAB10009ACB88 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C052093C2D0BAB09009ACB88 /* .gitignore */; };
 		C08DC72E2CFE5EF500AD0E60 /* SwiftStomp in Frameworks */ = {isa = PBXBuildFile; productRef = C08DC72D2CFE5EF500AD0E60 /* SwiftStomp */; };
 /* End PBXBuildFile section */
@@ -71,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C84F3712DEC8B1A009335DF /* Kingfisher in Frameworks */,
 				C08DC72E2CFE5EF500AD0E60 /* SwiftStomp in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,6 +136,7 @@
 			name = SynapseMobile;
 			packageProductDependencies = (
 				C08DC72D2CFE5EF500AD0E60 /* SwiftStomp */,
+				2C84F3702DEC8B1A009335DF /* Kingfisher */,
 			);
 			productName = SynapseMobile;
 			productReference = C0F98E0D2CE0AF7A0055B6A4 /* SynapseMobile.app */;
@@ -219,6 +222,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				C08DC72B2CFE5CCA00AD0E60 /* XCRemoteSwiftPackageReference "SwiftStomp" */,
+				2C84F36F2DEC8B1A009335DF /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = C0F98E0E2CE0AF7A0055B6A4 /* Products */;
@@ -586,6 +590,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2C84F36F2DEC8B1A009335DF /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
 		C08DC72B2CFE5CCA00AD0E60 /* XCRemoteSwiftPackageReference "SwiftStomp" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Romixery/SwiftStomp";
@@ -597,6 +609,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2C84F3702DEC8B1A009335DF /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2C84F36F2DEC8B1A009335DF /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		C08DC72D2CFE5EF500AD0E60 /* SwiftStomp */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C08DC72B2CFE5CCA00AD0E60 /* XCRemoteSwiftPackageReference "SwiftStomp" */;

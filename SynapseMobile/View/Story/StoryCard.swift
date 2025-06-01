@@ -28,16 +28,7 @@ struct StoryCard: View {
             
             
             VStack {
-                AsyncImage(url: URL(string: story.profile_picture ?? "")) { image in
-                    image.resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 60, height: 60)
-                        .clipped()
-                        .cornerRadius(.infinity)
-                        .shadow(color: .text, radius: 2)
-                } placeholder: {
-                    ProgressView()
-                }
+                ProfileImageView(imageData: nil, imageUrl: story.profile_picture, size: 50)
                 Text(story.user)
                     .font(.subheadline)
                     .foregroundColor(.primary)
