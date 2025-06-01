@@ -4,6 +4,7 @@ struct VerticalPostFeedView: View {
     let posts: [Post]
     let selectedPost: Post
     let animationNamespace: Namespace.ID
+    let title: String?
     
     private var indexOfSelected: Int? {
         posts.firstIndex(where: { $0.id == selectedPost.id })
@@ -59,7 +60,7 @@ struct VerticalPostFeedView: View {
                 }
             }
         }
-        .navigationTitle(selectedPost.profile.username)
+        .navigationTitle(title ?? "Explore")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.hidden, for: .tabBar)
     }

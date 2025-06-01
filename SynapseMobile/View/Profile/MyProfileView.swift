@@ -28,7 +28,7 @@ struct MyProfileView: View {
                                 .environmentObject(viewModel)
                         }
                         //ProfileStats()
-                        PostsGrid(posts: viewModel.userPosts)
+                        PostsGrid(posts: viewModel.userPosts, isProfileFeed: true)
                     }
                 }
                 
