@@ -24,8 +24,8 @@ struct PostsGrid: View {
         ScrollView{
             LazyVGrid(columns: Array(repeating: GridItem(), count: 2)) {
                 ForEach(self.posts) { post in
-                    NavigationLink(destination: PostDetailCard(post: post, animationNamespace: animationNamespace)
-                    ) {
+                    NavigationLink(destination: PostDetailCard(viewModel: PostViewModel(post: post), animationNamespace: animationNamespace))
+                    {
                         AsyncImage(url: URL(string: post.image ?? "")!) { image in
                             image
                                 .resizable()

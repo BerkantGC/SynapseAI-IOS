@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CommentModel: Identifiable, Codable {
+struct CommentModel: Identifiable, Codable, Equatable {
     var id: Int  // unique identifier
     var content: String
     var created_at: String?

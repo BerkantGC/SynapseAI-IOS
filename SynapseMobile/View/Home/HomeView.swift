@@ -4,7 +4,7 @@ struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
     @State private var selectedStory: StoryModel?
     @State private var showStoryModal = false
-    
+
     @State private var selectedPost: Post?
     @State private var showPostModal = false
     @Namespace private var animationNamespace
@@ -12,8 +12,8 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Background()
-                
+                Background().ignoresSafeArea()
+
                 if viewModel.isLoading {
                     ProgressView("Loading posts...")
                         .transition(.opacity.animation(.easeInOut))
@@ -23,59 +23,16 @@ struct HomeView: View {
                         .padding()
                         .transition(.opacity.animation(.easeInOut))
                 } else {
-                    ScrollViewReader { scrollView in
-                        ScrollView {
-                            Section(header: Text("Stories")
-                                .font(.title)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.horizontal)
-                            ) {
-                                StoryList(stories: viewModel.stories,
-                                          selectedStory: $selectedStory,
-                                          showStoryModal: $showStoryModal,
-                                          animationNamespace: animationNamespace)
-                            }
-                            Section(header: Text("Posts")
-                                .font(.title)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.horizontal)
-                            ) {
-                                LazyVStack {
-                                    ForEach(viewModel.posts) { post in
-                                        PostCard(post: post, animationNamespace: animationNamespace)
-                                            .onTapGesture {
-                                                scrollView.scrollTo(post.id, anchor: .center)
-                                                withAnimation(.spring(response: 0.5, dampingFraction: 0.8)
-                                                    .delay(0.1)) {
-                                                    selectedPost = post
-                                                    showPostModal.toggle()
-                                                }
-                                            }
-                                    }
-                                }
-                            }
-                        }
-                        .refreshable {
-                            await refreshContent()
-                        }
-                    }
+                    contentScrollView
                 }
-                
-                // Story Modal with Smooth Transition
-                if showStoryModal {
-                    StoryModalView(story: selectedStory!, showStoryModal: $showStoryModal, animationNamespace: animationNamespace)
-                }
-                
-                // Post Modal with Smooth Transition
-                if showPostModal, let post = selectedPost {
-                    PostDetailCard(post: post, animationNamespace: animationNamespace)
-                        .onTapGesture {
-                            withAnimation(.spring()) {
-                                selectedPost = nil
-                            }
-                        }
-                        .transition(.opacity.animation(.easeInOut))
-                        .toolbarVisibility(.hidden, for: .tabBar)
+
+                if showStoryModal, let story = selectedStory {
+                    StoryModalView(
+                        story: story,
+                        showStoryModal: $showStoryModal,
+                        animationNamespace: animationNamespace
+                    )
+                    .zIndex(2)
                 }
             }
             .toolbar {
@@ -86,18 +43,17 @@ struct HomeView: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink(destination: NotificationsView()) {
-                        if SocketManagerService.shared.notifications.count > 0 {
-                            Image(systemName: "bell.fill")
-                                .foregroundColor(.text)
-                                .overlay(
-                                    Text(String(SocketManagerService.shared.notifications.count))
-                                        .foregroundColor(.white)
-                                        .font(.caption)
-                                        .padding(5)
-                                        .offset(x: 10, y: -10)
-                                )
-                        } else {
-                            Image(systemName: "bell")
+                        ZStack(alignment: .topTrailing) {
+                            Image(systemName: SocketManagerService.shared.notifications.count > 0 ? "bell.fill" : "bell")
+                            if SocketManagerService.shared.notifications.count > 0 {
+                                Text("\(SocketManagerService.shared.notifications.count)")
+                                    .font(.caption2)
+                                    .foregroundColor(.white)
+                                    .padding(5)
+                                    .background(Color.red)
+                                    .clipShape(Circle())
+                                    .offset(x: 10, y: -10)
+                            }
                         }
                     }
                 }
@@ -108,14 +64,47 @@ struct HomeView: View {
             }
         }
     }
-    
-    private func refreshContent() async {
-        // Load posts and stories
-        viewModel.loadStories()
-        viewModel.loadPosts()
-    }
-}
 
-#Preview {
-    Main()
+    private var contentScrollView: some View {
+        ScrollViewReader { scrollView in
+            ScrollView {
+                VStack(spacing: 24) {
+                    Section(header: Text("Stories")
+                        .font(.title)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal)) {
+                            StoryList(
+                                stories: viewModel.stories,
+                                selectedStory: $selectedStory,
+                                showStoryModal: $showStoryModal,
+                                animationNamespace: animationNamespace
+                            )
+                        }
+
+                    Section(header: Text("Posts")
+                        .font(.title)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal)) {
+                            LazyVStack(spacing: 20) {
+                                ForEach(viewModel.posts) { post in
+                                    PostCard(post: post, animationNamespace: animationNamespace)
+                                        .id(post.id)
+                                }
+                            }
+                        }
+                }
+                .padding(.bottom, 20)
+            }
+            .refreshable {
+                await refreshContent()
+            }
+        }
+    }
+
+    private func refreshContent() async {
+        await MainActor.run {
+            viewModel.loadStories()
+            viewModel.loadPosts()
+        }
+    }
 }

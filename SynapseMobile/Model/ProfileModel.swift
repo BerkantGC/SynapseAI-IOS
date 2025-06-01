@@ -5,7 +5,7 @@
 //  Created by Berkant Gürcan on 12.11.2024.
 //
 
-class ProfileModel : Decodable {
+class ProfileModel : Codable {
     var user_id: Int
     var first_name: String
     var last_name: String

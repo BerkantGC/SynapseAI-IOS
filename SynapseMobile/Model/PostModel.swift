@@ -13,10 +13,10 @@ struct Post: Identifiable, Codable {
     var content: String?
     var image: String?
     var created_at: String
-    var profile_picture: String?
-    var full_name: String?
-    var username: String?
+    var profile: ProfileModel
     var liked: Bool?
+    var favorite: Bool
     var likes_count: Int?
     var comments_count: Int?
+    var top_comments: [CommentModel]?
 }
