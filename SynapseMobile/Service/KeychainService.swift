@@ -67,4 +67,10 @@ final class KeychainService {
         ]
         SecItemDelete(query as CFDictionary)
     }
+    
+    func getLoggedInUsername() -> String? {
+        guard let session = secureGet(forKey: "SESSION"),
+              let user = try? JSONDecoder().decode(User.self, from: Data(session.utf8)) else { return nil }
+        return user.username
+    }
 }

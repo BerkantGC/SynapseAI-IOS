@@ -12,7 +12,8 @@ struct PostCard: View {
     @ObservedObject private var viewModel: PostViewModel
     @State private var showCommentSheet = false
     @State private var isLiking = false
-    
+    @State private var showOptions = false
+
     private var post: Post {
         get { viewModel.post }
         set { viewModel.post = newValue }
@@ -39,8 +40,10 @@ struct PostCard: View {
     // MARK: - Header Section
     private var headerSection: some View {
         HStack {
-            profileImageView
-            userInfoView
+            NavigationLink(destination: ProfileView(username: post.profile.username)){
+                profileImageView
+                userInfoView
+            }
             Spacer()
             moreOptionsButton
         }
@@ -85,11 +88,33 @@ struct PostCard: View {
     
     private var moreOptionsButton: some View {
         Button {
-            // Handle more options
+            showOptions.toggle()
         } label: {
             Image(systemName: "ellipsis")
                 .foregroundColor(.secondary)
                 .padding(8)
+        }
+        .confirmationDialog("Post Options", isPresented: $showOptions, titleVisibility: .visible) {
+            if post.profile.username == KeychainService.instance.getLoggedInUsername() {
+                Button("Edit", role: .none) {
+                    // Open edit screen
+                }
+                Button("Delete", role: .destructive) {
+                    viewModel.deletePost()
+                }
+            } else {
+                Button("Report", role: .destructive) {
+                    viewModel.reportPost()
+                }
+            }
+
+            Button("Copy Link") {
+                if let postURL = URL(string: "https://synapseapp.com/posts/\(post.id)") {
+                    UIPasteboard.general.url = postURL
+                }
+            }
+
+            Button("Cancel", role: .cancel) {}
         }
     }
     

@@ -72,5 +72,15 @@ class PostViewModel: ObservableObject {
             }
         }
     }
+    
+    func deletePost() {
+        print("Deleting post \(post.id)")
+        // TODO: Call delete endpoint
+    }
+
+    func reportPost() {
+        print("Reporting post \(post.id)")
+        // TODO: Call report endpoint
+    }
 
 }
