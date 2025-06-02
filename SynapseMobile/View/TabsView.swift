@@ -19,10 +19,11 @@ enum Tab: Int {
 struct TabsView: View {
     @State var selectedTab: Tab = .home
     @State var notifications: [NotificationModel]?
+    @State var socketInitialized = false
+    
     init() {
         UITabBar.appearance().unselectedItemTintColor = .systemGray
         UITabBar.appearance().backgroundColor = .bgGradientStart
-        SocketManagerService.shared.connect()
     }
     
     var body: some View {
@@ -62,8 +63,14 @@ struct TabsView: View {
                 .tabItem {
                     Image(systemName: "person")
                 }
+        }.accentColor(.text)
+        .onAppear {
+            if !socketInitialized {
+                SocketManagerService.shared.resetAndReconnect()
+                socketInitialized = true
+            }
         }
-        .accentColor(.text)
+
     }
 }
 

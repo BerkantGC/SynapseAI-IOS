@@ -6,7 +6,8 @@ struct ImageGeneratorView: View {
     @State private var prompt = ""
     @State private var image: UIImage?
     @State private var isLoading = false
-
+    @State private var showContinueButton = false
+    
     var body: some View {
         ZStack {
             Background()
@@ -15,13 +16,15 @@ struct ImageGeneratorView: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color(.systemGray6))
-                        .frame(width: .infinity, height: UIScreen.main.bounds.height / 2)
+                        .aspectRatio(3/4, contentMode: .fit)
+                        .frame(maxWidth: .infinity)
                         .overlay(
                             Group {
                                 if let img = image {
                                     Image(uiImage: img)
                                         .resizable()
-                                        .scaledToFit()
+                                        .aspectRatio(3/4, contentMode: .fit)
+                                        .cornerRadius(12)
                                         .transition(.opacity)
                                         .animation(.easeInOut(duration: 0.3), value: image)
                                 } else {
@@ -31,9 +34,9 @@ struct ImageGeneratorView: View {
                                 }
                             }
                         )
-
-                }
+                }.hideKeyboardOnTap()
                 .padding(.horizontal)
+
 
                 TextField("Enter prompt...", text: $prompt, axis: .vertical)
                     .lineLimit(3...6)
@@ -64,6 +67,26 @@ struct ImageGeneratorView: View {
                     .shadow(radius: 5)
                 }
                 .padding(.horizontal)
+                
+                if showContinueButton && image != nil {
+                    HStack {
+                        Spacer()
+                        NavigationLink(destination: UploadFormPage(image: image!, prompt: prompt)) {
+                            HStack(spacing: 6) {
+                                Text("Next")
+                                Image(systemName: "arrow.right")
+                            }
+                            .padding(.horizontal, 14)
+                            .padding(.vertical, 10)
+                            .background(Color.indigo)
+                            .foregroundColor(.primary)
+                            .clipShape(Capsule())
+                            .shadow(radius: 4)
+                            .transition(.move(edge: .trailing).combined(with: .opacity))
+                            .padding()
+                        }
+                    }
+                }
 
                 Spacer()
             }
@@ -82,8 +105,9 @@ struct ImageGeneratorView: View {
         isLoading = true
         Task {
             let generated = await viewModel.generateImage(prompt: prompt)
-            withAnimation {
+            withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) {
                 image = generated
+                showContinueButton = true
             }
             isLoading = false
         }

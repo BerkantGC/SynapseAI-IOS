@@ -13,9 +13,9 @@ struct UploadView: View {
     @StateObject var viewModel = UploadViewModel.shared
     
     var body: some View{
-        ZStack{
+        NavigationStack{
+            ZStack{
             Background()
-            NavigationStack{
                 VStack{
                 Spacer()
                 

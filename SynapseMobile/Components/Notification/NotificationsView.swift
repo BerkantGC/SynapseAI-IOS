@@ -1,10 +1,3 @@
-//
-//  NotificationsView.swift
-//  SynapseMobile
-//
-//  Created by Berkant Gürcan on 12/11/24.
-//
-
 import Foundation
 import SwiftUI
 
@@ -15,27 +8,27 @@ struct NotificationsView: View {
         ZStack {
             Background()
             
-            VStack{
+            VStack {
                 if notificationViewModel.isLoading {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle())
                         .padding(.top, 20)
                 } else {
                     ScrollView {
-                        ForEach(notificationViewModel.notifications) { notification in
-                            NotificationItem(notification: notification)
-                                .environmentObject(notificationViewModel)
+                        LazyVStack {
+                            ForEach(notificationViewModel.notifications) { notification in
+                                NotificationItem(notification: notification)
+                                    .environmentObject(notificationViewModel)
+                            }
                         }
+                        .padding()
+                    }
+                    .refreshable {
+                        notificationViewModel.resetNotifications()
                     }
                 }
             }
         }
-        .onAppear {
-            //notificationViewModel.fetchNotifications()
-        }.navigationTitle("Notifications")
+        .navigationTitle("Notifications")
     }
-}
-
-#Preview {
-    Main()
 }

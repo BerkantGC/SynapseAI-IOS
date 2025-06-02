@@ -25,8 +25,10 @@ struct ChatView: View {
                                 MessageCard(message: message)
                                     .id(message.id)
                             }
-                        }.padding(.horizontal, 5)
+                        }.padding(.horizontal, 10)
                     }
+                    .scrollDismissesKeyboard(.interactively) // Dismiss on scroll
+                    .hideKeyboardOnTap()
                     .onAppear {
                         configureNavigationAppearance()
                         socketManager.proxy = proxy
@@ -44,7 +46,8 @@ struct ChatView: View {
                 
                 MessageInput(selectedUser: $selectedUser)
                     .padding()
-            }.toolbar(.hidden, for: .tabBar)
+            }
+            .toolbar(.hidden, for: .tabBar)
             .navigationTitle(socketManager.selectedSession?.user ?? "")
         }
     }

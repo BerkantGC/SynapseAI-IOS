@@ -22,14 +22,6 @@ class SocketManagerService: ObservableObject, SwiftStompDelegate {
     
     private var swiftStomp: SwiftStomp?
     
-    init() {
-        setupSocketConnection()
-        
-        if((swiftStomp?.isConnected) == nil) {
-            connect();
-        }
-    }
-    
     private func setupSocketConnection() {
         @EnvironmentKey("SOCKET_URL")
         var socketURLString :String;
@@ -97,9 +89,10 @@ class SocketManagerService: ObservableObject, SwiftStompDelegate {
     }
     
     func onConnect(swiftStomp: SwiftStomp, connectType: StompConnectType) {
-       
-        subscribe(to: "/user/queue/notifications")
-        subscribe(to: "/user/topic/private")
+        DispatchQueue.main.async {
+            self.subscribe(to: "/user/queue/notifications")
+            self.subscribe(to: "/user/topic/private")
+        }
         
         swiftStomp.send(body: "", to: "/app/get-notifications") // Ensure your server accepts empty payloads here
     }
@@ -109,12 +102,17 @@ class SocketManagerService: ObservableObject, SwiftStompDelegate {
             print("Received invalid message format")
             return
         }
-                
+        
         if(destination == "/user/queue/notifications"){
             DispatchQueue.main.async {
                 if let notificationsRes = try? JSONDecoder().decode(NotificationsReponse.self, from: Data(message.utf8)){
-                    
-                    self.notifications = notificationsRes.notifications
+                    if let notifications = notificationsRes.notifications{
+                        self.notifications = notifications
+                    } else if let notification = notificationsRes.notification{
+                        self.notifications.append(notification)
+                    } else if let deletedNotificationId = notificationsRes.deleted_notification_id {
+                        self.notifications = self.notifications.filter { $0.id != deletedNotificationId }
+                    }
                 }
             }
             
@@ -158,6 +156,25 @@ class SocketManagerService: ObservableObject, SwiftStompDelegate {
         }
         
         
+    }
+    
+    func clear() {
+        DispatchQueue.main.async {
+            self.notifications = []
+            self.sessions = SessionResponse(total: 0, sessions: [])
+            self.selectedSession = nil
+            self.messages = []
+            self.newMessage = ""
+            self.proxy = nil
+        }
+    }
+    
+    func resetAndReconnect() {
+        disconnect()
+        clear()
+        swiftStomp = nil
+        setupSocketConnection()
+        connect()
     }
 
     func onReceipt(swiftStomp: SwiftStomp, receiptId: String) {

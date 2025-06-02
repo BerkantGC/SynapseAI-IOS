@@ -4,6 +4,7 @@ struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
     @State private var selectedStory: StoryModel?
     @State private var showStoryModal = false
+    @ObservedObject private var socketManager = SocketManagerService.shared
 
     @State private var selectedPost: Post?
     @State private var showPostModal = false
@@ -44,9 +45,9 @@ struct HomeView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink(destination: NotificationsView()) {
                         ZStack(alignment: .topTrailing) {
-                            Image(systemName: SocketManagerService.shared.notifications.count > 0 ? "bell.fill" : "bell")
-                            if SocketManagerService.shared.notifications.count > 0 {
-                                Text("\(SocketManagerService.shared.notifications.count)")
+                            Image(systemName: socketManager.notifications.count > 0 ? "bell.fill" : "bell")
+                            if socketManager.notifications.count > 0 {
+                                Text("\(socketManager.notifications.count)")
                                     .font(.caption2)
                                     .foregroundColor(.white)
                                     .padding(5)

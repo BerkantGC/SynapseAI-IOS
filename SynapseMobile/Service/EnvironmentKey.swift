@@ -10,22 +10,37 @@ import Foundation
 @propertyWrapper
 struct EnvironmentKey<T: LosslessStringConvertible> {
     var wrappedValue: T
-    
+
     init(_ key: String) {
-        guard let stringValue = ProcessInfo.processInfo.environment[key],
-              let value = T(stringValue)
-        else {
-            fatalError("Environment variable '\(key)' not found or not convertible to \(T.self)")
-        }
-        self.wrappedValue = value
-    }
-    
-    init(_ key: String, _ defaultValue: T) {
-        if let stringValue = ProcessInfo.processInfo.environment[key],
-           let value = T(stringValue) {
+        if let envValue = ProcessInfo.processInfo.environment[key],
+           let value = T(envValue) {
             self.wrappedValue = value
-        } else {
-            self.wrappedValue = defaultValue
+            return
         }
+
+        if let plistValue = Bundle.main.infoDictionary?[key] as? String,
+           let value = T(plistValue) {
+            self.wrappedValue = value
+            return
+        }
+
+        fatalError("Environment variable or plist value '\(key)' not found or not convertible to \(T.self)")
+    }
+
+    init(_ key: String, _ defaultValue: T) {
+        if let envValue = ProcessInfo.processInfo.environment[key],
+           let value = T(envValue) {
+            self.wrappedValue = value
+            return
+        }
+
+        if let plistValue = Bundle.main.infoDictionary?[key] as? String,
+           let value = T(plistValue) {
+            self.wrappedValue = value
+            return
+        }
+
+        self.wrappedValue = defaultValue
     }
 }
+

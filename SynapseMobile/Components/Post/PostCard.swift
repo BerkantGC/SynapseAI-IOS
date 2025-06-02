@@ -38,42 +38,20 @@ struct PostCard: View {
         .background(.ultraThinMaterial)
         .cornerRadius(20)
         .clipped()
+        .padding(.horizontal, 10)
     }
     
     // MARK: - Header Section
     private var headerSection: some View {
         HStack {
             NavigationLink(destination: ProfileView(username: post.profile.username)){
-                profileImageView
+                ProfileImageView(imageData: nil, imageUrl: post.profile.profile_picture, size: 40)
                 userInfoView
             }
             Spacer()
             moreOptionsButton
         }
         .padding()
-    }
-    
-    private var profileImageView: some View {
-        Group {
-            if let profilePicture = post.profile.profile_picture {
-                AsyncImage(url: URL(string: profilePicture)) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                } placeholder: {
-                    ProgressView()
-                        .frame(width: 50, height: 50)
-                }
-            } else {
-                Image(systemName: "person.fill")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 20, height: 20)
-                    .foregroundColor(.secondary)
-            }
-        }
-        .frame(width: 50, height: 50)
-        .clipShape(Circle())
     }
     
     private var userInfoView: some View {

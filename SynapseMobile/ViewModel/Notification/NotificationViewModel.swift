@@ -9,7 +9,8 @@ import SwiftUI
 import Combine
 
 final class NotificationViewModel: ObservableObject {
-    let socketManager = SocketManagerService.shared
+    @ObservedObject var socketManager = SocketManagerService.shared
+
     private var cancellables = Set<AnyCancellable>()
 
     @Published var notifications: [NotificationModel] = []
@@ -18,8 +19,6 @@ final class NotificationViewModel: ObservableObject {
     @Published var error: String = ""
 
     init(){
-        socketManager.connect()
-
         socketManager.$notifications
             .receive(on: DispatchQueue.main)
             .sink { [weak self] updated in
@@ -40,12 +39,14 @@ final class NotificationViewModel: ObservableObject {
                 if let error = error {
                     self.error = error.localizedDescription
                 }
-                
-                if data != nil {
-                    self.notifications.remove(at: index)
-                }
             }
         }
         
+    }
+    
+    func resetNotifications() {
+        FetchService().executeRequest(url: "/notifications/reset", method: "POST", data: nil) {_,_,_ in 
+            
+        }
     }
 }

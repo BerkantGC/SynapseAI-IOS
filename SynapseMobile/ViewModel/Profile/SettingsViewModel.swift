@@ -10,5 +10,6 @@ import Foundation
 class SettingsViewModel : ObservableObject {
     func logout(){
         KeychainService.instance.clear(forKey: "SESSION")
+        SocketManagerService.shared.clear()
     }
 }

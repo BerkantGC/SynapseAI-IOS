@@ -29,6 +29,8 @@ struct NotificationModel: Identifiable, Decodable {
 }
 
 struct NotificationsReponse: Decodable {
-    var notifications: [NotificationModel]
-    var total_count: Int
+    var notifications: [NotificationModel]?
+    var notification: NotificationModel?
+    var deleted_notification_id: Int?
+    var total_count: Int?
 }

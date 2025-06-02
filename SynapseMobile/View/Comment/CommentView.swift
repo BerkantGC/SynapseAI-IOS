@@ -63,7 +63,8 @@ struct CommentView : View {
                         .padding(.trailing)
                 }
             }.padding(.vertical)
-
+            .hideKeyboardOnTap()
+            .scrollDismissesKeyboard(.interactively) // Dismiss on scroll
         }.onAppear{
             viewModel.loadComments(postId: self.parentPost.id)
         }
