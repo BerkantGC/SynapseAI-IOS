@@ -14,8 +14,6 @@ struct ExploreView: View {
     @State var query: String = ""
     @State var selectedUser: String?
     
-    var categoryList: [Category] = Category.allCases;
-    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -36,29 +34,78 @@ struct ExploreView: View {
                 
                 if !isSearching {
                     ScrollView{
-                        VStack(alignment: .leading) {
-                            Text("Explore")
-                                .font(.title)
-                                .fontWeight(.bold)
-                                .foregroundColor(.text)
-                                .padding(.horizontal, 10)
-                            ScrollView(.horizontal, showsIndicators: false){
-                                HStack{
-                                    ForEach(0...(categoryList.count - 1), id: \.self){ index in
-                                        CategoryCard(category: categoryList[index])
-                                    }
-                                }.padding(.horizontal)
-                            }
-                            PostsGrid(posts: viewModel.posts, scrollDisabled: true)
+                        VStack(alignment: .leading, spacing: 0) {
+                            CategoryList()
+                            profileRecommendations()
+                            exploreView()
                         }
                     }
                 }
             }.onAppear(){
-                viewModel.fetchExplorePosts()
+                Task {
+                    await viewModel.fetchExplorePosts()
+                    await viewModel.fetchFollowRecommendations()
+                }
             }
             .navigationDestination(item: self.$selectedUser, destination: { user in
                 ProfileView(username: user)
             })
+        }
+    }
+    
+    @ViewBuilder
+    func exploreView() -> some View {
+        Text("Explore")
+            .font(.title)
+            .fontWeight(.bold)
+            .foregroundColor(.text)
+            .padding(.horizontal, 10)
+            .padding(.top)
+        PostsGrid(posts: viewModel.posts, scrollDisabled: true)
+    }
+    
+    @ViewBuilder
+    func profileRecommendations () -> some View {
+        Text("Profiles")
+            .font(.title)
+            .fontWeight(.bold)
+            .foregroundColor(.text)
+            .padding(.horizontal, 10)
+            .padding(.vertical)
+        
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 10) {
+                ForEach(viewModel.recommendations) { recommendedProfile in
+                    HStack(alignment: .center) {
+                        ProfileImageView(imageData: nil, imageUrl: recommendedProfile.profile_picture, size: 30)
+                        Text(recommendedProfile.fullname ?? "")
+                        Image(systemName: "star.circle")
+                    }
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 5)
+                    .background(Capsule().fill(.ultraThinMaterial))
+                }
+            }.padding(.horizontal)
+        }
+    }
+}
+
+struct CategoryList: View {
+    var categoryList: [Category] = Category.allCases;
+    
+    var body: some View {
+        Text("Categories")
+            .font(.title)
+            .fontWeight(.bold)
+            .foregroundColor(.text)
+            .padding(.horizontal, 10)
+            .padding(.vertical)
+        ScrollView(.horizontal, showsIndicators: false){
+            HStack{
+                ForEach(0...(categoryList.count - 1), id: \.self){ index in
+                    CategoryCard(category: categoryList[index])
+                }
+            }.padding(.horizontal)
         }
     }
 }
