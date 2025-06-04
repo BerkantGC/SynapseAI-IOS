@@ -7,11 +7,16 @@
 
 import Foundation
 
-struct Post: Identifiable, Codable {
+struct Post: Identifiable, Codable, Equatable {
+    static func == (lhs: Post, rhs: Post) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     var id: Int  // unique identifier
     var title: String?
     var content: String?
     var image: String?
+    var prompt: String?
     var created_at: String
     var profile: ProfileModel
     var liked: Bool?

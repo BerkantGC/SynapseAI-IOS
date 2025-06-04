@@ -9,6 +9,8 @@ import SwiftUI
 struct UploadFormPage: View {
     @State var image: UIImage
     @State var prompt: String
+    @State private var submittedPost: Post? = nil
+    @State private var navigateToHome = false
     @State private var title: String = ""
     @State private var description: String = ""
     @State private var content: String = ""
@@ -18,6 +20,10 @@ struct UploadFormPage: View {
     var body: some View {
         ZStack {
             Background()
+            
+            NavigationLink(destination: MyProfileView(), isActive: $navigateToHome) {
+                EmptyView()
+            }.hidden()
             
             ScrollView {
                 VStack(spacing: 24) {
@@ -75,22 +81,9 @@ struct UploadFormPage: View {
                         }
                         .padding(.horizontal, 20)
                         
-                        // Description Field
-                        VStack(alignment: .leading, spacing: 8) {
-                            Label("Description", systemImage: "text.alignleft")
-                                .font(.subheadline)
-                                .fontWeight(.medium)
-                                .foregroundColor(.secondary)
-                            
-                            TextField("Brief description of your creation...", text: $description, axis: .vertical)
-                                .lineLimit(2...4)
-                                .textFieldStyle(CustomTextFieldStyle())
-                        }
-                        .padding(.horizontal, 20)
-                        
                         // Content Field
                         VStack(alignment: .leading, spacing: 8) {
-                            Label("Content", systemImage: "doc.text")
+                            Label("Description", systemImage: "doc.text")
                                 .font(.subheadline)
                                 .fontWeight(.medium)
                                 .foregroundColor(.secondary)
@@ -160,25 +153,46 @@ struct UploadFormPage: View {
     
     private func submitForm() {
         guard isFormValid else { return }
-        
         isSubmitting = true
-        
-        // Add haptic feedback
-        let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
-        impactFeedback.impactOccurred()
-        
-        // Simulate API call
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+
+        // Haptic
+        let haptic = UIImpactFeedbackGenerator(style: .medium)
+        haptic.impactOccurred()
+
+        // Prepare form data
+        let fields: [String: Any] = [
+            "title": title,
+            "content": content,
+            "prompt": prompt
+        ]
+
+        guard let imageData = image.jpegData(compressionQuality: 0.9) else {
             isSubmitting = false
-            
-            // Success haptic feedback
-            let notificationFeedback = UINotificationFeedbackGenerator()
-            notificationFeedback.notificationOccurred(.success)
-            
-            // Navigate back or show success
-            dismiss()
+            return
+        }
+
+        FetchService().buildFormData(
+            url: "/posts/create-post",
+            method: "POST",
+            data: fields,
+            fileKey: "image",
+            fileData: imageData,
+        ) { data, response, error in
+            DispatchQueue.main.async {
+                isSubmitting = false
+
+                if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                    let successFeedback = UINotificationFeedbackGenerator()
+                    successFeedback.notificationOccurred(.success)
+                    navigateToHome = true
+                } else {
+                    let errorFeedback = UINotificationFeedbackGenerator()
+                    errorFeedback.notificationOccurred(.error)
+                }
+            }
         }
     }
+
 }
 
 // Custom TextField Style

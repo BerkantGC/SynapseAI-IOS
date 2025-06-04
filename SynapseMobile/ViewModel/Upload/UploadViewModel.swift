@@ -68,5 +68,4 @@ class UploadViewModel: ObservableObject {
             }
         }
     }
-
 }
