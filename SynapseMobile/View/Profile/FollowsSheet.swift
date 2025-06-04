@@ -17,6 +17,7 @@ struct FollowsSheet : View {
     var body: some View {
         ZStack{
             Background()
+            
             VStack{
                 Picker(selection: $selectedSegment, label: Text("Picker")) {
                     Text("Followers")

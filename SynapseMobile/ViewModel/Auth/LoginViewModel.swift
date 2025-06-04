@@ -105,7 +105,7 @@ class LoginViewModel: ObservableObject {
                 let user = try? JSONDecoder().decode(User.self, from: session.data(using: .utf8)!)
                 if let tokenExpiresAt = user?.refresh_expires_at {
                     DispatchQueue.main.async {
-                        if Date().isTokenValid(expiresAt: tokenExpiresAt)
+                        if Date.isTokenValid(expiresAt: tokenExpiresAt)
                         {
                             self.isLogged = true;
                         }
