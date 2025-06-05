@@ -45,7 +45,7 @@ struct LoginView: View {
                                 .cornerRadius(10.0)
                                 .padding(.horizontal, 5)
                         } else{
-                            Text("Login")
+                            Text("Sign in")
                                 .font(.headline)
                                 .foregroundColor(.text)
                                 .padding(10)
@@ -53,6 +53,16 @@ struct LoginView: View {
                                 .background(.blue)
                                 .cornerRadius(10)
                                 .padding(.horizontal, 5)
+                        }
+                    }
+                    
+                    HStack{
+                        CustomGoogleSigninButton {
+                            viewModel.signInWithGoogle()
+                        }
+                        
+                        AppleSignInButton { token in
+                            viewModel.signInWithApple(idToken: token)
                         }
                     }
                     
@@ -73,5 +83,5 @@ struct LoginView: View {
 
 
 #Preview {
-    LoginView()
+    Main()
 }

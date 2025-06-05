@@ -2,15 +2,27 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BASE_URL</key>
+	<string>http://192.168.1.38:8080</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-
-	<key>BASE_URL</key>
-	<string>$(BASE_URL)</string>
 	<key>SOCKET_URL</key>
-	<string>$(SOCKET_URL)</string>
+	<string>ws://192.168.1.38:8080/live</string>
+	<key>GOOGLE_CLIENT_ID</key>
+	<string>452745049335-k1ugns4j9hi3v8cptd6r973uevpbkcm4.apps.googleusercontent.com</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>GoogleSignIn</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.452745049335-k1ugns4j9hi3v8cptd6r973uevpbkcm4</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

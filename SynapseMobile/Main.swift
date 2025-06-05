@@ -9,7 +9,6 @@ import SwiftUI
 
 struct Main: View {
     @StateObject private var authViewModel = LoginViewModel.shared
-   
     var body: some View{
         ZStack{
             if authViewModel.isLogged {

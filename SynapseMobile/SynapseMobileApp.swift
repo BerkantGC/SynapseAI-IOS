@@ -6,9 +6,16 @@
 //
 
 import SwiftUI
+import GoogleSignIn
 
 @main
 struct SynapseMobileApp: App {
+    init(){
+        @EnvironmentKey("GOOGLE_CLIENT_ID")
+        var clientId: String
+        
+        GIDSignIn.sharedInstance.configuration = GIDConfiguration(clientID: clientId)
+    }
     
     var body: some Scene {
         WindowGroup {

@@ -3,6 +3,7 @@
 import Foundation
 import Combine
 import SwiftUI
+import GoogleSignIn
 
 class LoginViewModel: ObservableObject {
     static let shared = LoginViewModel()
@@ -10,6 +11,7 @@ class LoginViewModel: ObservableObject {
     @Published var username: String = ""
     @Published var password: String = ""
     @Published var errorMessage: String? = nil
+    @Published var isLoading: Bool = false
     @AppStorage("isLogged") var isLogged: Bool = false
     
     private var cancellables = Set<AnyCancellable>()
@@ -70,12 +72,20 @@ class LoginViewModel: ObservableObject {
             return
         }
         
+        isLoading = true
+        
         FetchService().executeRequest(url: "/auth/login",
                                       method: "POST",
                                       data: ["username": username, "password": password]
         ) { data, response, error in
+            DispatchQueue.main.async {
+                self.isLoading = false
+            }
+            
             if let error = error {
-                self.errorMessage = error.localizedDescription
+                DispatchQueue.main.async {
+                    self.errorMessage = error.localizedDescription
+                }
             }
             
             if let data = data {
@@ -89,34 +99,134 @@ class LoginViewModel: ObservableObject {
                             self.isLogged = true
                         }
                     } catch {
-                        self.errorMessage = "Failed to save user to keychain."
+                        DispatchQueue.main.async {
+                            self.errorMessage = "Failed to save user to keychain."
+                        }
                     }
                 } catch {
-                    self.errorMessage = "Invalid username or password."
+                    DispatchQueue.main.async {
+                        self.errorMessage = "Invalid username or password."
+                    }
                 }
             }
+        }
+    }
+    
+    // MARK: - Google Sign-In
+    func signInWithGoogle() {
+        guard let presentingViewController = UIApplication.shared.connectedScenes
+            .compactMap({ $0 as? UIWindowScene })
+            .first?.windows.first?.rootViewController else {
+            self.errorMessage = "No root view controller found"
+            return
+        }
+
+        isLoading = true
+        errorMessage = nil
+
+        GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController) { [weak self] result, error in
+            DispatchQueue.main.async {
+                self?.isLoading = false
+            }
+
+            if let error = error {
+                DispatchQueue.main.async {
+                    self?.errorMessage = "Google Sign-In failed: \(error.localizedDescription)"
+                }
+                return
+            }
+
+            guard let result = result,
+                  let idToken = result.user.idToken?.tokenString else {
+                DispatchQueue.main.async {
+                    self?.errorMessage = "Failed to get Google ID token"
+                }
+                return
+            }
+
+            // Send Google ID token to your backend
+            self?.authenticateWithBackend(idToken: idToken, provider: .google)
+        }
+    }
+    
+    // MARK: - APPLE Sign-in
+    func signInWithApple(idToken: String) {
+        self.authenticateWithBackend(idToken: idToken, provider: .apple)
+    }
+    
+    private func authenticateWithBackend(idToken: String, provider: AuthProvider) {
+        FetchService().executeRequest(
+            url: provider == .apple ? "/auth/apple" : "/auth/google",
+            method: "POST",
+            data: ["idToken": idToken, "clientType": "ios"]
+        ) { [weak self] data, response, error in
+            if let error = error {
+                DispatchQueue.main.async {
+                    self?.errorMessage = "Authentication failed: \(error.localizedDescription)"
+                }
+                return
+            }
+            
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    self?.errorMessage = "No data received from server"
+                }
+                return
+            }
+            
+            do {
+                let user = try JSONDecoder().decode(User.self, from: data)
+                // Save the user to the keychain
+                do {
+                    try KeychainService.instance.secureStore(user, forKey: "SESSION")
+                    DispatchQueue.main.async {
+                        self?.user = user
+                        self?.isLogged = true
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        self?.errorMessage = "Failed to save user to keychain."
+                    }
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    self?.errorMessage = "Failed to decode user data from server."
+                }
+            }
+        }
+    }
+    
+    func signOut() {
+        // Sign out from Google
+        GIDSignIn.sharedInstance.signOut()
         
+        // Clear local session
+        KeychainService.instance.clear(forKey: "SESSION")
+        
+        DispatchQueue.main.async {
+            self.user = nil
+            self.isLogged = false
+            self.username = ""
+            self.password = ""
+            self.errorMessage = nil
         }
     }
         
     func checkToken(){
-            let stringSession = KeychainService.instance.secureGet(forKey: "SESSION")
-            if let session = stringSession {
-                let user = try? JSONDecoder().decode(User.self, from: session.data(using: .utf8)!)
-                if let tokenExpiresAt = user?.refresh_expires_at {
-                    DispatchQueue.main.async {
-                        if Date.isTokenValid(expiresAt: tokenExpiresAt)
-                        {
-                            self.isLogged = true;
-                        }
-                        else {
-                            self.isLogged = false;
-                        }
+        let stringSession = KeychainService.instance.secureGet(forKey: "SESSION")
+        if let session = stringSession {
+            let user = try? JSONDecoder().decode(User.self, from: session.data(using: .utf8)!)
+            if let tokenExpiresAt = user?.refresh_expires_at {
+                DispatchQueue.main.async {
+                    if Date.isTokenValid(expiresAt: tokenExpiresAt) {
+                        self.isLogged = true
+                    } else {
+                        self.isLogged = false
                     }
                 }
-            } else {
-                self.isLogged = false;
             }
+        } else {
+            self.isLogged = false
+        }
     }
 }
-
