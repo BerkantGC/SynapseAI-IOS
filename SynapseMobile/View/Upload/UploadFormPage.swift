@@ -180,14 +180,17 @@ struct UploadFormPage: View {
         ) { data, response, error in
             DispatchQueue.main.async {
                 isSubmitting = false
-
-                if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                    let successFeedback = UINotificationFeedbackGenerator()
-                    successFeedback.notificationOccurred(.success)
-                    navigateToHome = true
-                } else {
-                    let errorFeedback = UINotificationFeedbackGenerator()
-                    errorFeedback.notificationOccurred(.error)
+                
+                if let httpResponse = response as? HTTPURLResponse {
+                    if httpResponse.statusCode == 200 {
+                        let successFeedback = UINotificationFeedbackGenerator()
+                        successFeedback.notificationOccurred(.success)
+                        navigateToHome = true
+                    } else {
+                        print(httpResponse.statusCode)
+                        let errorFeedback = UINotificationFeedbackGenerator()
+                        errorFeedback.notificationOccurred(.error)
+                    }
                 }
             }
         }

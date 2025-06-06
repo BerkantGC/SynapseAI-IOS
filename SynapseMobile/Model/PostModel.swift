@@ -19,6 +19,8 @@ struct Post: Identifiable, Codable, Equatable {
     var prompt: String?
     var created_at: String
     var profile: ProfileModel
+    var video: String?
+    var processing_status: String?
     var liked: Bool?
     var favorite: Bool
     var likes_count: Int?

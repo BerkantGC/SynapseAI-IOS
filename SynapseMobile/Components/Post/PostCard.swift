@@ -10,6 +10,9 @@ import SwiftUI
 import Kingfisher
 
 struct PostCard: View {
+    @EnvironmentKey("BASE_URL")
+    private var BASE_URL: String;
+    
     @ObservedObject private var viewModel: PostViewModel
     @State private var showCommentSheet = false
     @State private var isLiking = false
@@ -34,7 +37,7 @@ struct PostCard: View {
     var body: some View {
         VStack(spacing: 0) {
             headerSection
-            postImageSection
+            postSection
             actionButtonsSection
             contentSection
         }
@@ -238,18 +241,28 @@ struct PostCard: View {
     }
     
     // MARK: - Post Image Section
-    private var postImageSection: some View {
+    private var postSection: some View {
         NavigationLink(destination: PostDetailCard(viewModel: viewModel, animationNamespace: animationNamespace)) {
             ZStack(alignment: .top) {
-                KFImage(URL(string: post.image ?? ""))
-                    .placeholder {
-                        ProgressView().frame(height: 300)
-                    }
-                    .resizable()
-                    .matchedGeometryEffect(id: post.id, in: animationNamespace)
-                    .aspectRatio(contentMode: .fill)
-                    .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height * 0.6)
-                    .clipped()
+                if let video = viewModel.post.video {
+                    HLSPlayerView(url: "\(BASE_URL)\(video)", onLike: {
+                        if !(post.liked)!{
+                            viewModel.toggleLike()
+                        }
+                    },post: post, isDetail: false)
+                        .frame(width: UIScreen.main.bounds.width - 20, height: UIScreen.main.bounds.height * 0.5)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                } else {
+                    KFImage(URL(string: post.image ?? ""))
+                        .placeholder {
+                            ProgressView().frame(height: 300)
+                        }
+                        .resizable()
+                        .matchedGeometryEffect(id: post.id, in: animationNamespace)
+                        .aspectRatio(contentMode: .fill)
+                        .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height * 0.6)
+                        .clipped()
+                }
                 
                 // AI Generated Icon – centered at top
                 if let prompt = post.prompt, !prompt.isEmpty {

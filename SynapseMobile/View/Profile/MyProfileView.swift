@@ -26,6 +26,7 @@ struct MyProfileView: View {
                         } else if viewModel.profile != nil {
                             ProfileHeader(isMe: true)
                                 .environmentObject(viewModel)
+                            PurchaseView()
                         }
                         //ProfileStats()
                         PostsGrid(posts: viewModel.userPosts, pageTitle: viewModel.profile?.username ?? "")
@@ -50,6 +51,31 @@ struct MyProfileView: View {
         }
     }
 }
+
+struct PurchaseView: View {
+    @StateObject var storeManager = StoreManager()
+
+    var body: some View {
+        Section(header: Text("Support & Upgrades")
+        .font(.headline)
+        .foregroundColor(.gray)
+        .padding(.top)) {
+            if !storeManager.products.isEmpty {
+            VStack {
+                ForEach(storeManager.products, id: \.productIdentifier) { product in
+                    Button(action: {
+                        storeManager.purchase(product: product)
+                    }) {
+                        Text("Buy \(product.localizedTitle) – \(product.priceLocale.currencySymbol ?? "")\(product.price)")
+                    }
+                    .padding()
+                }
+                }
+            }
+        }
+    }
+}
+
 
 #Preview {
     Main()

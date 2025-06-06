@@ -36,7 +36,7 @@ struct PostsGrid: View {
                             title: pageTitle
                         )
                     ) {
-                        KFImage(URL(string: post.image ?? "")!)
+                        KFImage(URL(string: post.image ?? "https://synapsebucket.s3.eu-north-1.amazonaws.com/emmastone__post_81079215-9bbe-43ee-ac95-a1b2552ff4b9.jpeg")!)
                         .placeholder{
                             Color.gray
                                 .aspectRatio(1, contentMode: .fit)

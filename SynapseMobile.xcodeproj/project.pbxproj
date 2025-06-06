@@ -10,6 +10,7 @@
 		2C84F3712DEC8B1A009335DF /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 2C84F3702DEC8B1A009335DF /* Kingfisher */; };
 		2CCFE1362DF1007F002E8302 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 2CCFE1352DF1007F002E8302 /* GoogleSignIn */; };
 		2CCFE1382DF1007F002E8302 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2CCFE1372DF1007F002E8302 /* GoogleSignInSwift */; };
+		2CFA7E882DF1869C00C16547 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFA7E872DF1869C00C16547 /* StoreKit.framework */; };
 		C052093D2D0BAB10009ACB88 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C052093C2D0BAB09009ACB88 /* .gitignore */; };
 		C08DC72E2CFE5EF500AD0E60 /* SwiftStomp in Frameworks */ = {isa = PBXBuildFile; productRef = C08DC72D2CFE5EF500AD0E60 /* SwiftStomp */; };
 /* End PBXBuildFile section */
@@ -32,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2CFA7E872DF1869C00C16547 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		C052093C2D0BAB09009ACB88 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		C0F98E0D2CE0AF7A0055B6A4 /* SynapseMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SynapseMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0F98E1D2CE0AF7C0055B6A4 /* SynapseMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SynapseMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,6 +78,7 @@
 			files = (
 				2C84F3712DEC8B1A009335DF /* Kingfisher in Frameworks */,
 				C08DC72E2CFE5EF500AD0E60 /* SwiftStomp in Frameworks */,
+				2CFA7E882DF1869C00C16547 /* StoreKit.framework in Frameworks */,
 				2CCFE1362DF1007F002E8302 /* GoogleSignIn in Frameworks */,
 				2CCFE1382DF1007F002E8302 /* GoogleSignInSwift in Frameworks */,
 			);
@@ -98,6 +101,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2CFA7E862DF1869C00C16547 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2CFA7E872DF1869C00C16547 /* StoreKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C0F98E042CE0AF7A0055B6A4 = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +116,7 @@
 				C0F98E0F2CE0AF7A0055B6A4 /* SynapseMobile */,
 				C0F98E202CE0AF7C0055B6A4 /* SynapseMobileTests */,
 				C0F98E2A2CE0AF7C0055B6A4 /* SynapseMobileUITests */,
+				2CFA7E862DF1869C00C16547 /* Frameworks */,
 				C0F98E0E2CE0AF7A0055B6A4 /* Products */,
 			);
 			sourceTree = "<group>";

@@ -40,6 +40,7 @@ struct PostDetailCard: View {
             ScrollView {
                 VStack(spacing: 0) {
                     heroImageSection
+                    
                     if !isImageFullscreen {
                         contentCard
                             .transition(
@@ -99,68 +100,116 @@ struct PostDetailCard: View {
         }
     }
     
-    // MARK: - Hero Image Section
+    // MARK: - Fixed Hero Image Section
     private var heroImageSection: some View {
         GeometryReader { geometry in
-            KFImage(URL(string: post.image ?? ""))
-            .placeholder {
-                Rectangle()
-                    .fill(
-                        LinearGradient(
-                            colors: [Color.gray.opacity(0.2), Color.gray.opacity(0.4)],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
+            ZStack {
+                if let videoURLString = post.video, !videoURLString.isEmpty {
+                    // Video Player
+                    HLSPlayerView(
+                        url: videoURLString,
+                        onLike: {
+                            withAnimation(.spring(response: 0.3, dampingFraction: 0.5)) {
+                                viewModel.toggleLike()
+                            }
+                        },
+                        post: post,
+                        isDetail: true
                     )
-                    .overlay(
-                        VStack {
-                            ProgressView()
-                                .scaleEffect(1.2)
-                                .tint(.white)
-                            Text("Loading...")
-                                .font(.caption)
-                                .foregroundColor(.white.opacity(0.7))
-                                .padding(.top, 8)
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+                    .clipShape(Rectangle())
+                    .matchedGeometryEffect(id: "post-image-\(post.id)", in: animationNamespace)
+                    
+                } else {
+                    // Image fallback
+                    KFImage(URL(string: post.image ?? ""))
+                        .placeholder {
+                            Rectangle()
+                                .fill(
+                                    LinearGradient(
+                                        colors: [Color.gray.opacity(0.2), Color.gray.opacity(0.4)],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                                )
+                                .overlay(
+                                    VStack {
+                                        ProgressView()
+                                            .scaleEffect(1.2)
+                                            .tint(.white)
+                                        Text("Loading...")
+                                            .font(.caption)
+                                            .foregroundColor(.white.opacity(0.7))
+                                            .padding(.top, 8)
+                                    }
+                                )
                         }
-                    )
-            }
-            .resizable()
-            .matchedGeometryEffect(id: "post-image-\(post.id)", in: animationNamespace)
-            .aspectRatio(contentMode: .fill)
-            .frame(width: geometry.size.width, height: geometry.size.height)
-            .clipped()
-            .scaleEffect(imageScale)
-            .offset(y: imageOffset)
-            .overlay(
-                // Enhanced gradient overlay
-                LinearGradient(
-                    gradient: Gradient(stops: [
-                        .init(color: Color.black.opacity(0.3), location: 0.0),
-                        .init(color: Color.clear, location: 0.3),
-                        .init(color: Color.clear, location: 0.7),
-                        .init(color: Color.black.opacity(0.5), location: 1.0)
-                    ]),
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-            )
-            .onTapGesture {
-                withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
-                    isImageFullscreen.toggle()
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .clipped()
+                        .matchedGeometryEffect(id: "post-image-\(post.id)", in: animationNamespace)
+                        .scaleEffect(imageScale)
+                        .offset(y: imageOffset)
+                        .overlay(
+                            // Enhanced gradient overlay for images only
+                            LinearGradient(
+                                gradient: Gradient(stops: [
+                                    .init(color: Color.black.opacity(0.3), location: 0.0),
+                                    .init(color: Color.clear, location: 0.3),
+                                    .init(color: Color.clear, location: 0.7),
+                                    .init(color: Color.black.opacity(0.5), location: 1.0)
+                                ]),
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                        )
+                        .onTapGesture {
+                            withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
+                                isImageFullscreen.toggle()
+                            }
+                        }
                 }
             }
             .animation(.spring(response: 0.4, dampingFraction: 0.8), value: imageScale)
         }
         .frame(height: isImageFullscreen ? UIScreen.main.bounds.height : UIScreen.main.bounds.height * 0.6)
         .overlay(alignment: .topLeading) {
-            backButton
-                .padding(.top, 50)
-                .padding(.leading, 20)
+            // Only show back button if it's not a video (since video has its own controls)
+            if post.video == nil || post.video?.isEmpty == true {
+                backButton
+                    .padding(.top, 50)
+                    .padding(.leading, 20)
+            }
         }
         .overlay(alignment: .bottomTrailing) {
-            quickActionButtons
-                .padding(.bottom, 50)
-                .padding(.trailing, 20)
+            // Only show quick action buttons for images (video handles its own interactions)
+            if post.video == nil || post.video?.isEmpty == true {
+                quickActionButtons
+                    .padding(.bottom, 50)
+                    .padding(.trailing, 20)
+            }
+        }
+        .overlay(alignment: .topLeading) {
+            // Always show back button for videos too, but in a different style
+            if post.video != nil && !(post.video?.isEmpty ?? true) {
+                Button {
+                    withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
+                        dismiss()
+                    }
+                } label: {
+                    Image(systemName: "chevron.left")
+                        .font(.title2)
+                        .fontWeight(.medium)
+                        .foregroundColor(.white)
+                        .frame(width: 44, height: 44)
+                        .background(.ultraThinMaterial, in: Circle())
+                        .shadow(color: .black.opacity(0.3), radius: 10, x: 0, y: 5)
+                }
+                .padding(.top, 50)
+                .padding(.leading, 20)
+                .zIndex(100) // Ensure it's above video controls
+            }
         }
         .background(
             GeometryReader { geometry in
