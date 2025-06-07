@@ -35,28 +35,28 @@
 /* Begin PBXFileReference section */
 		2CFA7E872DF1869C00C16547 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		C052093C2D0BAB09009ACB88 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		C0F98E0D2CE0AF7A0055B6A4 /* SynapseMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SynapseMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C0F98E1D2CE0AF7C0055B6A4 /* SynapseMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SynapseMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C0F98E272CE0AF7C0055B6A4 /* SynapseMobileUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SynapseMobileUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0F98E0D2CE0AF7A0055B6A4 /* Synapse AI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Synapse AI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0F98E1D2CE0AF7C0055B6A4 /* Synapse AITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Synapse AITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0F98E272CE0AF7C0055B6A4 /* Synapse AIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Synapse AIUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		C0DE5F622CF87A0A00F761A0 /* Exceptions for "SynapseMobile" folder in "SynapseMobile" target */ = {
+		C0DE5F622CF87A0A00F761A0 /* Exceptions for "Synapse AI" folder in "Synapse AI" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = C0F98E0C2CE0AF7A0055B6A4 /* SynapseMobile */;
+			target = C0F98E0C2CE0AF7A0055B6A4 /* Synapse AI */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		C0F98E0F2CE0AF7A0055B6A4 /* SynapseMobile */ = {
+		C0F98E0F2CE0AF7A0055B6A4 /* Synapse AI */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				C0DE5F622CF87A0A00F761A0 /* Exceptions for "SynapseMobile" folder in "SynapseMobile" target */,
+				C0DE5F622CF87A0A00F761A0 /* Exceptions for "Synapse AI" folder in "Synapse AI" target */,
 			);
-			path = SynapseMobile;
+			path = "Synapse AI";
 			sourceTree = "<group>";
 		};
 		C0F98E202CE0AF7C0055B6A4 /* SynapseMobileTests */ = {
@@ -113,7 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				C052093C2D0BAB09009ACB88 /* .gitignore */,
-				C0F98E0F2CE0AF7A0055B6A4 /* SynapseMobile */,
+				C0F98E0F2CE0AF7A0055B6A4 /* Synapse AI */,
 				C0F98E202CE0AF7C0055B6A4 /* SynapseMobileTests */,
 				C0F98E2A2CE0AF7C0055B6A4 /* SynapseMobileUITests */,
 				2CFA7E862DF1869C00C16547 /* Frameworks */,
@@ -124,9 +124,9 @@
 		C0F98E0E2CE0AF7A0055B6A4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C0F98E0D2CE0AF7A0055B6A4 /* SynapseMobile.app */,
-				C0F98E1D2CE0AF7C0055B6A4 /* SynapseMobileTests.xctest */,
-				C0F98E272CE0AF7C0055B6A4 /* SynapseMobileUITests.xctest */,
+				C0F98E0D2CE0AF7A0055B6A4 /* Synapse AI.app */,
+				C0F98E1D2CE0AF7C0055B6A4 /* Synapse AITests.xctest */,
+				C0F98E272CE0AF7C0055B6A4 /* Synapse AIUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -134,9 +134,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C0F98E0C2CE0AF7A0055B6A4 /* SynapseMobile */ = {
+		C0F98E0C2CE0AF7A0055B6A4 /* Synapse AI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C0F98E312CE0AF7C0055B6A4 /* Build configuration list for PBXNativeTarget "SynapseMobile" */;
+			buildConfigurationList = C0F98E312CE0AF7C0055B6A4 /* Build configuration list for PBXNativeTarget "Synapse AI" */;
 			buildPhases = (
 				C0F98E092CE0AF7A0055B6A4 /* Sources */,
 				C0F98E0A2CE0AF7A0055B6A4 /* Frameworks */,
@@ -147,9 +147,9 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				C0F98E0F2CE0AF7A0055B6A4 /* SynapseMobile */,
+				C0F98E0F2CE0AF7A0055B6A4 /* Synapse AI */,
 			);
-			name = SynapseMobile;
+			name = "Synapse AI";
 			packageProductDependencies = (
 				C08DC72D2CFE5EF500AD0E60 /* SwiftStomp */,
 				2C84F3702DEC8B1A009335DF /* Kingfisher */,
@@ -157,12 +157,12 @@
 				2CCFE1372DF1007F002E8302 /* GoogleSignInSwift */,
 			);
 			productName = SynapseMobile;
-			productReference = C0F98E0D2CE0AF7A0055B6A4 /* SynapseMobile.app */;
+			productReference = C0F98E0D2CE0AF7A0055B6A4 /* Synapse AI.app */;
 			productType = "com.apple.product-type.application";
 		};
-		C0F98E1C2CE0AF7C0055B6A4 /* SynapseMobileTests */ = {
+		C0F98E1C2CE0AF7C0055B6A4 /* Synapse AITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C0F98E342CE0AF7C0055B6A4 /* Build configuration list for PBXNativeTarget "SynapseMobileTests" */;
+			buildConfigurationList = C0F98E342CE0AF7C0055B6A4 /* Build configuration list for PBXNativeTarget "Synapse AITests" */;
 			buildPhases = (
 				C0F98E192CE0AF7C0055B6A4 /* Sources */,
 				C0F98E1A2CE0AF7C0055B6A4 /* Frameworks */,
@@ -176,16 +176,16 @@
 			fileSystemSynchronizedGroups = (
 				C0F98E202CE0AF7C0055B6A4 /* SynapseMobileTests */,
 			);
-			name = SynapseMobileTests;
+			name = "Synapse AITests";
 			packageProductDependencies = (
 			);
 			productName = SynapseMobileTests;
-			productReference = C0F98E1D2CE0AF7C0055B6A4 /* SynapseMobileTests.xctest */;
+			productReference = C0F98E1D2CE0AF7C0055B6A4 /* Synapse AITests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		C0F98E262CE0AF7C0055B6A4 /* SynapseMobileUITests */ = {
+		C0F98E262CE0AF7C0055B6A4 /* Synapse AIUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C0F98E372CE0AF7C0055B6A4 /* Build configuration list for PBXNativeTarget "SynapseMobileUITests" */;
+			buildConfigurationList = C0F98E372CE0AF7C0055B6A4 /* Build configuration list for PBXNativeTarget "Synapse AIUITests" */;
 			buildPhases = (
 				C0F98E232CE0AF7C0055B6A4 /* Sources */,
 				C0F98E242CE0AF7C0055B6A4 /* Frameworks */,
@@ -199,11 +199,11 @@
 			fileSystemSynchronizedGroups = (
 				C0F98E2A2CE0AF7C0055B6A4 /* SynapseMobileUITests */,
 			);
-			name = SynapseMobileUITests;
+			name = "Synapse AIUITests";
 			packageProductDependencies = (
 			);
 			productName = SynapseMobileUITests;
-			productReference = C0F98E272CE0AF7C0055B6A4 /* SynapseMobileUITests.xctest */;
+			productReference = C0F98E272CE0AF7C0055B6A4 /* Synapse AIUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -229,7 +229,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C0F98E082CE0AF7A0055B6A4 /* Build configuration list for PBXProject "SynapseMobile" */;
+			buildConfigurationList = C0F98E082CE0AF7A0055B6A4 /* Build configuration list for PBXProject "Synapse AI" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -248,9 +248,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C0F98E0C2CE0AF7A0055B6A4 /* SynapseMobile */,
-				C0F98E1C2CE0AF7C0055B6A4 /* SynapseMobileTests */,
-				C0F98E262CE0AF7C0055B6A4 /* SynapseMobileUITests */,
+				C0F98E0C2CE0AF7A0055B6A4 /* Synapse AI */,
+				C0F98E1C2CE0AF7C0055B6A4 /* Synapse AITests */,
+				C0F98E262CE0AF7C0055B6A4 /* Synapse AIUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -307,12 +307,12 @@
 /* Begin PBXTargetDependency section */
 		C0F98E1F2CE0AF7C0055B6A4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C0F98E0C2CE0AF7A0055B6A4 /* SynapseMobile */;
+			target = C0F98E0C2CE0AF7A0055B6A4 /* Synapse AI */;
 			targetProxy = C0F98E1E2CE0AF7C0055B6A4 /* PBXContainerItemProxy */;
 		};
 		C0F98E292CE0AF7C0055B6A4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C0F98E0C2CE0AF7A0055B6A4 /* SynapseMobile */;
+			target = C0F98E0C2CE0AF7A0055B6A4 /* Synapse AI */;
 			targetProxy = C0F98E282CE0AF7C0055B6A4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -320,7 +320,7 @@
 /* Begin XCBuildConfiguration section */
 		C0F98E2F2CE0AF7C0055B6A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = C0F98E0F2CE0AF7A0055B6A4 /* SynapseMobile */;
+			baseConfigurationReferenceAnchor = C0F98E0F2CE0AF7A0055B6A4 /* Synapse AI */;
 			baseConfigurationReferenceRelativePath = Debug.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -353,6 +353,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = /SynapseAI/SynapseAI.entitlements;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -385,7 +386,7 @@
 		};
 		C0F98E302CE0AF7C0055B6A4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = C0F98E0F2CE0AF7A0055B6A4 /* SynapseMobile */;
+			baseConfigurationReferenceAnchor = C0F98E0F2CE0AF7A0055B6A4 /* Synapse AI */;
 			baseConfigurationReferenceRelativePath = Release.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -418,6 +419,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = /SynapseAI/SynapseAI.entitlements;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -443,19 +445,21 @@
 		};
 		C0F98E322CE0AF7C0055B6A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = C0F98E0F2CE0AF7A0055B6A4 /* SynapseMobile */;
+			baseConfigurationReferenceAnchor = C0F98E0F2CE0AF7A0055B6A4 /* Synapse AI */;
 			baseConfigurationReferenceRelativePath = Debug.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = SynapseMobile/SynapseMobile.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Synapse AI/SynapseAI.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"SynapseMobile/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Synapse AI/Preview Content\"";
 				DEVELOPMENT_TEAM = ZW893GY47A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SynapseMobile/Info.plist;
+				INFOPLIST_FILE = "Synapse AI/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Synapse AI";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -477,19 +481,21 @@
 		};
 		C0F98E332CE0AF7C0055B6A4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = C0F98E0F2CE0AF7A0055B6A4 /* SynapseMobile */;
+			baseConfigurationReferenceAnchor = C0F98E0F2CE0AF7A0055B6A4 /* Synapse AI */;
 			baseConfigurationReferenceRelativePath = Release.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = SynapseMobile/SynapseMobile.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Synapse AI/SynapseAI.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"SynapseMobile/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Synapse AI/Preview Content\"";
 				DEVELOPMENT_TEAM = ZW893GY47A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SynapseMobile/Info.plist;
+				INFOPLIST_FILE = "Synapse AI/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Synapse AI";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -523,7 +529,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SynapseMobile.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SynapseMobile";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Synapse AI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Synapse AI";
 			};
 			name = Debug;
 		};
@@ -541,7 +547,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SynapseMobile.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SynapseMobile";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Synapse AI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Synapse AI";
 			};
 			name = Release;
 		};
@@ -580,41 +586,41 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C0F98E082CE0AF7A0055B6A4 /* Build configuration list for PBXProject "SynapseMobile" */ = {
+		C0F98E082CE0AF7A0055B6A4 /* Build configuration list for PBXProject "Synapse AI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C0F98E2F2CE0AF7C0055B6A4 /* Debug */,
 				C0F98E302CE0AF7C0055B6A4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
-		C0F98E312CE0AF7C0055B6A4 /* Build configuration list for PBXNativeTarget "SynapseMobile" */ = {
+		C0F98E312CE0AF7C0055B6A4 /* Build configuration list for PBXNativeTarget "Synapse AI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C0F98E322CE0AF7C0055B6A4 /* Debug */,
 				C0F98E332CE0AF7C0055B6A4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
-		C0F98E342CE0AF7C0055B6A4 /* Build configuration list for PBXNativeTarget "SynapseMobileTests" */ = {
+		C0F98E342CE0AF7C0055B6A4 /* Build configuration list for PBXNativeTarget "Synapse AITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C0F98E352CE0AF7C0055B6A4 /* Debug */,
 				C0F98E362CE0AF7C0055B6A4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
-		C0F98E372CE0AF7C0055B6A4 /* Build configuration list for PBXNativeTarget "SynapseMobileUITests" */ = {
+		C0F98E372CE0AF7C0055B6A4 /* Build configuration list for PBXNativeTarget "Synapse AIUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C0F98E382CE0AF7C0055B6A4 /* Debug */,
 				C0F98E392CE0AF7C0055B6A4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 

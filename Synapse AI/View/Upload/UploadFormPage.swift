@@ -8,7 +8,7 @@ import SwiftUI
 
 struct UploadFormPage: View {
     @State var image: UIImage
-    @State var prompt: String
+    @State var prompt: String?
     @State private var submittedPost: Post? = nil
     @State private var navigateToHome = false
     @State private var title: String = ""
@@ -42,18 +42,20 @@ struct UploadFormPage: View {
                             )
                         
                         // Prompt Display
-                        VStack(spacing: 6) {
-                            Text("Generated from prompt")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                            
-                            Text(prompt)
-                                .font(.headline)
-                                .fontWeight(.medium)
-                                .multilineTextAlignment(.center)
-                                .padding(.horizontal, 16)
-                                .padding(.vertical, 8)
-                                .background(.ultraThinMaterial, in: Capsule())
+                        if let prompt = prompt {
+                            VStack(spacing: 6) {
+                                Text("Generated from prompt")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                
+                                Text(prompt)
+                                    .font(.headline)
+                                    .fontWeight(.medium)
+                                    .multilineTextAlignment(.center)
+                                    .padding(.horizontal, 16)
+                                    .padding(.vertical, 8)
+                                    .background(.ultraThinMaterial, in: Capsule())
+                            }
                         }
                     }
                     .padding(.top, 8)
@@ -163,7 +165,7 @@ struct UploadFormPage: View {
         let fields: [String: Any] = [
             "title": title,
             "content": content,
-            "prompt": prompt
+            "prompt": prompt ?? nil
         ]
 
         guard let imageData = image.jpegData(compressionQuality: 0.9) else {

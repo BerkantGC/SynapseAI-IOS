@@ -87,5 +87,19 @@ struct MediaEditor: View {
         }
         .padding()
         .navigationBarTitle("Media Editor", displayMode: .inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                if image != nil {
+                    NavigationLink(destination: UploadFormPage(image: image!)) {
+                        Text("Share")
+                            .font(.caption)
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(Capsule().fill(Color.blue))
+                    }
+                }
+            }
+        }
     }
 }

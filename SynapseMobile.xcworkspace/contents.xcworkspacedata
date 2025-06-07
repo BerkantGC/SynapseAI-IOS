@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:SynapseMobile.xcodeproj">
+      location = "group:Synapse AI.xcodeproj">
    </FileRef>
 </Workspace>
