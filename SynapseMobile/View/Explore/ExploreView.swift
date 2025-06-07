@@ -76,14 +76,16 @@ struct ExploreView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 10) {
                 ForEach(viewModel.recommendations) { recommendedProfile in
-                    HStack(alignment: .center) {
-                        ProfileImageView(imageData: nil, imageUrl: recommendedProfile.profile_picture, size: 30)
-                        Text(recommendedProfile.fullname ?? "")
-                        Image(systemName: "star.circle")
+                    NavigationLink(destination: ProfileView(username: recommendedProfile.username)) {
+                        HStack(alignment: .center) {
+                            ProfileImageView(imageData: nil, imageUrl: recommendedProfile.profile_picture, size: 30)
+                            Text(recommendedProfile.fullname ?? "")
+                            Image(systemName: "star.circle")
+                        }
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 5)
+                        .background(Capsule().fill(.ultraThinMaterial))
                     }
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 5)
-                    .background(Capsule().fill(.ultraThinMaterial))
                 }
             }.padding(.horizontal)
         }

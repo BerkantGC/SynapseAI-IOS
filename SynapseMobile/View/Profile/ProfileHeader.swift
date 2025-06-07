@@ -66,20 +66,15 @@ struct ProfileHeader : View {
                         .font(.title)
                         .fontWeight(.bold)
                     
-                    if (!self.isMe && currentSession?.username != viewModel.profile?.username) {
-                        Button(action: {
-                            viewModel.handleFollow()
-                        }, label: {
-                            Text(viewModel.profile?.follow_status == .ACCEPTED
-                                 ? "Unfollow"
-                                 : viewModel.profile?.follow_status == .PENDING
-                                 ? "Follow Requested"
-                                 : "Follow")
-                            .foregroundColor(.text)
-                            .padding(10)
-                            .background(.ultraThinMaterial)
-                        })
+                    if !self.isMe, currentSession?.username != viewModel.profile?.username, let profile = viewModel.profile {
+                        FollowButton(profile: profile) {
+                            // 🔁 Force refresh the layout or set a flag
+                            withAnimation {
+                                viewModel.objectWillChange.send()
+                            }
+                        }
                     }
+
                 }
                 Spacer()
             }

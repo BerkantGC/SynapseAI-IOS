@@ -327,7 +327,7 @@ struct PostDetailCard: View {
         VStack(spacing: 0) {
             // User Info Header
             
-            NavigationLink(destination: ProfileView(username: post.profile.username)) {
+            NavigationLink(destination: ProfileView(sharedProfile: post.profile, username: post.profile.username)) {
                 userInfoHeader
                     .padding(.horizontal, 24)
                     .padding(.top, 24)
@@ -408,19 +408,6 @@ struct PostDetailCard: View {
     }
 
     // MARK: - User Info Header
-    var followStatusText: String {
-        switch post.profile.follow_status {
-        case .ACCEPTED:
-            return "Following"
-        case .PENDING:
-            return "Requested"
-        case .REJECTED:
-            return "Follow"
-        default:
-            return "Follow"
-        }
-    }
-    
     private var userInfoHeader: some View {
         HStack(spacing: 12) {
             ProfileImageView(imageData: nil, imageUrl: post.profile.profile_picture, size: 50)
@@ -439,24 +426,7 @@ struct PostDetailCard: View {
             
             Spacer()
             
-            Button {
-                // Follow/Unfollow functionality
-                withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
-                    // Handle follow action
-                }
-            } label: {
-                Text(followStatusText)
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
-                    .foregroundColor(post.profile.follow_status == .ACCEPTED ? .primary : .white)
-                    .padding(.horizontal, 15)
-                    .padding(.vertical, 10)
-                    .background(
-                        RoundedRectangle(cornerRadius: 25)
-                            .fill(post.profile.follow_status == .ACCEPTED ?
-                                  Color.gray.opacity(0.2) : Color.blue)
-                    )
-            }
+            FollowButton(profile: viewModel.post.profile)
             .scaleEffect(buttonPresses["follow"] == true ? 0.95 : 1.0)
             .onTapGesture {
                 withAnimation(.easeInOut(duration: 0.1)) {

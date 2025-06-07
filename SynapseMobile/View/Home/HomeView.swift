@@ -14,17 +14,23 @@ struct HomeView: View {
         NavigationStack {
             ZStack {
                 Background().ignoresSafeArea()
-
-                if viewModel.isLoading {
-                    ProgressView("Loading posts...")
-                        .transition(.opacity.animation(.easeInOut))
-                } else if let errorMessage = viewModel.errorMessage {
-                    Text(errorMessage)
-                        .foregroundColor(.red)
-                        .padding()
-                        .transition(.opacity.animation(.easeInOut))
-                } else {
-                    contentScrollView
+                
+                ScrollViewReader { scrollView in
+                    ScrollView {
+                        if viewModel.isLoading {
+                            ProgressView("Loading posts...")
+                                .transition(.opacity.animation(.easeInOut))
+                        } else if let errorMessage = viewModel.errorMessage {
+                            Text(errorMessage)
+                                .foregroundColor(.red)
+                                .padding()
+                                .transition(.opacity.animation(.easeInOut))
+                        } else {
+                            contentScrollView
+                        }
+                    }.refreshable {
+                        await refreshContent()
+                    }
                 }
 
                 if showStoryModal, let story = selectedStory {
@@ -67,8 +73,7 @@ struct HomeView: View {
     }
 
     private var contentScrollView: some View {
-        ScrollViewReader { scrollView in
-            ScrollView {
+        
                 VStack(spacing: 24) {
                     Section(header: Text("Stories")
                         .font(.title)
@@ -116,13 +121,7 @@ struct HomeView: View {
                             }
                         }
                     }
-
-                }
                 .padding(.bottom, 20)
-            }
-            .refreshable {
-                await refreshContent()
-            }
         }
     }
 
