@@ -167,8 +167,8 @@ struct UploadFormPage: View {
             "content": content
         ]
 
-        if ((prompt?.isEmpty) == nil) {
-            fields.updateValue("prompt", forKey: prompt!)
+        if let prompt = prompt {
+            fields.updateValue("prompt", forKey: prompt)
         }
         guard let imageData = image.jpegData(compressionQuality: 0.9) else {
             isSubmitting = false
