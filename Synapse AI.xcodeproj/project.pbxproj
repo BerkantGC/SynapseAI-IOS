@@ -11,8 +11,11 @@
 		2CCFE1362DF1007F002E8302 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 2CCFE1352DF1007F002E8302 /* GoogleSignIn */; };
 		2CCFE1382DF1007F002E8302 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2CCFE1372DF1007F002E8302 /* GoogleSignInSwift */; };
 		2CFA7E882DF1869C00C16547 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFA7E872DF1869C00C16547 /* StoreKit.framework */; };
+		35EB2E1A618A5370007D9EED /* Pods_Synapse_AITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BE424FE4C44F9C49DB91920 /* Pods_Synapse_AITests.framework */; };
+		689C7C5703699A1E18EA571B /* Pods_Synapse_AI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838B1F3038B68195AF8A0456 /* Pods_Synapse_AI.framework */; };
 		C052093D2D0BAB10009ACB88 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C052093C2D0BAB09009ACB88 /* .gitignore */; };
 		C08DC72E2CFE5EF500AD0E60 /* SwiftStomp in Frameworks */ = {isa = PBXBuildFile; productRef = C08DC72D2CFE5EF500AD0E60 /* SwiftStomp */; };
+		FD82C7BD2F45A882E4E8B956 /* Pods_Synapse_AI_Synapse_AIUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B940A6B021F6BF2556C93255 /* Pods_Synapse_AI_Synapse_AIUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,18 +36,44 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A9B4AB576F0F4FA0C64B1E8 /* Pods-Synapse AITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Synapse AITests.release.xcconfig"; path = "Target Support Files/Pods-Synapse AITests/Pods-Synapse AITests.release.xcconfig"; sourceTree = "<group>"; };
+		2677C6E81E55EDEC223E35AB /* Pods-Synapse AITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Synapse AITests.debug.xcconfig"; path = "Target Support Files/Pods-Synapse AITests/Pods-Synapse AITests.debug.xcconfig"; sourceTree = "<group>"; };
+		2CCF393F2DF44A7B007552B5 /* simple.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = simple.xcodeproj; sourceTree = "<group>"; };
+		2CCF3C322DF44A7C007552B5 /* MediaPipeTasksDocGen.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MediaPipeTasksDocGen.xcodeproj; sourceTree = "<group>"; };
+		2CCF435D2DF44A7C007552B5 /* TestApp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = TestApp.xcodeproj; sourceTree = "<group>"; };
+		2CCF44432DF44A7C007552B5 /* TensorFlowLiteSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = TensorFlowLiteSwift.xcodeproj; sourceTree = "<group>"; };
+		2CCF46BA2DF44A7C007552B5 /* TFLiteBenchmark.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = TFLiteBenchmark.xcodeproj; sourceTree = "<group>"; };
+		2CCF477C2DF44A7C007552B5 /* TFLiteEvaluation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = TFLiteEvaluation.xcodeproj; sourceTree = "<group>"; };
+		2CCFB24B2DF44A7B007552B5 /* Buttons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Buttons.xcodeproj; sourceTree = "<group>"; };
+		2CCFC2332DF44A7B007552B5 /* iOSCocoaPodsTester.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = iOSCocoaPodsTester.xcodeproj; sourceTree = "<group>"; };
+		2CCFC23F2DF44A7B007552B5 /* OSXCocoaPodsTester.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = OSXCocoaPodsTester.xcodeproj; sourceTree = "<group>"; };
+		2CCFC2D82DF44A7B007552B5 /* ProtocolBuffers_iOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ProtocolBuffers_iOS.xcodeproj; sourceTree = "<group>"; };
+		2CCFC2D92DF44A7B007552B5 /* ProtocolBuffers_OSX.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ProtocolBuffers_OSX.xcodeproj; sourceTree = "<group>"; };
+		2CCFC2DA2DF44A7B007552B5 /* ProtocolBuffers_tvOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ProtocolBuffers_tvOS.xcodeproj; sourceTree = "<group>"; };
+		2CCFD2DC2DF44A7B007552B5 /* gemmlowp_test.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = gemmlowp_test.xcodeproj; sourceTree = "<group>"; };
+		2CCFD3F02DF44A7B007552B5 /* GTM.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = GTM.xcodeproj; sourceTree = "<group>"; };
+		2CCFD3F32DF44A7B007552B5 /* GTMiPhone.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = GTMiPhone.xcodeproj; sourceTree = "<group>"; };
 		2CFA7E872DF1869C00C16547 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		3BE424FE4C44F9C49DB91920 /* Pods_Synapse_AITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Synapse_AITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		51B80498B686422859566602 /* Pods-Synapse AI-Synapse AIUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Synapse AI-Synapse AIUITests.release.xcconfig"; path = "Target Support Files/Pods-Synapse AI-Synapse AIUITests/Pods-Synapse AI-Synapse AIUITests.release.xcconfig"; sourceTree = "<group>"; };
+		6950348CFAD00470A9D4CD5E /* Pods-Synapse AI-Synapse AIUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Synapse AI-Synapse AIUITests.debug.xcconfig"; path = "Target Support Files/Pods-Synapse AI-Synapse AIUITests/Pods-Synapse AI-Synapse AIUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		838B1F3038B68195AF8A0456 /* Pods_Synapse_AI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Synapse_AI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		96CCCEF24292B56C1CE44F1C /* Pods-Synapse AI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Synapse AI.debug.xcconfig"; path = "Target Support Files/Pods-Synapse AI/Pods-Synapse AI.debug.xcconfig"; sourceTree = "<group>"; };
+		B940A6B021F6BF2556C93255 /* Pods_Synapse_AI_Synapse_AIUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Synapse_AI_Synapse_AIUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C052093C2D0BAB09009ACB88 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		C0F98E0D2CE0AF7A0055B6A4 /* Synapse AI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Synapse AI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0F98E1D2CE0AF7C0055B6A4 /* Synapse AITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Synapse AITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0F98E272CE0AF7C0055B6A4 /* Synapse AIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Synapse AIUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF1CA6B9037A477EEC805309 /* Pods-Synapse AI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Synapse AI.release.xcconfig"; path = "Target Support Files/Pods-Synapse AI/Pods-Synapse AI.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
 		C0DE5F622CF87A0A00F761A0 /* Exceptions for "Synapse AI" folder in "Synapse AI" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Debug.xcconfig,
 				Info.plist,
+				Release.xcconfig,
 			);
 			target = C0F98E0C2CE0AF7A0055B6A4 /* Synapse AI */;
 		};
@@ -81,6 +110,7 @@
 				2CFA7E882DF1869C00C16547 /* StoreKit.framework in Frameworks */,
 				2CCFE1362DF1007F002E8302 /* GoogleSignIn in Frameworks */,
 				2CCFE1382DF1007F002E8302 /* GoogleSignInSwift in Frameworks */,
+				689C7C5703699A1E18EA571B /* Pods_Synapse_AI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35EB2E1A618A5370007D9EED /* Pods_Synapse_AITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,18 +126,140 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD82C7BD2F45A882E4E8B956 /* Pods_Synapse_AI_Synapse_AIUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2CCF51902DF44A83007552B5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2CCF51922DF44A83007552B5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2CCF51942DF44A83007552B5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2CCF51962DF44A83007552B5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2CCF51982DF44A83007552B5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2CCF519A2DF44A83007552B5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2CCF519C2DF44A83007552B5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2CCF519E2DF44A83007552B5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2CCF51A02DF44A83007552B5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2CCF51A22DF44A83007552B5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2CCF51A42DF44A83007552B5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2CCF51A62DF44A83007552B5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2CCF51A82DF44A83007552B5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2CCF51AA2DF44A83007552B5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2CCF51AC2DF44A83007552B5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		2CFA7E862DF1869C00C16547 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				2CFA7E872DF1869C00C16547 /* StoreKit.framework */,
+				838B1F3038B68195AF8A0456 /* Pods_Synapse_AI.framework */,
+				B940A6B021F6BF2556C93255 /* Pods_Synapse_AI_Synapse_AIUITests.framework */,
+				3BE424FE4C44F9C49DB91920 /* Pods_Synapse_AITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B6F689AFCE2728B6BB603EA7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				96CCCEF24292B56C1CE44F1C /* Pods-Synapse AI.debug.xcconfig */,
+				FF1CA6B9037A477EEC805309 /* Pods-Synapse AI.release.xcconfig */,
+				6950348CFAD00470A9D4CD5E /* Pods-Synapse AI-Synapse AIUITests.debug.xcconfig */,
+				51B80498B686422859566602 /* Pods-Synapse AI-Synapse AIUITests.release.xcconfig */,
+				2677C6E81E55EDEC223E35AB /* Pods-Synapse AITests.debug.xcconfig */,
+				0A9B4AB576F0F4FA0C64B1E8 /* Pods-Synapse AITests.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		C0F98E042CE0AF7A0055B6A4 = {
@@ -118,6 +271,7 @@
 				C0F98E2A2CE0AF7C0055B6A4 /* SynapseMobileUITests */,
 				2CFA7E862DF1869C00C16547 /* Frameworks */,
 				C0F98E0E2CE0AF7A0055B6A4 /* Products */,
+				B6F689AFCE2728B6BB603EA7 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -138,9 +292,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C0F98E312CE0AF7C0055B6A4 /* Build configuration list for PBXNativeTarget "Synapse AI" */;
 			buildPhases = (
+				B73180942304FAFBB632B9AC /* [CP] Check Pods Manifest.lock */,
 				C0F98E092CE0AF7A0055B6A4 /* Sources */,
 				C0F98E0A2CE0AF7A0055B6A4 /* Frameworks */,
 				C0F98E0B2CE0AF7A0055B6A4 /* Resources */,
+				3236E2FC53A95A0225E3E5AF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -164,6 +320,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C0F98E342CE0AF7C0055B6A4 /* Build configuration list for PBXNativeTarget "Synapse AITests" */;
 			buildPhases = (
+				C502AF5265C13E01F32822FE /* [CP] Check Pods Manifest.lock */,
 				C0F98E192CE0AF7C0055B6A4 /* Sources */,
 				C0F98E1A2CE0AF7C0055B6A4 /* Frameworks */,
 				C0F98E1B2CE0AF7C0055B6A4 /* Resources */,
@@ -177,8 +334,6 @@
 				C0F98E202CE0AF7C0055B6A4 /* SynapseMobileTests */,
 			);
 			name = "Synapse AITests";
-			packageProductDependencies = (
-			);
 			productName = SynapseMobileTests;
 			productReference = C0F98E1D2CE0AF7C0055B6A4 /* Synapse AITests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -187,9 +342,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C0F98E372CE0AF7C0055B6A4 /* Build configuration list for PBXNativeTarget "Synapse AIUITests" */;
 			buildPhases = (
+				A5B3564FB11102FD32036D1B /* [CP] Check Pods Manifest.lock */,
 				C0F98E232CE0AF7C0055B6A4 /* Sources */,
 				C0F98E242CE0AF7C0055B6A4 /* Frameworks */,
 				C0F98E252CE0AF7C0055B6A4 /* Resources */,
+				11D29C0D2662AA25BE683A51 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -200,8 +357,6 @@
 				C0F98E2A2CE0AF7C0055B6A4 /* SynapseMobileUITests */,
 			);
 			name = "Synapse AIUITests";
-			packageProductDependencies = (
-			);
 			productName = SynapseMobileUITests;
 			productReference = C0F98E272CE0AF7C0055B6A4 /* Synapse AIUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -214,10 +369,11 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1610;
-				LastUpgradeCheck = 1610;
+				LastUpgradeCheck = 1640;
 				TargetAttributes = {
 					C0F98E0C2CE0AF7A0055B6A4 = {
 						CreatedOnToolsVersion = 16.1;
+						LastSwiftMigration = 1640;
 					};
 					C0F98E1C2CE0AF7C0055B6A4 = {
 						CreatedOnToolsVersion = 16.1;
@@ -235,6 +391,8 @@
 			knownRegions = (
 				en,
 				Base,
+				it,
+				fr,
 			);
 			mainGroup = C0F98E042CE0AF7A0055B6A4;
 			minimizedProjectReferenceProxies = 1;
@@ -246,6 +404,68 @@
 			preferredProjectObjectVersion = 77;
 			productRefGroup = C0F98E0E2CE0AF7A0055B6A4 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 2CCF51A22DF44A83007552B5 /* Products */;
+					ProjectRef = 2CCFB24B2DF44A7B007552B5 /* Buttons.xcodeproj */;
+				},
+				{
+					ProductGroup = 2CCF519A2DF44A83007552B5 /* Products */;
+					ProjectRef = 2CCFD2DC2DF44A7B007552B5 /* gemmlowp_test.xcodeproj */;
+				},
+				{
+					ProductGroup = 2CCF51AA2DF44A83007552B5 /* Products */;
+					ProjectRef = 2CCFD3F02DF44A7B007552B5 /* GTM.xcodeproj */;
+				},
+				{
+					ProductGroup = 2CCF51A02DF44A83007552B5 /* Products */;
+					ProjectRef = 2CCFD3F32DF44A7B007552B5 /* GTMiPhone.xcodeproj */;
+				},
+				{
+					ProductGroup = 2CCF51AC2DF44A83007552B5 /* Products */;
+					ProjectRef = 2CCFC2332DF44A7B007552B5 /* iOSCocoaPodsTester.xcodeproj */;
+				},
+				{
+					ProductGroup = 2CCF51982DF44A83007552B5 /* Products */;
+					ProjectRef = 2CCF3C322DF44A7C007552B5 /* MediaPipeTasksDocGen.xcodeproj */;
+				},
+				{
+					ProductGroup = 2CCF51962DF44A83007552B5 /* Products */;
+					ProjectRef = 2CCFC23F2DF44A7B007552B5 /* OSXCocoaPodsTester.xcodeproj */;
+				},
+				{
+					ProductGroup = 2CCF51902DF44A83007552B5 /* Products */;
+					ProjectRef = 2CCFC2D82DF44A7B007552B5 /* ProtocolBuffers_iOS.xcodeproj */;
+				},
+				{
+					ProductGroup = 2CCF51942DF44A83007552B5 /* Products */;
+					ProjectRef = 2CCFC2D92DF44A7B007552B5 /* ProtocolBuffers_OSX.xcodeproj */;
+				},
+				{
+					ProductGroup = 2CCF51A62DF44A83007552B5 /* Products */;
+					ProjectRef = 2CCFC2DA2DF44A7B007552B5 /* ProtocolBuffers_tvOS.xcodeproj */;
+				},
+				{
+					ProductGroup = 2CCF519C2DF44A83007552B5 /* Products */;
+					ProjectRef = 2CCF393F2DF44A7B007552B5 /* simple.xcodeproj */;
+				},
+				{
+					ProductGroup = 2CCF51A82DF44A83007552B5 /* Products */;
+					ProjectRef = 2CCF44432DF44A7C007552B5 /* TensorFlowLiteSwift.xcodeproj */;
+				},
+				{
+					ProductGroup = 2CCF51A42DF44A83007552B5 /* Products */;
+					ProjectRef = 2CCF435D2DF44A7C007552B5 /* TestApp.xcodeproj */;
+				},
+				{
+					ProductGroup = 2CCF51922DF44A83007552B5 /* Products */;
+					ProjectRef = 2CCF46BA2DF44A7C007552B5 /* TFLiteBenchmark.xcodeproj */;
+				},
+				{
+					ProductGroup = 2CCF519E2DF44A83007552B5 /* Products */;
+					ProjectRef = 2CCF477C2DF44A7C007552B5 /* TFLiteEvaluation.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				C0F98E0C2CE0AF7A0055B6A4 /* Synapse AI */,
@@ -279,6 +499,117 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		11D29C0D2662AA25BE683A51 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Synapse AI-Synapse AIUITests/Pods-Synapse AI-Synapse AIUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Synapse AI-Synapse AIUITests/Pods-Synapse AI-Synapse AIUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Synapse AI-Synapse AIUITests/Pods-Synapse AI-Synapse AIUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3236E2FC53A95A0225E3E5AF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Synapse AI/Pods-Synapse AI-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Synapse AI/Pods-Synapse AI-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Synapse AI/Pods-Synapse AI-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A5B3564FB11102FD32036D1B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Synapse AI-Synapse AIUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B73180942304FAFBB632B9AC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Synapse AI-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C502AF5265C13E01F32822FE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Synapse AITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C0F98E092CE0AF7A0055B6A4 /* Sources */ = {
@@ -325,6 +656,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -393,6 +725,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -449,21 +782,28 @@
 		};
 		C0F98E322CE0AF7C0055B6A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = C0F98E0F2CE0AF7A0055B6A4 /* Synapse AI */;
-			baseConfigurationReferenceRelativePath = Debug.xcconfig;
+			baseConfigurationReference = 96CCCEF24292B56C1CE44F1C /* Pods-Synapse AI.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Synapse AI/SynapseAI.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Synapse AI/Preview Content\"";
 				DEVELOPMENT_TEAM = ZW893GY47A;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/ios_opencv",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Synapse AI/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Synapse AI";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_NSCameraUsageDescription = "To detect users' smile";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -475,10 +815,65 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/bundletool/bundletool.runfiles/mediapipe/external/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/provisioning_profile_tool/provisioning_profile_tool.runfiles/mediapipe/external/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/python_aarch64-apple-darwin/lib/itcl4.2.2",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/bundletool/bundletool.runfiles/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/org_tensorflow/tensorflow/lite/ios/testdata/extended_filename",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-86daeec680bc/bin/external/XNNPACK/generate_build_identifier_py.runfiles/mediapipe/external/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/codesigningtool/codesigningtool.runfiles/mediapipe/external/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/python_aarch64-apple-darwin/lib/itcl4.2.2",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-86daeec680bc/bin/external/XNNPACK/generate_build_identifier_py.runfiles/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/build_bazel_rules_swift/examples/xplatform/swift_import",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/org_tensorflow/tensorflow/lite/ios/testdata/skip_same_file",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/xctoolrunner/xctoolrunner.runfiles/mediapipe/external/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/provisioning_profile_tool/provisioning_profile_tool.runfiles/mediapipe/external/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/bundletool/bundletool.runfiles/mediapipe/external/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/provisioning_profile_tool/provisioning_profile_tool.runfiles/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/xctoolrunner/xctoolrunner.runfiles/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-86daeec680bc/bin/external/XNNPACK/generate_build_identifier_py.runfiles/mediapipe/external/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/bundletool/bundletool.runfiles/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib/jli",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib/server",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/plisttool/plisttool.runfiles/mediapipe/external/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/xctoolrunner/xctoolrunner.runfiles/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/codesigningtool/codesigningtool.runfiles/mediapipe/external/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib/server",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/org_tensorflow/tensorflow/lite/ios/testdata/simple",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/xctoolrunner/xctoolrunner.runfiles/mediapipe/external/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-86daeec680bc/bin/external/XNNPACK/generate_build_identifier_py.runfiles/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/codesigningtool/codesigningtool.runfiles/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/codesigningtool/codesigningtool.runfiles/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/plisttool/plisttool.runfiles/mediapipe/external/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/plisttool/plisttool.runfiles/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/org_tensorflow/tensorflow/lite/ios/testdata/duplicate_names",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/provisioning_profile_tool/provisioning_profile_tool.runfiles/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/python_aarch64-apple-darwin/lib/thread2.8.7",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/org_tensorflow/tensorflow/lite/ios/testdata/odd_bytes",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/plisttool/plisttool.runfiles/python_aarch64-apple-darwin/lib",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bbu.SynapseMobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -486,21 +881,28 @@
 		};
 		C0F98E332CE0AF7C0055B6A4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = C0F98E0F2CE0AF7A0055B6A4 /* Synapse AI */;
-			baseConfigurationReferenceRelativePath = Release.xcconfig;
+			baseConfigurationReference = FF1CA6B9037A477EEC805309 /* Pods-Synapse AI.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Synapse AI/SynapseAI.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Synapse AI/Preview Content\"";
 				DEVELOPMENT_TEAM = ZW893GY47A;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/ios_opencv",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Synapse AI/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Synapse AI";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_NSCameraUsageDescription = "To detect users' smile";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -511,6 +913,60 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/bundletool/bundletool.runfiles/mediapipe/external/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/provisioning_profile_tool/provisioning_profile_tool.runfiles/mediapipe/external/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/python_aarch64-apple-darwin/lib/itcl4.2.2",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/bundletool/bundletool.runfiles/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/org_tensorflow/tensorflow/lite/ios/testdata/extended_filename",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-86daeec680bc/bin/external/XNNPACK/generate_build_identifier_py.runfiles/mediapipe/external/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/codesigningtool/codesigningtool.runfiles/mediapipe/external/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/python_aarch64-apple-darwin/lib/itcl4.2.2",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-86daeec680bc/bin/external/XNNPACK/generate_build_identifier_py.runfiles/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/build_bazel_rules_swift/examples/xplatform/swift_import",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/org_tensorflow/tensorflow/lite/ios/testdata/skip_same_file",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/xctoolrunner/xctoolrunner.runfiles/mediapipe/external/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/provisioning_profile_tool/provisioning_profile_tool.runfiles/mediapipe/external/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/bundletool/bundletool.runfiles/mediapipe/external/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/provisioning_profile_tool/provisioning_profile_tool.runfiles/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/xctoolrunner/xctoolrunner.runfiles/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-86daeec680bc/bin/external/XNNPACK/generate_build_identifier_py.runfiles/mediapipe/external/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/bundletool/bundletool.runfiles/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib/jli",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib/server",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/plisttool/plisttool.runfiles/mediapipe/external/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/xctoolrunner/xctoolrunner.runfiles/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/codesigningtool/codesigningtool.runfiles/mediapipe/external/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib/server",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/org_tensorflow/tensorflow/lite/ios/testdata/simple",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/xctoolrunner/xctoolrunner.runfiles/mediapipe/external/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-86daeec680bc/bin/external/XNNPACK/generate_build_identifier_py.runfiles/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/codesigningtool/codesigningtool.runfiles/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/codesigningtool/codesigningtool.runfiles/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/plisttool/plisttool.runfiles/mediapipe/external/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/plisttool/plisttool.runfiles/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/org_tensorflow/tensorflow/lite/ios/testdata/duplicate_names",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/provisioning_profile_tool/provisioning_profile_tool.runfiles/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/bazel_tools/jdk/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/python_aarch64-apple-darwin/lib/thread2.8.7",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/org_tensorflow/tensorflow/lite/ios/testdata/odd_bytes",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-mediapipe/external/python_aarch64-apple-darwin/lib",
+					"$(PROJECT_DIR)/Synapse\\ AI/SmileDetection/mediapipe_include/mediapipe/bazel-out/darwin_arm64-opt-exec-50AE0418-ST-0d1fe7b00ffe/bin/external/build_bazel_rules_apple/tools/plisttool/plisttool.runfiles/python_aarch64-apple-darwin/lib",
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bbu.SynapseMobile;
@@ -523,6 +979,7 @@
 		};
 		C0F98E352CE0AF7C0055B6A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2677C6E81E55EDEC223E35AB /* Pods-Synapse AITests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -541,6 +998,7 @@
 		};
 		C0F98E362CE0AF7C0055B6A4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A9B4AB576F0F4FA0C64B1E8 /* Pods-Synapse AITests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -559,6 +1017,7 @@
 		};
 		C0F98E382CE0AF7C0055B6A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6950348CFAD00470A9D4CD5E /* Pods-Synapse AI-Synapse AIUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -575,6 +1034,7 @@
 		};
 		C0F98E392CE0AF7C0055B6A4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 51B80498B686422859566602 /* Pods-Synapse AI-Synapse AIUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

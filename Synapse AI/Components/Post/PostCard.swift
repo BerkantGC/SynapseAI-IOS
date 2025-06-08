@@ -20,24 +20,30 @@ struct PostCard: View {
     @State private var showPromptModal = false
     @State private var aiIconScale: CGFloat = 1.0
     @State private var aiIconRotation: Double = 0
+    @State private var showCamera = false
     
     private var post: Post {
         get { viewModel.post }
         set { viewModel.post = newValue }
     }
     let animationNamespace: Namespace.ID
-    let onImageLoad: (() -> Void)? // optional callback
 
-    init(post: Post, animationNamespace: Namespace.ID, onImageLoad: (() -> Void)? = nil) {
+    init(post: Post, animationNamespace: Namespace.ID) {
         self.viewModel = PostViewModel(post: post);
         self.animationNamespace = animationNamespace
-        self.onImageLoad = onImageLoad
     }
     
     var body: some View {
         VStack(spacing: 0) {
             headerSection
-            postSection
+            if viewModel.isSmilingRequired {
+                LockedPost {
+                    showCamera = true
+                }
+            } else {
+                postSection
+            }
+            
             actionButtonsSection
             contentSection
         }
@@ -49,6 +55,21 @@ struct PostCard: View {
             promptModalView
                 .presentationDetents([.medium, .large])
                 .presentationDragIndicator(.visible)
+        }
+        .fullScreenCover(isPresented: $showCamera) {
+            
+            #if targetEnvironment(simulator)
+            Button(action: {
+                showCamera = false
+                viewModel.unblockPost()
+            }) {Text("Unlock")}
+            #else
+            SmileUnlockCameraView {
+                // Called when smile is detected
+                showCamera = false
+                viewModel.unblockPost()
+            }
+            #endif
         }
     }
     

@@ -24,6 +24,7 @@ struct Post: Identifiable, Codable, Equatable {
     var liked: Bool?
     var favorite: Bool
     var likes_count: Int?
+    var feeling: String?
     var comments_count: Int?
     var top_comments: [CommentModel]?
 }

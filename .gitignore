@@ -16,9 +16,14 @@ profiles
 DerivedData
 .idea/
 *.hmap
+*.task
 *.xccheckout
-*.xcworkspace
 *.xcconfig
 !default.xcworkspace
-
+Pods/
+*.a
+*.xcworkspace
+*.xcuserstate
+DerivedData/
+Podfile.lock
 SynapseMobile.xcworkspace/xcuserdata/berkantgurcan.xcuserdatad/UserInterfaceState.xcuserstate

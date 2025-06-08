@@ -11,10 +11,12 @@ import SwiftUI
 class PostViewModel: ObservableObject {
     @Published var isLoading: Bool;
     @Published var post: Post;
+    @Published var isSmilingRequired: Bool
     
     init(isLoading: Bool = false, post: Post) {
         self.isLoading = isLoading
         self.post = post
+        self.isSmilingRequired = post.feeling == "SMILE"
     }
     
     // MARK: - Actions
@@ -71,6 +73,10 @@ class PostViewModel: ObservableObject {
                 self.isLoading = false
             }
         }
+    }
+    
+    func unblockPost() {
+        self.isSmilingRequired = false
     }
     
     func deletePost() {

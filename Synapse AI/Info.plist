@@ -4,15 +4,6 @@
 <dict>
 	<key>BASE_URL</key>
 	<string>http://192.168.1.38:8080</string>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
-	<key>SOCKET_URL</key>
-	<string>ws://192.168.1.38:8080/live</string>
-	<key>GOOGLE_CLIENT_ID</key>
-	<string>452745049335-k1ugns4j9hi3v8cptd6r973uevpbkcm4.apps.googleusercontent.com</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -24,5 +15,16 @@
 			</array>
 		</dict>
 	</array>
+	<key>GOOGLE_CLIENT_ID</key>
+	<string>452745049335-k1ugns4j9hi3v8cptd6r973uevpbkcm4.apps.googleusercontent.com</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSCameraUsageDescription </key>
+	<string>Smile detection için kamera gerekiyor.</string>
+	<key>SOCKET_URL</key>
+	<string>ws://192.168.1.38:8080/live</string>
 </dict>
 </plist>

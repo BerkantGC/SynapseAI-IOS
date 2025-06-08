@@ -162,12 +162,14 @@ struct UploadFormPage: View {
         haptic.impactOccurred()
 
         // Prepare form data
-        let fields: [String: Any] = [
+        var fields: [String: Any] = [
             "title": title,
-            "content": content,
-            "prompt": prompt ?? nil
+            "content": content
         ]
 
+        if ((prompt?.isEmpty) == nil) {
+            fields.updateValue("prompt", forKey: prompt!)
+        }
         guard let imageData = image.jpegData(compressionQuality: 0.9) else {
             isSubmitting = false
             return

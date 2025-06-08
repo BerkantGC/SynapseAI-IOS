@@ -36,16 +36,20 @@ struct PostsGrid: View {
                             title: pageTitle
                         )
                     ) {
-                        KFImage(URL(string: post.image ?? "https://synapsebucket.s3.eu-north-1.amazonaws.com/emmastone__post_81079215-9bbe-43ee-ac95-a1b2552ff4b9.jpeg")!)
+                        KFImage(URL(string: post.image ?? "placeholder")!)
                         .placeholder{
-                            Color.gray
+                            Image("placeholder")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: UIScreen.main.bounds.height / 3)
                                 .aspectRatio(1, contentMode: .fit)
+                                .clipped()
                                 .cornerRadius(10)
                                 .matchedGeometryEffect(id: "post-image-\(post.id)", in: animationNamespace)
                         }
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(minWidth: 0, maxWidth: .infinity)
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: UIScreen.main.bounds.height / 3)
                         .aspectRatio(1, contentMode: .fit)
                         .clipped()
                         .cornerRadius(10)
