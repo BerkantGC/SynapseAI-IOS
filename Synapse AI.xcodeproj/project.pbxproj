@@ -7,14 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2C84F3712DEC8B1A009335DF /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 2C84F3702DEC8B1A009335DF /* Kingfisher */; };
-		2CCFE1362DF1007F002E8302 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 2CCFE1352DF1007F002E8302 /* GoogleSignIn */; };
-		2CCFE1382DF1007F002E8302 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2CCFE1372DF1007F002E8302 /* GoogleSignInSwift */; };
 		2CFA7E882DF1869C00C16547 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFA7E872DF1869C00C16547 /* StoreKit.framework */; };
 		35EB2E1A618A5370007D9EED /* Pods_Synapse_AITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BE424FE4C44F9C49DB91920 /* Pods_Synapse_AITests.framework */; };
 		689C7C5703699A1E18EA571B /* Pods_Synapse_AI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838B1F3038B68195AF8A0456 /* Pods_Synapse_AI.framework */; };
 		C052093D2D0BAB10009ACB88 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C052093C2D0BAB09009ACB88 /* .gitignore */; };
-		C08DC72E2CFE5EF500AD0E60 /* SwiftStomp in Frameworks */ = {isa = PBXBuildFile; productRef = C08DC72D2CFE5EF500AD0E60 /* SwiftStomp */; };
 		FD82C7BD2F45A882E4E8B956 /* Pods_Synapse_AI_Synapse_AIUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B940A6B021F6BF2556C93255 /* Pods_Synapse_AI_Synapse_AIUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -105,11 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C84F3712DEC8B1A009335DF /* Kingfisher in Frameworks */,
-				C08DC72E2CFE5EF500AD0E60 /* SwiftStomp in Frameworks */,
 				2CFA7E882DF1869C00C16547 /* StoreKit.framework in Frameworks */,
-				2CCFE1362DF1007F002E8302 /* GoogleSignIn in Frameworks */,
-				2CCFE1382DF1007F002E8302 /* GoogleSignInSwift in Frameworks */,
 				689C7C5703699A1E18EA571B /* Pods_Synapse_AI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -306,12 +298,6 @@
 				C0F98E0F2CE0AF7A0055B6A4 /* Synapse AI */,
 			);
 			name = "Synapse AI";
-			packageProductDependencies = (
-				C08DC72D2CFE5EF500AD0E60 /* SwiftStomp */,
-				2C84F3702DEC8B1A009335DF /* Kingfisher */,
-				2CCFE1352DF1007F002E8302 /* GoogleSignIn */,
-				2CCFE1372DF1007F002E8302 /* GoogleSignInSwift */,
-			);
 			productName = SynapseMobile;
 			productReference = C0F98E0D2CE0AF7A0055B6A4 /* Synapse AI.app */;
 			productType = "com.apple.product-type.application";
@@ -396,11 +382,6 @@
 			);
 			mainGroup = C0F98E042CE0AF7A0055B6A4;
 			minimizedProjectReferenceProxies = 1;
-			packageReferences = (
-				C08DC72B2CFE5CCA00AD0E60 /* XCRemoteSwiftPackageReference "SwiftStomp" */,
-				2C84F36F2DEC8B1A009335DF /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				2CCFE1342DF1007F002E8302 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
-			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = C0F98E0E2CE0AF7A0055B6A4 /* Products */;
 			projectDirPath = "";
@@ -1089,56 +1070,6 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		2C84F36F2DEC8B1A009335DF /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.0;
-			};
-		};
-		2CCFE1342DF1007F002E8302 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.0.0;
-			};
-		};
-		C08DC72B2CFE5CCA00AD0E60 /* XCRemoteSwiftPackageReference "SwiftStomp" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Romixery/SwiftStomp";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.4;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		2C84F3702DEC8B1A009335DF /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2C84F36F2DEC8B1A009335DF /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
-		};
-		2CCFE1352DF1007F002E8302 /* GoogleSignIn */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2CCFE1342DF1007F002E8302 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
-			productName = GoogleSignIn;
-		};
-		2CCFE1372DF1007F002E8302 /* GoogleSignInSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2CCFE1342DF1007F002E8302 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
-			productName = GoogleSignInSwift;
-		};
-		C08DC72D2CFE5EF500AD0E60 /* SwiftStomp */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C08DC72B2CFE5CCA00AD0E60 /* XCRemoteSwiftPackageReference "SwiftStomp" */;
-			productName = SwiftStomp;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C0F98E052CE0AF7A0055B6A4 /* Project object */;
 }

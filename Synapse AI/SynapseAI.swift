@@ -10,6 +10,8 @@ import GoogleSignIn
 
 @main
 struct SynapseMobileApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
     init(){
         @EnvironmentKey("GOOGLE_CLIENT_ID")
         var clientId: String

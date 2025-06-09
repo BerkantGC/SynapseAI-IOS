@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BASE_URL</key>
-	<string>http://192.168.1.38:8080</string>
+	<string>http://34.107.4.212:8080</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -25,6 +25,6 @@
 	<key>NSCameraUsageDescription </key>
 	<string>Smile detection için kamera gerekiyor.</string>
 	<key>SOCKET_URL</key>
-	<string>ws://192.168.1.38:8080/live</string>
+	<string>ws://34.107.4.212:8080/live</string>
 </dict>
 </plist>

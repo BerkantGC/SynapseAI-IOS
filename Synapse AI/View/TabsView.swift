@@ -24,6 +24,19 @@ struct TabsView: View {
     init() {
         UITabBar.appearance().unselectedItemTintColor = .systemGray
         UITabBar.appearance().backgroundColor = .bgGradientStart
+        sendAPNTokenToBackend()
+    }
+    
+    func sendAPNTokenToBackend () {
+        if let apns_token = UserDefaults.standard.string(forKey: "apns_token") {
+            FetchService().executeRequest(url: "/device", method: "POST", data: ["token": apns_token]) { data, response, error in
+                
+                if let httpResponse = response as! HTTPURLResponse? {
+                    print("device token sent status: \(httpResponse.statusCode)")
+                }
+                
+            }
+        }
     }
     
     var body: some View {

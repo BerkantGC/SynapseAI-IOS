@@ -8,7 +8,10 @@ target 'Synapse AI' do
   # Pods for Synapse AI 
   pod 'MediaPipeTasksVision' 
   pod 'lottie-ios'
-
+  pod 'SwiftStomp'
+  pod 'GoogleSignIn'
+  pod 'GoogleSignInSwift'
+  pod 'Kingfisher'
 
   target 'Synapse AITests' do
     inherit! :search_paths

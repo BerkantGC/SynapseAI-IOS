@@ -5,7 +5,7 @@ struct HomeView: View {
     @State private var selectedStory: StoryModel?
     @State private var showStoryModal = false
     @ObservedObject private var socketManager = SocketManagerService.shared
-
+    @State private var navigateToProfileId: String? = nil
     @State private var selectedPost: Post?
     @State private var showPostModal = false
     @Namespace private var animationNamespace
@@ -65,9 +65,21 @@ struct HomeView: View {
                     }
                 }
             }
+            .navigationDestination(isPresented: Binding<Bool>(
+                get: { navigateToProfileId != nil },
+                set: { if !$0 { navigateToProfileId = nil } }
+            )) {
+                if let id = navigateToProfileId {
+                    ProfileView(username: id)
+                }
+            }
             .onAppear {
                 viewModel.loadPosts()
                 viewModel.loadStories()
+            }
+        }.onReceive(NotificationCenter.default.publisher(for: .navigateToProfile)) { notification in
+            if let profileId = notification.object as? String {
+                navigateToProfileId = profileId
             }
         }
     }
