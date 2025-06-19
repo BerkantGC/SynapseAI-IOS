@@ -86,8 +86,8 @@ struct HomeView: View {
 
     private var contentScrollView: some View {
         
-                VStack(spacing: 24) {
-                    Section(header: Text("Stories")
+                VStack(spacing: 10) {
+                    Section(header: Text("Daily") 
                         .font(.title)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal)) {
@@ -133,7 +133,7 @@ struct HomeView: View {
                             }
                         }
                     }
-                .padding(.bottom, 20)
+                .padding(.bottom, 10)
         }
     }
 

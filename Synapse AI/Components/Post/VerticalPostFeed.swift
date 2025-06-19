@@ -1,15 +1,17 @@
 import SwiftUI
 
 struct VerticalPostFeedView: View {
-    let posts: [Post]
+    @State var posts: [Post]
     let selectedPost: Post
     let animationNamespace: Namespace.ID
     let title: String?
     
+    @State private var hasScrolled = false
+    
     private var indexOfSelected: Int? {
         posts.firstIndex(where: { $0.id == selectedPost.id })
     }
-    
+     
     var body: some View {
         ZStack {
             Background()
@@ -17,46 +19,26 @@ struct VerticalPostFeedView: View {
             ScrollViewReader { proxy in
                 ScrollView {
                     LazyVStack(spacing: 20) {
-                        if let index = indexOfSelected {
-                            // Posts ABOVE selected one (in reverse order)
-                            ForEach(Array(posts[..<index].reversed().enumerated()), id: \.element.id) { _, post in
-                                PostCard(
-                                    post: post,
-                                    animationNamespace: animationNamespace
-                                )
-                            }
-                            
-                            // Selected Post in center
+                        ForEach(posts, id: \.id) { post in
                             PostCard(
-                                post: selectedPost,
-                                animationNamespace: animationNamespace
-                            )
-                            .id("selectedPost") // Add ID for scrolling
-                            
-                            // Posts BELOW selected one
-                            if index + 1 < posts.count {
-                                ForEach(posts[(index + 1)...], id: \.id) { post in
-                                    PostCard(
-                                        post: post,
-                                        animationNamespace: animationNamespace
-                                    )
+                                post: post,
+                                animationNamespace: animationNamespace,
+                                onDelete: {
+                                    if let index = posts.firstIndex(where: { $0.id == post.id }) {
+                                        posts.remove(at: index)
+                                    }
                                 }
-                            }
-                        } else {
-                            // Fallback: if selectedPost is not found in posts array
-                            ForEach(posts, id: \.id) { post in
-                                PostCard(
-                                    post: post,
-                                    animationNamespace: animationNamespace
-                                )
-                            }
+                            ).id(post.id)
                         }
                     }
                     .padding(.vertical, 20)
                 }
                 .onAppear {
-                    // Scroll to selected post when view appears (no animation)
-                    proxy.scrollTo("selectedPost", anchor: .center)
+                    // Scroll only the first time
+                    if !hasScrolled {
+                        proxy.scrollTo(selectedPost.id, anchor: .top)
+                        hasScrolled = true
+                    }
                 }
             }
         }

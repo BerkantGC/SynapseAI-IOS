@@ -25,6 +25,7 @@ struct PreferencesView: View {
                     }
                     
                     Section(header: Text("Personal Information")) {
+                        TextField("Bio", text: $viewModel.bio)
                         Picker("Gender", selection: $viewModel.gender) {
                             ForEach(genders, id: \.self) { gender in
                                 Text(gender.capitalized)

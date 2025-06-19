@@ -79,9 +79,16 @@ class PostViewModel: ObservableObject {
         self.isSmilingRequired = false
     }
     
-    func deletePost() {
-        print("Deleting post \(post.id)")
-        // TODO: Call delete endpoint
+    func deletePost(onDelete: (()->Void)? = nil) async {
+        await FetchService().executeRequest(url: "/posts/\(post.id)", method: "DELETE", data: nil) { data, response, error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("Error deleting post: \(error)")
+                } else {
+                    onDelete?()
+                }
+            }
+        }
     }
 
     func reportPost() {

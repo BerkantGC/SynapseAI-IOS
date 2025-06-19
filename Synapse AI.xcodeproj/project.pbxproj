@@ -8,32 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		2CFA7E882DF1869C00C16547 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFA7E872DF1869C00C16547 /* StoreKit.framework */; };
-		35EB2E1A618A5370007D9EED /* Pods_Synapse_AITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BE424FE4C44F9C49DB91920 /* Pods_Synapse_AITests.framework */; };
-		689C7C5703699A1E18EA571B /* Pods_Synapse_AI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838B1F3038B68195AF8A0456 /* Pods_Synapse_AI.framework */; };
+		43A758D14BF44523D7A0483B /* Pods_Synapse_AI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6E2B68518DD176D4440AC2 /* Pods_Synapse_AI.framework */; };
 		C052093D2D0BAB10009ACB88 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C052093C2D0BAB09009ACB88 /* .gitignore */; };
-		FD82C7BD2F45A882E4E8B956 /* Pods_Synapse_AI_Synapse_AIUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B940A6B021F6BF2556C93255 /* Pods_Synapse_AI_Synapse_AIUITests.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		C0F98E1E2CE0AF7C0055B6A4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C0F98E052CE0AF7A0055B6A4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C0F98E0C2CE0AF7A0055B6A4;
-			remoteInfo = SynapseMobile;
-		};
-		C0F98E282CE0AF7C0055B6A4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C0F98E052CE0AF7A0055B6A4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C0F98E0C2CE0AF7A0055B6A4;
-			remoteInfo = SynapseMobile;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		0A9B4AB576F0F4FA0C64B1E8 /* Pods-Synapse AITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Synapse AITests.release.xcconfig"; path = "Target Support Files/Pods-Synapse AITests/Pods-Synapse AITests.release.xcconfig"; sourceTree = "<group>"; };
-		2677C6E81E55EDEC223E35AB /* Pods-Synapse AITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Synapse AITests.debug.xcconfig"; path = "Target Support Files/Pods-Synapse AITests/Pods-Synapse AITests.debug.xcconfig"; sourceTree = "<group>"; };
+		1A110E28BC4D3E36EFD18DF9 /* Pods-Synapse AITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Synapse AITests.debug.xcconfig"; path = "Target Support Files/Pods-Synapse AITests/Pods-Synapse AITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2CCF393F2DF44A7B007552B5 /* simple.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = simple.xcodeproj; sourceTree = "<group>"; };
 		2CCF3C322DF44A7C007552B5 /* MediaPipeTasksDocGen.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MediaPipeTasksDocGen.xcodeproj; sourceTree = "<group>"; };
 		2CCF435D2DF44A7C007552B5 /* TestApp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = TestApp.xcodeproj; sourceTree = "<group>"; };
@@ -50,17 +30,14 @@
 		2CCFD3F02DF44A7B007552B5 /* GTM.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = GTM.xcodeproj; sourceTree = "<group>"; };
 		2CCFD3F32DF44A7B007552B5 /* GTMiPhone.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = GTMiPhone.xcodeproj; sourceTree = "<group>"; };
 		2CFA7E872DF1869C00C16547 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		3BE424FE4C44F9C49DB91920 /* Pods_Synapse_AITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Synapse_AITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		51B80498B686422859566602 /* Pods-Synapse AI-Synapse AIUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Synapse AI-Synapse AIUITests.release.xcconfig"; path = "Target Support Files/Pods-Synapse AI-Synapse AIUITests/Pods-Synapse AI-Synapse AIUITests.release.xcconfig"; sourceTree = "<group>"; };
-		6950348CFAD00470A9D4CD5E /* Pods-Synapse AI-Synapse AIUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Synapse AI-Synapse AIUITests.debug.xcconfig"; path = "Target Support Files/Pods-Synapse AI-Synapse AIUITests/Pods-Synapse AI-Synapse AIUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		838B1F3038B68195AF8A0456 /* Pods_Synapse_AI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Synapse_AI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		96CCCEF24292B56C1CE44F1C /* Pods-Synapse AI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Synapse AI.debug.xcconfig"; path = "Target Support Files/Pods-Synapse AI/Pods-Synapse AI.debug.xcconfig"; sourceTree = "<group>"; };
-		B940A6B021F6BF2556C93255 /* Pods_Synapse_AI_Synapse_AIUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Synapse_AI_Synapse_AIUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4908822EF7C6D8E98F9E77E6 /* Pods-Synapse AI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Synapse AI.debug.xcconfig"; path = "Target Support Files/Pods-Synapse AI/Pods-Synapse AI.debug.xcconfig"; sourceTree = "<group>"; };
+		624CB8F954F81B63BF435F26 /* Pods-Synapse AI-Synapse AIUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Synapse AI-Synapse AIUITests.release.xcconfig"; path = "Target Support Files/Pods-Synapse AI-Synapse AIUITests/Pods-Synapse AI-Synapse AIUITests.release.xcconfig"; sourceTree = "<group>"; };
+		774D126B440E042A039E464C /* Pods-Synapse AITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Synapse AITests.release.xcconfig"; path = "Target Support Files/Pods-Synapse AITests/Pods-Synapse AITests.release.xcconfig"; sourceTree = "<group>"; };
+		842F46E455B8415EA05DDF07 /* Pods-Synapse AI-Synapse AIUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Synapse AI-Synapse AIUITests.debug.xcconfig"; path = "Target Support Files/Pods-Synapse AI-Synapse AIUITests/Pods-Synapse AI-Synapse AIUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		91D2A0503A8EA1E5ABC9AD93 /* Pods-Synapse AI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Synapse AI.release.xcconfig"; path = "Target Support Files/Pods-Synapse AI/Pods-Synapse AI.release.xcconfig"; sourceTree = "<group>"; };
+		9B6E2B68518DD176D4440AC2 /* Pods_Synapse_AI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Synapse_AI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C052093C2D0BAB09009ACB88 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		C0F98E0D2CE0AF7A0055B6A4 /* Synapse AI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Synapse AI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C0F98E1D2CE0AF7C0055B6A4 /* Synapse AITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Synapse AITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C0F98E272CE0AF7C0055B6A4 /* Synapse AIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Synapse AIUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FF1CA6B9037A477EEC805309 /* Pods-Synapse AI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Synapse AI.release.xcconfig"; path = "Target Support Files/Pods-Synapse AI/Pods-Synapse AI.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -84,16 +61,6 @@
 			path = "Synapse AI";
 			sourceTree = "<group>";
 		};
-		C0F98E202CE0AF7C0055B6A4 /* SynapseMobileTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = SynapseMobileTests;
-			sourceTree = "<group>";
-		};
-		C0F98E2A2CE0AF7C0055B6A4 /* SynapseMobileUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = SynapseMobileUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,23 +69,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CFA7E882DF1869C00C16547 /* StoreKit.framework in Frameworks */,
-				689C7C5703699A1E18EA571B /* Pods_Synapse_AI.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C0F98E1A2CE0AF7C0055B6A4 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				35EB2E1A618A5370007D9EED /* Pods_Synapse_AITests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C0F98E242CE0AF7C0055B6A4 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FD82C7BD2F45A882E4E8B956 /* Pods_Synapse_AI_Synapse_AIUITests.framework in Frameworks */,
+				43A758D14BF44523D7A0483B /* Pods_Synapse_AI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,9 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				2CFA7E872DF1869C00C16547 /* StoreKit.framework */,
-				838B1F3038B68195AF8A0456 /* Pods_Synapse_AI.framework */,
-				B940A6B021F6BF2556C93255 /* Pods_Synapse_AI_Synapse_AIUITests.framework */,
-				3BE424FE4C44F9C49DB91920 /* Pods_Synapse_AITests.framework */,
+				9B6E2B68518DD176D4440AC2 /* Pods_Synapse_AI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -244,12 +193,12 @@
 		B6F689AFCE2728B6BB603EA7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				96CCCEF24292B56C1CE44F1C /* Pods-Synapse AI.debug.xcconfig */,
-				FF1CA6B9037A477EEC805309 /* Pods-Synapse AI.release.xcconfig */,
-				6950348CFAD00470A9D4CD5E /* Pods-Synapse AI-Synapse AIUITests.debug.xcconfig */,
-				51B80498B686422859566602 /* Pods-Synapse AI-Synapse AIUITests.release.xcconfig */,
-				2677C6E81E55EDEC223E35AB /* Pods-Synapse AITests.debug.xcconfig */,
-				0A9B4AB576F0F4FA0C64B1E8 /* Pods-Synapse AITests.release.xcconfig */,
+				4908822EF7C6D8E98F9E77E6 /* Pods-Synapse AI.debug.xcconfig */,
+				91D2A0503A8EA1E5ABC9AD93 /* Pods-Synapse AI.release.xcconfig */,
+				842F46E455B8415EA05DDF07 /* Pods-Synapse AI-Synapse AIUITests.debug.xcconfig */,
+				624CB8F954F81B63BF435F26 /* Pods-Synapse AI-Synapse AIUITests.release.xcconfig */,
+				1A110E28BC4D3E36EFD18DF9 /* Pods-Synapse AITests.debug.xcconfig */,
+				774D126B440E042A039E464C /* Pods-Synapse AITests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -259,8 +208,6 @@
 			children = (
 				C052093C2D0BAB09009ACB88 /* .gitignore */,
 				C0F98E0F2CE0AF7A0055B6A4 /* Synapse AI */,
-				C0F98E202CE0AF7C0055B6A4 /* SynapseMobileTests */,
-				C0F98E2A2CE0AF7C0055B6A4 /* SynapseMobileUITests */,
 				2CFA7E862DF1869C00C16547 /* Frameworks */,
 				C0F98E0E2CE0AF7A0055B6A4 /* Products */,
 				B6F689AFCE2728B6BB603EA7 /* Pods */,
@@ -271,8 +218,6 @@
 			isa = PBXGroup;
 			children = (
 				C0F98E0D2CE0AF7A0055B6A4 /* Synapse AI.app */,
-				C0F98E1D2CE0AF7C0055B6A4 /* Synapse AITests.xctest */,
-				C0F98E272CE0AF7C0055B6A4 /* Synapse AIUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -284,11 +229,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C0F98E312CE0AF7C0055B6A4 /* Build configuration list for PBXNativeTarget "Synapse AI" */;
 			buildPhases = (
-				B73180942304FAFBB632B9AC /* [CP] Check Pods Manifest.lock */,
+				759431C2D05E61EB7760F2D9 /* [CP] Check Pods Manifest.lock */,
 				C0F98E092CE0AF7A0055B6A4 /* Sources */,
 				C0F98E0A2CE0AF7A0055B6A4 /* Frameworks */,
 				C0F98E0B2CE0AF7A0055B6A4 /* Resources */,
-				3236E2FC53A95A0225E3E5AF /* [CP] Embed Pods Frameworks */,
+				E6BB94BD3455A7D439CD38DA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -301,51 +246,6 @@
 			productName = SynapseMobile;
 			productReference = C0F98E0D2CE0AF7A0055B6A4 /* Synapse AI.app */;
 			productType = "com.apple.product-type.application";
-		};
-		C0F98E1C2CE0AF7C0055B6A4 /* Synapse AITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C0F98E342CE0AF7C0055B6A4 /* Build configuration list for PBXNativeTarget "Synapse AITests" */;
-			buildPhases = (
-				C502AF5265C13E01F32822FE /* [CP] Check Pods Manifest.lock */,
-				C0F98E192CE0AF7C0055B6A4 /* Sources */,
-				C0F98E1A2CE0AF7C0055B6A4 /* Frameworks */,
-				C0F98E1B2CE0AF7C0055B6A4 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				C0F98E1F2CE0AF7C0055B6A4 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				C0F98E202CE0AF7C0055B6A4 /* SynapseMobileTests */,
-			);
-			name = "Synapse AITests";
-			productName = SynapseMobileTests;
-			productReference = C0F98E1D2CE0AF7C0055B6A4 /* Synapse AITests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		C0F98E262CE0AF7C0055B6A4 /* Synapse AIUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C0F98E372CE0AF7C0055B6A4 /* Build configuration list for PBXNativeTarget "Synapse AIUITests" */;
-			buildPhases = (
-				A5B3564FB11102FD32036D1B /* [CP] Check Pods Manifest.lock */,
-				C0F98E232CE0AF7C0055B6A4 /* Sources */,
-				C0F98E242CE0AF7C0055B6A4 /* Frameworks */,
-				C0F98E252CE0AF7C0055B6A4 /* Resources */,
-				11D29C0D2662AA25BE683A51 /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				C0F98E292CE0AF7C0055B6A4 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				C0F98E2A2CE0AF7C0055B6A4 /* SynapseMobileUITests */,
-			);
-			name = "Synapse AIUITests";
-			productName = SynapseMobileUITests;
-			productReference = C0F98E272CE0AF7C0055B6A4 /* Synapse AIUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -360,14 +260,6 @@
 					C0F98E0C2CE0AF7A0055B6A4 = {
 						CreatedOnToolsVersion = 16.1;
 						LastSwiftMigration = 1640;
-					};
-					C0F98E1C2CE0AF7C0055B6A4 = {
-						CreatedOnToolsVersion = 16.1;
-						TestTargetID = C0F98E0C2CE0AF7A0055B6A4;
-					};
-					C0F98E262CE0AF7C0055B6A4 = {
-						CreatedOnToolsVersion = 16.1;
-						TestTargetID = C0F98E0C2CE0AF7A0055B6A4;
 					};
 				};
 			};
@@ -450,8 +342,6 @@
 			projectRoot = "";
 			targets = (
 				C0F98E0C2CE0AF7A0055B6A4 /* Synapse AI */,
-				C0F98E1C2CE0AF7C0055B6A4 /* Synapse AITests */,
-				C0F98E262CE0AF7C0055B6A4 /* Synapse AIUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -465,88 +355,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C0F98E1B2CE0AF7C0055B6A4 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C0F98E252CE0AF7C0055B6A4 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		11D29C0D2662AA25BE683A51 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Synapse AI-Synapse AIUITests/Pods-Synapse AI-Synapse AIUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Synapse AI-Synapse AIUITests/Pods-Synapse AI-Synapse AIUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Synapse AI-Synapse AIUITests/Pods-Synapse AI-Synapse AIUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3236E2FC53A95A0225E3E5AF /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Synapse AI/Pods-Synapse AI-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Synapse AI/Pods-Synapse AI-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Synapse AI/Pods-Synapse AI-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A5B3564FB11102FD32036D1B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Synapse AI-Synapse AIUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B73180942304FAFBB632B9AC /* [CP] Check Pods Manifest.lock */ = {
+		759431C2D05E61EB7760F2D9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -568,26 +380,25 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C502AF5265C13E01F32822FE /* [CP] Check Pods Manifest.lock */ = {
+		E6BB94BD3455A7D439CD38DA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Synapse AI/Pods-Synapse AI-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Synapse AI/Pods-Synapse AI-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Synapse AITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Synapse AI/Pods-Synapse AI-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -600,34 +411,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C0F98E192CE0AF7C0055B6A4 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C0F98E232CE0AF7C0055B6A4 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		C0F98E1F2CE0AF7C0055B6A4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C0F98E0C2CE0AF7A0055B6A4 /* Synapse AI */;
-			targetProxy = C0F98E1E2CE0AF7C0055B6A4 /* PBXContainerItemProxy */;
-		};
-		C0F98E292CE0AF7C0055B6A4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C0F98E0C2CE0AF7A0055B6A4 /* Synapse AI */;
-			targetProxy = C0F98E282CE0AF7C0055B6A4 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		C0F98E2F2CE0AF7C0055B6A4 /* Debug */ = {
@@ -763,7 +547,7 @@
 		};
 		C0F98E322CE0AF7C0055B6A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96CCCEF24292B56C1CE44F1C /* Pods-Synapse AI.debug.xcconfig */;
+			baseConfigurationReference = 4908822EF7C6D8E98F9E77E6 /* Pods-Synapse AI.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -862,7 +646,7 @@
 		};
 		C0F98E332CE0AF7C0055B6A4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FF1CA6B9037A477EEC805309 /* Pods-Synapse AI.release.xcconfig */;
+			baseConfigurationReference = 91D2A0503A8EA1E5ABC9AD93 /* Pods-Synapse AI.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -958,78 +742,6 @@
 			};
 			name = Release;
 		};
-		C0F98E352CE0AF7C0055B6A4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2677C6E81E55EDEC223E35AB /* Pods-Synapse AITests.debug.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.final-project.SynapseMobileTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Synapse AI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Synapse AI";
-			};
-			name = Debug;
-		};
-		C0F98E362CE0AF7C0055B6A4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0A9B4AB576F0F4FA0C64B1E8 /* Pods-Synapse AITests.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.final-project.SynapseMobileTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Synapse AI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Synapse AI";
-			};
-			name = Release;
-		};
-		C0F98E382CE0AF7C0055B6A4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6950348CFAD00470A9D4CD5E /* Pods-Synapse AI-Synapse AIUITests.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.final-project.SynapseMobileUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SynapseMobile;
-			};
-			name = Debug;
-		};
-		C0F98E392CE0AF7C0055B6A4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 51B80498B686422859566602 /* Pods-Synapse AI-Synapse AIUITests.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.final-project.SynapseMobileUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SynapseMobile;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1047,24 +759,6 @@
 			buildConfigurations = (
 				C0F98E322CE0AF7C0055B6A4 /* Debug */,
 				C0F98E332CE0AF7C0055B6A4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		C0F98E342CE0AF7C0055B6A4 /* Build configuration list for PBXNativeTarget "Synapse AITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C0F98E352CE0AF7C0055B6A4 /* Debug */,
-				C0F98E362CE0AF7C0055B6A4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		C0F98E372CE0AF7C0055B6A4 /* Build configuration list for PBXNativeTarget "Synapse AIUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C0F98E382CE0AF7C0055B6A4 /* Debug */,
-				C0F98E392CE0AF7C0055B6A4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

@@ -66,6 +66,7 @@ struct ProfileHeader : View {
                         .font(.title)
                         .fontWeight(.bold)
                     
+                    Text("\(viewModel.profile?.bio ?? "")")
                     if !self.isMe, currentSession?.username != viewModel.profile?.username, let profile = viewModel.profile {
                         FollowButton(profile: profile) {
                             // 🔁 Force refresh the layout or set a flag
@@ -74,7 +75,7 @@ struct ProfileHeader : View {
                             }
                         }
                     }
-
+                    
                 }
                 Spacer()
             }

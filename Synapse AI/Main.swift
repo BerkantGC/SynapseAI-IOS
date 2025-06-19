@@ -24,6 +24,10 @@ struct Main: View {
         }
     }
 }
-#Preview {
-    Main()
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        Main()
+    }
 }
+

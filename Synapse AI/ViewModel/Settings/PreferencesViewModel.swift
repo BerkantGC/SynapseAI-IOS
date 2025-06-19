@@ -13,6 +13,7 @@ class PreferencesViewModel: ObservableObject {
     @Published var city: String = ""
     @Published var birthday: Date = Date()
     @Published var toast: Toast? = nil
+    @Published var bio: String = ""
     
     func getPreferences() async {
         await FetchService().executeRequest(url: "/profile/preferences", method: "GET", data: nil) { data, response, error in
@@ -24,6 +25,7 @@ class PreferencesViewModel: ObservableObject {
                     self.isPrivate = decoded.is_private
                     self.gender = decoded.gender
                     self.city = decoded.city
+                    self.bio = decoded.bio
 
                     let formatter = DateFormatter()
                     formatter.dateFormat = "yyyy-MM-dd"
@@ -46,7 +48,8 @@ class PreferencesViewModel: ObservableObject {
             "is_private": isPrivate,
             "gender": gender,
             "city": city,
-            "birthday": formatter.string(from: birthday) // ✅ fix here
+            "birthday": formatter.string(from: birthday), // ✅ fix here
+            "bio": bio
         ]
         
         await FetchService().executeRequest(url: "/profile/update_preferences", method: "PUT", data: payload

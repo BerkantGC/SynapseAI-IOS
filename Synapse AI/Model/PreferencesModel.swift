@@ -10,4 +10,5 @@ struct PreferencesModel: Decodable {
     let gender: String
     let city: String
     let birthday: String
+    let bio: String
 }

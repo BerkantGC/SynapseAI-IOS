@@ -4,13 +4,11 @@
 //
 //  Created by Berkant Gürcan on 12.11.2024.
 //
-
 import Foundation
 import Combine
 
 class ProfileModel: ObservableObject, Codable, Identifiable {
     var id: Int { user_id }
-
     @Published var user_id: Int
     @Published var first_name: String
     @Published var last_name: String
@@ -21,13 +19,14 @@ class ProfileModel: ObservableObject, Codable, Identifiable {
     @Published var follow_status: FollowStatus?
     @Published var is_private: Bool
     @Published var visible: Bool
-
+    @Published var bio: String?
+    
     enum CodingKeys: String, CodingKey {
         case user_id, first_name, last_name, username,
              profile_picture, followers_count,
-             followings_count, follow_status, is_private, visible
+             followings_count, follow_status, is_private, visible, bio
     }
-
+    
     init(
         user_id: Int,
         first_name: String,
@@ -38,7 +37,8 @@ class ProfileModel: ObservableObject, Codable, Identifiable {
         followings_count: Int,
         follow_status: FollowStatus?,
         is_private: Bool,
-        visible: Bool
+        visible: Bool,
+        bio: String?
     ) {
         self.user_id = user_id
         self.first_name = first_name
@@ -50,12 +50,12 @@ class ProfileModel: ObservableObject, Codable, Identifiable {
         self.follow_status = follow_status
         self.is_private = is_private
         self.visible = visible
+        self.bio = bio
     }
-
+    
     // Required for Codable with @Published
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-
         self.user_id = try container.decode(Int.self, forKey: .user_id)
         self.first_name = try container.decode(String.self, forKey: .first_name)
         self.last_name = try container.decode(String.self, forKey: .last_name)
@@ -66,11 +66,12 @@ class ProfileModel: ObservableObject, Codable, Identifiable {
         self.follow_status = try container.decodeIfPresent(FollowStatus.self, forKey: .follow_status)
         self.is_private = try container.decode(Bool.self, forKey: .is_private)
         self.visible = try container.decode(Bool.self, forKey: .visible)
+        // Fixed: Use decodeIfPresent for optional bio
+        self.bio = try container.decodeIfPresent(String.self, forKey: .bio)
     }
-
+    
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-
         try container.encode(user_id, forKey: .user_id)
         try container.encode(first_name, forKey: .first_name)
         try container.encode(last_name, forKey: .last_name)
@@ -81,5 +82,6 @@ class ProfileModel: ObservableObject, Codable, Identifiable {
         try container.encodeIfPresent(follow_status, forKey: .follow_status)
         try container.encode(is_private, forKey: .is_private)
         try container.encode(visible, forKey: .visible)
+        try container.encodeIfPresent(bio, forKey: .bio)
     }
 }

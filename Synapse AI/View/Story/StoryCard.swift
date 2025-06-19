@@ -10,32 +10,58 @@ struct StoryCard: View {
     
     var body: some View {
         Button(action: onTap) {
-            VStack(spacing: 8) {
-                ZStack {
-                    // Gradient border
-                    Circle()
-                        .stroke(
-                            LinearGradient(
-                                colors: [.purple, .blue, .cyan],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            ),
-                            lineWidth: 3
+            ZStack {
+                // Background story image with black filter
+                    KFImage(URL(string: story.image))
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 240, height: 160)
+                        .clipped()
+                        .cornerRadius(16)
+                        .overlay(
+                            // Black filter overlay
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(Color.black.opacity(0.4))
                         )
-                        .frame(width: 76, height: 76)
-                        .shadow(color: .purple.opacity(0.3), radius: 8, x: 0, y: 4)
-                    
-                    ProfileImageView(imageData: nil, imageUrl: story.profile_picture, size: 70)
-                    .matchedGeometryEffect(id: "story\(story.id)", in: animationNamespace)
-                }
+                        .matchedGeometryEffect(id: "story\(story.id)", in: animationNamespace)
                 
-                Text(story.user)
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundColor(.primary)
-                    .lineLimit(1)
-                    .truncationMode(.tail)
+                VStack {
+                    HStack {
+                        // Profile picture in top-left corner
+                        ProfileImageView(
+                            imageData: nil,
+                            imageUrl: story.profile_picture,
+                            size: 32
+                        )
+                        .overlay(
+                            Circle()
+                                .stroke(Color.white, lineWidth: 2)
+                        )
+                        .shadow(color: .black.opacity(0.3), radius: 4, x: 0, y: 2)
+                        
+                        Spacer()
+                    }
+                    .padding(.top, 12)
+                    .padding(.horizontal, 12)
+                    
+                    Spacer()
+                    
+                    // Username at bottom
+                    HStack {
+                        Text(story.user)
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundColor(.white)
+                            .shadow(color: .black.opacity(0.5), radius: 2, x: 0, y: 1)
+                            .lineLimit(1)
+                            .truncationMode(.tail)
+                        
+                        Spacer()
+                    }
+                    .padding(.bottom, 12)
+                    .padding(.horizontal, 12)
+                }
             }
-            .frame(width: 80)
+            .frame(width: 240, height: 160)
         }
         .buttonStyle(StoryCardButtonStyle())
         .scaleEffect(isPressed ? 0.95 : 1.0)

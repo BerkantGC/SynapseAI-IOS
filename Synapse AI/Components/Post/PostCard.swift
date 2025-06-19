@@ -21,6 +21,9 @@ struct PostCard: View {
     @State private var aiIconScale: CGFloat = 1.0
     @State private var aiIconRotation: Double = 0
     @State private var showCamera = false
+    @State private var showShareSheet: Bool = false
+    
+    let onDelete: (() -> Void)?
     
     private var post: Post {
         get { viewModel.post }
@@ -28,9 +31,10 @@ struct PostCard: View {
     }
     let animationNamespace: Namespace.ID
 
-    init(post: Post, animationNamespace: Namespace.ID) {
+    init(post: Post, animationNamespace: Namespace.ID, onDelete: (() -> Void)? = nil) {
         self.viewModel = PostViewModel(post: post);
         self.animationNamespace = animationNamespace
+        self.onDelete = onDelete
     }
     
     var body: some View {
@@ -42,6 +46,9 @@ struct PostCard: View {
                 }
             } else {
                 postSection
+                .sheet(isPresented: $showShareSheet) {
+                    ShareSheet(items: [shareContent])
+                }
             }
             
             actionButtonsSection
@@ -73,6 +80,10 @@ struct PostCard: View {
         }
     }
     
+    private var shareContent: String {
+        return "Check out this post: \(post.title ?? "")"
+    }
+
     // MARK: - Header Section
     private var headerSection: some View {
         HStack {
@@ -154,7 +165,9 @@ struct PostCard: View {
                     // Open edit screen
                 }
                 Button("Delete", role: .destructive) {
-                    viewModel.deletePost()
+                    Task {
+                        await viewModel.deletePost(onDelete: onDelete)
+                    }
                 }
             } else {
                 Button("Report", role: .destructive) {
@@ -347,7 +360,7 @@ struct PostCard: View {
     
     private var shareButton: some View {
         Button {
-            //
+            self.showShareSheet.toggle()
         } label: {
             Image(systemName: "paperplane")
                 .font(.system(size: 25))

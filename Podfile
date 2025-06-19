@@ -5,7 +5,8 @@ target 'Synapse AI' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
   
-  # Pods for Synapse AI 
+  # Pods for Synapse AI
+  pod 'MediaPipeTasksCommon' 
   pod 'MediaPipeTasksVision' 
   pod 'lottie-ios'
   pod 'SwiftStomp'

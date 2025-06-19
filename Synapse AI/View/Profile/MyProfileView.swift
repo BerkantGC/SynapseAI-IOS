@@ -26,7 +26,7 @@ struct MyProfileView: View {
                         } else if viewModel.profile != nil {
                             ProfileHeader(isMe: true)
                                 .environmentObject(viewModel)
-                            PurchaseView()
+                            //PurchaseView()
                         }
                         //ProfileStats()
                         PostsGrid(posts: viewModel.userPosts, pageTitle: viewModel.profile?.username ?? "")
