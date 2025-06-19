@@ -17,10 +17,8 @@ struct PostCard: View {
     @State private var showCommentSheet = false
     @State private var isLiking = false
     @State private var showOptions = false
-    @State private var showPromptModal = false
-    @State private var aiIconScale: CGFloat = 1.0
-    @State private var aiIconRotation: Double = 0
     @State private var showCamera = false
+    @State private var showPromptModal = false
     @State private var showShareSheet: Bool = false
     
     let onDelete: (() -> Void)?
@@ -59,7 +57,7 @@ struct PostCard: View {
         .clipped()
         .padding(.horizontal, 10)
         .sheet(isPresented: $showPromptModal) {
-            promptModalView
+            PromptModalView(prompt: post.prompt ?? "", showPromptModal: $showPromptModal)
                 .presentationDetents([.medium, .large])
                 .presentationDragIndicator(.visible)
         }
@@ -96,46 +94,6 @@ struct PostCard: View {
             moreOptionsButton
         }
         .padding()
-    }
-    
-    private var aiGeneratedIndicator: some View {
-        Button {
-            showPromptModal = true
-            // Add haptic feedback
-            let impactFeedback = UIImpactFeedbackGenerator(style: .light)
-            impactFeedback.impactOccurred()
-        } label: {
-            ZStack {
-                // Animated background circle
-                Circle()
-                    .fill(
-                        LinearGradient(
-                            gradient: Gradient(colors: [.yellow, .red, .bgGradientStart]),
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
-                    .frame(width: 32, height: 32)
-                    .scaleEffect(aiIconScale)
-                    .rotationEffect(.degrees(aiIconRotation))
-                
-                // AI sparkle icon
-                Image(systemName: "sparkles")
-                    .font(.system(size: 14, weight: .bold))
-                    .foregroundColor(.white)
-                    .shadow(color: .black.opacity(0.3), radius: 1, x: 0, y: 1)
-            }
-        }
-        .onAppear {
-            // Start continuous animation
-            withAnimation(.easeInOut(duration: 2.0).repeatForever(autoreverses: true)) {
-                aiIconScale = 1.1
-            }
-            
-            withAnimation(.linear(duration: 8.0).repeatForever(autoreverses: false)) {
-                aiIconRotation = 360
-            }
-        }
     }
     
     private var userInfoView: some View {
@@ -185,95 +143,6 @@ struct PostCard: View {
         }
     }
     
-    // MARK: - AI Prompt Modal
-    private var promptModalView: some View {
-        NavigationView {
-            VStack(spacing: 0) {
-                // Modal Header
-                VStack(spacing: 16) {
-                    // Animated AI Icon
-                    ZStack {
-                        Circle()
-                            .fill(
-                                LinearGradient(
-                                    gradient: Gradient(colors: [.yellow, .red, .bgGradientStart]),
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                )
-                            )
-                            .frame(width: 60, height: 60)
-                        
-                        Image(systemName: "sparkles")
-                            .font(.system(size: 24, weight: .bold))
-                            .foregroundColor(.white)
-                    }
-                    .scaleEffect(1.0)
-                    .onAppear {
-                        withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
-                            // Animation on appear
-                        }
-                    }
-                    
-                    VStack(spacing: 4) {
-                        Text("Generated Content")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                        
-                        Text("This post was created using Synapse AI assistance")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                    }
-                }
-                .padding(.top, 20)
-                .padding(.horizontal, 20)
-                
-                Divider()
-                    .padding(.vertical, 20)
-                
-                // Prompt Content
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text("Prompt")
-                            .font(.title3)
-                            .fontWeight(.semibold)
-                            .padding(.bottom, 4)
-
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text(post.prompt ?? "")
-                                .font(.callout)
-                                .fontWeight(.medium)
-                                .multilineTextAlignment(.leading)
-                                .padding()
-                                .background(.ultraThinMaterial)
-                                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 16)
-                                        .stroke(Color.primary.opacity(0.1), lineWidth: 1)
-                                )
-                        }
-                    }
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 40)
-                }
-                
-                Spacer()
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
-                        showPromptModal = false
-                    }
-                    .fontWeight(.semibold)
-                }
-            }
-        }
-        .transition(.asymmetric(
-            insertion: .move(edge: .bottom).combined(with: .opacity),
-            removal: .move(edge: .bottom).combined(with: .opacity)
-        ))
-    }
-    
     // MARK: - Post Image Section
     private var postSection: some View {
         NavigationLink(destination: PostDetailCard(viewModel: viewModel, animationNamespace: animationNamespace)
@@ -303,7 +172,12 @@ struct PostCard: View {
                 if let prompt = post.prompt, !prompt.isEmpty {
                     HStack {
                         Spacer()
-                        aiGeneratedIndicator
+                        AIGeneratedIndicator(onTap: {
+                            showPromptModal.toggle()
+                            // Add haptic feedback
+                            let impactFeedback = UIImpactFeedbackGenerator(style: .light)
+                            impactFeedback.impactOccurred()
+                        })
                     }
                     .padding(.top, 12)
                     .padding(.trailing, 12)

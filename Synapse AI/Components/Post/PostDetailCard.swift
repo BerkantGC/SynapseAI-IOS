@@ -457,6 +457,28 @@ struct PostDetailCard: View {
                     .lineSpacing(6)
                     .foregroundColor(.primary.opacity(0.9))
             }
+            
+            if let prompt = post.prompt, !prompt.isEmpty {
+                VStack(alignment: .leading){
+                    HStack{
+                        AIGeneratedIndicator(size: 24)
+                        Text("Prompt")
+                            .font(.subheadline)
+                    }
+                    
+                    Text(prompt)
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+                        .multilineTextAlignment(.leading)
+                }
+                .padding()
+                .background(.ultraThinMaterial)
+                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(Color.primary.opacity(0.1), lineWidth: 1)
+                )
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
