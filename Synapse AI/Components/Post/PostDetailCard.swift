@@ -28,10 +28,12 @@ struct PostDetailCard: View {
 
     let animationNamespace: Namespace.ID
     private let headerHeight: CGFloat = 100
-    
+    var currentUsername: String;
+        
     init(viewModel: PostViewModel, animationNamespace: Namespace.ID) {
         self.viewModel = viewModel
         self.animationNamespace = animationNamespace
+        self.currentUsername = KeychainService.instance.getLoggedInUsername() ?? ""
     }
     
     var body: some View {
@@ -424,15 +426,17 @@ struct PostDetailCard: View {
             
             Spacer()
             
-            FollowButton(profile: viewModel.post.profile)
-            .scaleEffect(buttonPresses["follow"] == true ? 0.95 : 1.0)
-            .onTapGesture {
-                withAnimation(.easeInOut(duration: 0.1)) {
-                    buttonPresses["follow"] = true
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            if currentUsername != post.profile.username {
+                FollowButton(profile: viewModel.post.profile)
+                .scaleEffect(buttonPresses["follow"] == true ? 0.95 : 1.0)
+                .onTapGesture {
                     withAnimation(.easeInOut(duration: 0.1)) {
-                        buttonPresses["follow"] = false
+                        buttonPresses["follow"] = true
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        withAnimation(.easeInOut(duration: 0.1)) {
+                            buttonPresses["follow"] = false
+                        }
                     }
                 }
             }
