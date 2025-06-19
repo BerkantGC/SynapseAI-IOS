@@ -15,7 +15,10 @@ class UploadViewModel: ObservableObject {
     @Published var selectedImageData: Data?
     @Published var selection: PhotosPickerItem?
     @Published var isShowingImageGenerator = false
-    
+    @Published var selectedVideoURL: URL?
+    @Published var isVideoSelected: Bool=false
+    @Published var isImageSelected: Bool=false
+
     static let shared = UploadViewModel()
     
     func navigateImageGenerator() {
@@ -86,18 +89,34 @@ class UploadViewModel: ObservableObject {
                         if let error = error {
                             print("Request failed: \(error.localizedDescription)")
                             continuation.resume(returning: nil)
+                            return
                         }
 
-                        let httpResponse = response as? HTTPURLResponse
-                        guard let data = data,
-                              httpResponse!.statusCode == 200 else {
-                            print("Invalid response or no data", httpResponse?.statusCode)
+                        guard let httpResponse = response as? HTTPURLResponse else {
+                            print("Not a valid HTTP response")
                             continuation.resume(returning: nil)
                             return
                         }
-                      
+
+                        guard let data = data else {
+                            print("No data received")
+                            continuation.resume(returning: nil)
+                            return
+                        }
+
+                        if httpResponse.statusCode != 200 {
+                            // Try to parse error message from data
+                            if let errorMessage = String(data: data, encoding: .utf8) {
+                                print("Server returned status code \(httpResponse.statusCode): \(errorMessage)")
+                            } else {
+                                print("Server returned status code \(httpResponse.statusCode), but no readable error message")
+                            }
+                            continuation.resume(returning: nil)
+                            return
+                        }
+
+                        // Success path continues...
                         let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent("generated_video.mp4")
-                        
                         do {
                             self.deleteTempFileIfExists(at: tempURL.path)
                             try data.write(to: tempURL)

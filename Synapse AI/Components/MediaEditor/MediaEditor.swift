@@ -90,7 +90,7 @@ struct MediaEditor: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 if image != nil {
-                    NavigationLink(destination: UploadFormPage(image: image!)) {
+                    NavigationLink(destination: UploadFormPage(media: .image(image!))) {
                         Text("Share")
                             .font(.caption)
                             .foregroundColor(.white)
