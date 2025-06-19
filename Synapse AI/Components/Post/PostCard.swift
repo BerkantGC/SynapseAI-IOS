@@ -276,7 +276,9 @@ struct PostCard: View {
     
     // MARK: - Post Image Section
     private var postSection: some View {
-        NavigationLink(destination: PostDetailCard(viewModel: viewModel, animationNamespace: animationNamespace)) {
+        NavigationLink(destination: PostDetailCard(viewModel: viewModel, animationNamespace: animationNamespace)
+            .navigationTransition(.zoom(sourceID: "post-image-\(post.id)", in: animationNamespace))
+        ) {
             ZStack(alignment: .top) {
                 if let video = viewModel.post.video {
                     HLSPlayerView(url: "\(BASE_URL)\(video)", onLike: {
@@ -284,7 +286,7 @@ struct PostCard: View {
                             viewModel.toggleLike()
                         }
                     },post: post, isDetail: false)
-                        .frame(width: UIScreen.main.bounds.width - 20, height: UIScreen.main.bounds.height * 0.5)
+                        .frame(width: UIScreen.main.bounds.width - 20, height: UIScreen.main.bounds.height * 0.6)
                         .clipShape(RoundedRectangle(cornerRadius: 20))
                 } else {
                     KFImage(URL(string: post.image ?? ""))
@@ -292,9 +294,8 @@ struct PostCard: View {
                             ProgressView().frame(height: 300)
                         }
                         .resizable()
-                        .matchedGeometryEffect(id: post.id, in: animationNamespace)
                         .aspectRatio(contentMode: .fill)
-                        .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height * 0.6)
+                        .frame(width: UIScreen.main.bounds.width - 20, height: UIScreen.main.bounds.height * 0.6)
                         .clipped()
                 }
                 
@@ -307,7 +308,7 @@ struct PostCard: View {
                     .padding(.top, 12)
                     .padding(.trailing, 12)
                 }
-            }
+            }.matchedTransitionSource(id: "post-image-\(post.id)", in: animationNamespace)
         }
     }
     

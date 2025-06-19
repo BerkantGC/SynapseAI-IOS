@@ -14,6 +14,7 @@ protocol DisplayableComment {
     var likes_count: Int { get }
     var created_at: String? { get }
     var profile_picture: String? { get }
+    var liked: Bool { get }
 }
 
 extension CommentModel: DisplayableComment {}
@@ -29,6 +30,7 @@ struct CommentModel: Identifiable, Codable, Equatable {
     var answers_count: Int?
     var answers: [AnswerModel]
     var post_id: Int
+    var liked: Bool
 }
 
 struct AnswerModel: Identifiable, Codable, Equatable {
@@ -40,4 +42,5 @@ struct AnswerModel: Identifiable, Codable, Equatable {
     var likes_count: Int
     var post_id: Int
     var parent_id: Int?
+    var liked: Bool
 }

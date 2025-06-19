@@ -118,8 +118,6 @@ struct PostDetailCard: View {
                     )
                     .frame(width: geometry.size.width, height: geometry.size.height)
                     .clipShape(Rectangle())
-                    .matchedGeometryEffect(id: "post-image-\(post.id)", in: animationNamespace)
-                    
                 } else {
                     // Image fallback
                     KFImage(URL(string: post.image ?? ""))
@@ -148,7 +146,7 @@ struct PostDetailCard: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(width: geometry.size.width, height: geometry.size.height)
                         .clipped()
-                        .matchedGeometryEffect(id: "post-image-\(post.id)", in: animationNamespace)
+                        .matchedTransitionSource(id: "post-image-\(post.id)", in: animationNamespace)
                         .scaleEffect(imageScale)
                         .offset(y: imageOffset)
                         .overlay(

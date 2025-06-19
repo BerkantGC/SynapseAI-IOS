@@ -15,17 +15,19 @@ class CommentViewModel: ObservableObject {
     
     func loadComments(postId: Int) {
         FetchService().executeRequest(url: "/comments?post_id=\(postId)", method: "GET", data: nil) { data, response, error in
-            if let error = error {
-                self.errorMessage = error.localizedDescription
-                return
-            }
-            
-            if let data = data {
+    
+            // Check if this endpoint worked
+            if error == nil,
+               let data = data,
+               let httpResponse = response as? HTTPURLResponse,
+               httpResponse.statusCode == 200 {
+                
                 do {
-                    let comments = try JSONDecoder().decode([CommentModel].self, from: data)
-                    self.comments = comments
+                    let fetchedComments = try JSONDecoder().decode([CommentModel].self, from: data)
+                    self.comments = fetchedComments
+                    return
                 } catch {
-                    self.errorMessage = error.localizedDescription
+                    print("Failed to decode from: \(error)")
                 }
             }
         }

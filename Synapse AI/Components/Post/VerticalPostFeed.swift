@@ -36,7 +36,7 @@ struct VerticalPostFeedView: View {
                 .onAppear {
                     // Scroll only the first time
                     if !hasScrolled {
-                        proxy.scrollTo(selectedPost.id, anchor: .top)
+                        proxy.scrollTo(selectedPost.id, anchor: .center)
                         hasScrolled = true
                     }
                 }

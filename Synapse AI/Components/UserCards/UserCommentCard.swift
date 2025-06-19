@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 struct UserCommentCard: View {
-    var comment: CommentModel
+    @State var comment: CommentModel
     var onReply: (() -> Void)? = nil
 
     @State private var expandedAnswers: [AnswerModel] = []
@@ -179,6 +179,46 @@ struct UserCommentCard: View {
             }
         }
     }
+    
+    private func toggleLike(for item: any DisplayableComment, isAnswer: Bool) {
+       guard !isLoadingReplies else { return }
+       isLoadingReplies = true
+
+       let endpoint = isAnswer ? "/answers/\(item.id)/like" : "/comments/\(item.id)/like"
+       
+       FetchService().executeRequest(
+           url: endpoint,
+           method: "POST",
+           data: nil
+       ) { data, response, error in
+           DispatchQueue.main.async {
+               isLoadingReplies = false
+               
+               if let error = error {
+                   print("Failed to toggle like: \(error)")
+                   return
+               }
+               
+               guard data != nil else {
+                   print("No response data")
+                   return
+               }
+               
+               // Update the appropriate item's like status
+               if isAnswer {
+                   // Find and update the answer in expandedAnswers
+                   if let index = expandedAnswers.firstIndex(where: { $0.id == item.id }) {
+                       expandedAnswers[index].liked.toggle()
+                       expandedAnswers[index].likes_count += expandedAnswers[index].liked ? 1 : -1
+                   }
+               } else {
+                   // Update the main comment
+                   comment.liked.toggle()
+                   comment.likes_count += comment.liked ? 1 : -1
+               }
+           }
+       }
+   }
 
     @ViewBuilder
     func commentView<T: DisplayableComment>(_ data: T, isAnswer: Bool) -> some View {
@@ -223,14 +263,21 @@ struct UserCommentCard: View {
                     // Action buttons
                     HStack(spacing: 20) {
                         // Like button
-                        HStack(spacing: 4) {
-                            Image(systemName: "heart")
-                                .font(.caption)
-                            Text(formatLikes(data.likes_count))
-                                .font(.caption)
-                                .fontWeight(.medium)
+                        Button {
+                            toggleLike(for: data, isAnswer: isAnswer)
+                        } label: {
+                            HStack(spacing: 4) {
+                                Image(systemName: data.liked ? "heart.fill" : "heart")
+                                    .font(.caption)
+                                    .foregroundColor(data.liked ? .red : .secondary)
+                                
+                                Text(formatLikes(data.likes_count))
+                                    .font(.caption)
+                                    .fontWeight(.medium)
+                                    .foregroundColor(.secondary)
+                            }
                         }
-                        .foregroundColor(.secondary)
+                        .buttonStyle(PlainButtonStyle())
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
                         .background(
