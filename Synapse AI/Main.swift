@@ -19,7 +19,9 @@ struct Main: View {
                 LoginView()
                     .environmentObject(authViewModel)
             }
-        }.onAppear {
+        }
+        .toastView(toast: $authViewModel.toast)
+        .onAppear {
             authViewModel.checkToken()
         }
     }

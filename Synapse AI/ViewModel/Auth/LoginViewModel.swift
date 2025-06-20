@@ -12,17 +12,33 @@ class LoginViewModel: ObservableObject {
     @Published var password: String = ""
     @Published var errorMessage: String? = nil
     @Published var isLoading: Bool = false
+    @Published var toast: Toast?
     @AppStorage("isLogged") var isLogged: Bool = false
     
     private var cancellables = Set<AnyCancellable>()
     
     init(){
         NotificationCenter.default.addObserver(self, selector: #selector(handle401), name: .didReceive401, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleErrorNotification(_:)), name: .didReceiveError, object: nil)
     }
     
    deinit {
        NotificationCenter.default.removeObserver(self, name: .didReceive401, object: nil)
+       NotificationCenter.default.removeObserver(self)
    }
+    
+    @objc private func handleErrorNotification(_ notification: Notification) {
+        if let message = notification.userInfo?["message"] as? String {
+            DispatchQueue.main.async {
+                self.toast = Toast(
+                    style: .error,
+                    message: message,
+                    duration: 3.0,
+                    width: .infinity
+                )
+            }
+        }
+    }
     
     @objc private func handle401() {
         let stringSession = KeychainService.instance.secureGet(forKey: "SESSION")

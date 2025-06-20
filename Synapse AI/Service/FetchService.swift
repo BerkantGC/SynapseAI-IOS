@@ -102,7 +102,7 @@ class FetchService{
         
         // Upload the data
         URLSession.shared.uploadTask(with: urlRequest, from: formData) { data, response, error in
-            self.handleUnauthorizedResponse(response: response)
+            self.handleResponse(data: data, response: response, error: error)
             
             completion(data, response, error)
         }.resume()
@@ -112,18 +112,119 @@ class FetchService{
         let request = buildUrl(url: url, method: method, data: data)
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            self.handleUnauthorizedResponse(response: response)
+            self.handleResponse(data: data, response: response, error: error)
             
             completion(data, response, error)
         }
         task.resume()
     }
     
-    func handleUnauthorizedResponse(response: URLResponse?) {
-            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 401 {
+    // Updated method to handle all responses
+    func handleResponse(data: Data?, response: URLResponse?, error: Error?) {
+        // Handle network errors first
+        if let error = error {
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(
+                    name: .didReceiveError,
+                    object: nil,
+                    userInfo: ["message": "Network error: \(error.localizedDescription)"]
+                )
+            }
+            return
+        }
+        
+        // Handle HTTP response codes
+        if let httpResponse = response as? HTTPURLResponse {
+            switch httpResponse.statusCode {
+            case 200...299:
+                // Success - do nothing
+                break
+            case 401:
+                // Unauthorized - existing behavior
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .didReceive401, object: nil)
                 }
+            default:
+                if let data = data {
+                    print("Raw data length: \(data.count)")
+                    if let dataString = String(data: data, encoding: .utf8) {
+                        print("Raw data as string: \(dataString)")
+                    } else {
+                        print("Data cannot be converted to UTF-8 string")
+                    }
+                } else {
+                    print("Data is nil")
+                }
+                
+                var message: String
+                
+                // Check if data exists and is not empty
+                guard let data = data, !data.isEmpty else {
+                    print("Data is nil or empty, using default error message")
+                    message = getErrorMessage(for: httpResponse.statusCode)
+                    
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(
+                            name: .didReceiveError,
+                            object: nil,
+                            userInfo: ["message": message]
+                        )
+                    }
+                    return
+                }
+                
+                do {
+                    let decoder = JSONDecoder()
+                    let errorResponse = try decoder.decode(ErrorResponse.self, from: data)
+                    message = errorResponse.message
+                    print("Successfully decoded error response: \(message)")
+                } catch {
+                    print("JSON decoding error: \(error)")
+                    
+                    // Try to get a string representation of the data
+                    if let dataString = String(data: data, encoding: .utf8) {
+                        print("Failed to decode JSON, raw response: \(dataString)")
+                    }
+                    
+                    // Fallback to default error message
+                    message = getErrorMessage(for: httpResponse.statusCode)
+                }
+                
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(
+                        name: .didReceiveError,
+                        object: nil,
+                        userInfo: ["message": message]
+                    )
+                }
             }
         }
+    }
+    
+    // Helper method to get appropriate error messages for different status codes
+    private func getErrorMessage(for statusCode: Int) -> String {
+        switch statusCode {
+        case 400:
+            return "Bad request. Please check your input."
+        case 403:
+            return "Access forbidden. You don't have permission."
+        case 404:
+            return "Resource not found."
+        case 422:
+            return "Invalid data provided."
+        case 500:
+            return "Server error. Please try again later."
+        case 502:
+            return "Bad gateway. Server is temporarily unavailable."
+        case 503:
+            return "Service unavailable. Please try again later."
+        default:
+            return "Request failed with status code \(statusCode)."
+        }
+    }
+    
+    // Keep the old method for backward compatibility
+    func handleUnauthorizedResponse(response: URLResponse?) {
+        handleResponse(data: nil, response: response, error: nil)
+    }
 }
