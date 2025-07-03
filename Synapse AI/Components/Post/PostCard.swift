@@ -57,7 +57,7 @@ struct PostCard: View {
         .clipped()
         .padding(.horizontal, 10)
         .sheet(isPresented: $showPromptModal) {
-            PromptModalView(prompt: post.prompt ?? "", showPromptModal: $showPromptModal)
+            PromptModalView(post: post, showPromptModal: $showPromptModal)
                 .presentationDetents([.medium, .large])
                 .presentationDragIndicator(.visible)
         }
@@ -79,7 +79,7 @@ struct PostCard: View {
     }
     
     private var shareContent: String {
-        return "Check out this post: \(post.title ?? "")"
+        return "Check out this post: \(post.title ?? "") (\(post.id)), posted by \(post.profile.username). Image: \(post.image ?? "")"
     }
 
     // MARK: - Header Section
@@ -169,7 +169,7 @@ struct PostCard: View {
                 }
                 
                 // AI Generated Icon – centered at top
-                if let prompt = post.prompt, !prompt.isEmpty {
+                if post.prompt != nil || post.enhanced_prompt != nil {
                     HStack {
                         Spacer()
                         AIGeneratedIndicator(onTap: {

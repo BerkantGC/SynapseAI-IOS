@@ -40,11 +40,11 @@ struct PostsGrid: View {
                                 Image(systemName: "lock.fill")
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
-                                    .frame(width: 10, height: 10)
+                                    .frame(width: 20, height: 20)
                                     .foregroundColor(.gray)
 
                                 Text("This post is too positive.")
-                                    .font(.headline)
+                                    .font(.system(size: 10))
                             }
                             .padding(5)
                             .frame(

@@ -136,7 +136,7 @@ class FetchService{
         // Handle HTTP response codes
         if let httpResponse = response as? HTTPURLResponse {
             switch httpResponse.statusCode {
-            case 200...299:
+            case 200...299, 400, 403:
                 // Success - do nothing
                 break
             case 401:
@@ -204,10 +204,6 @@ class FetchService{
     // Helper method to get appropriate error messages for different status codes
     private func getErrorMessage(for statusCode: Int) -> String {
         switch statusCode {
-        case 400:
-            return "Bad request. Please check your input."
-        case 403:
-            return "Access forbidden. You don't have permission."
         case 404:
             return "Resource not found."
         case 422:

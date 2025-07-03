@@ -95,7 +95,7 @@ class CameraManager: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleB
             return
         }
         
-        // Gülüş ile ilgili tüm blendshape'leri al
+        // Get all the blendshaped for smile
         let leftSmile = blendShapes.categories.first(where: { $0.categoryName == "mouthSmileLeft" })?.score ?? 0
         let rightSmile = blendShapes.categories.first(where: { $0.categoryName == "mouthSmileRight" })?.score ?? 0
         let cheekSquintLeft = blendShapes.categories.first(where: { $0.categoryName == "cheekSquintLeft" })?.score ?? 0
@@ -105,7 +105,7 @@ class CameraManager: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleB
         let mouthPucker = blendShapes.categories.first(where: { $0.categoryName == "mouthPucker" })?.score ?? 0
         let jawOpen = blendShapes.categories.first(where: { $0.categoryName == "jawOpen" })?.score ?? 0
         
-        // Gerçekçi gülüş skorunu hesapla
+        // Calculate realistic smile score
         let smileScore = calculateRealisticSmileScore(
             leftSmile: leftSmile,
             rightSmile: rightSmile,
@@ -117,31 +117,31 @@ class CameraManager: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleB
             jawOpen: jawOpen
         )
         
-        // Gülüş skorunu geçmişe ekle
+        // Add score to history
         smileScoreHistory.append(smileScore)
         if smileScoreHistory.count > historySize {
             smileScoreHistory.removeFirst()
         }
         
-        // Geçmiş skorların ortalamasını al (stabilite için)
+        // Get all the scores average (Stability)
         let averageSmileScore = smileScoreHistory.reduce(0, +) / Float(smileScoreHistory.count)
         
-        // Dinamik eşik değeri (daha akıllı algılama)
+        
         let dynamicThreshold = calculateDynamicThreshold()
         let isSmiling = averageSmileScore > dynamicThreshold
         
-        // Ardışık frame kontrolü
+        // Consecutive frame control
         if isSmiling {
             consecutiveSmileFrames += 1
         } else {
             consecutiveSmileFrames = 0
         }
         
-        // Cooldown kontrolü
+        // Cooldown control
         let currentTime = Date()
         let canTriggerSmile = lastSmileTime == nil || currentTime.timeIntervalSince(lastSmileTime!) > smileCooldown
         
-        // Gülüş algılandı mı?
+        // is Smile Detected?
         let finalSmileDetected = consecutiveSmileFrames >= requiredConsecutiveFrames && canTriggerSmile
         
         DispatchQueue.main.async {
@@ -164,27 +164,16 @@ class CameraManager: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleB
         mouthPucker: Float,
         jawOpen: Float
     ) -> Float {
-        // Temel gülüş skoru
         let baseSmileScore = (leftSmile + rightSmile) / 2
-        
-        // Göz kısılması (gerçek gülüşte gözler kısılır - Duchenne smile)
         let eyeSquintScore = (eyeSquintLeft + eyeSquintRight) / 2
-        
-        // Yanak kısılması
         let cheekSquintScore = (cheekSquintLeft + cheekSquintRight) / 2
-        
-        // Asimetri kontrolü (çok asimetrik gülüşler şüpheli)
         let asymmetryPenalty = abs(leftSmile - rightSmile)
-        
-        // Ağız büzülmesi negatif etki (gülüş değil)
         let puckerPenalty = mouthPucker
-        
-        // Çok fazla ağız açılması negatif etki (gülmek yerine konuşuyor olabilir)
         let jawOpenPenalty = jawOpen > 0.3 ? jawOpen * 0.5 : 0
         
         // Weighted score hesaplama
         var realisticScore = baseSmileScore * 0.6 // Temel ağırlık
-        realisticScore += eyeSquintScore * 0.3 // Göz kısılması önemli
+        realisticScore += eyeSquintScore * 0.3 // Göz kısılması
         realisticScore += cheekSquintScore * 0.2 // Yanak kısılması
         realisticScore -= asymmetryPenalty * 0.3 // Asimetri cezası
         realisticScore -= puckerPenalty * 0.4 // Büzülme cezası
@@ -194,20 +183,20 @@ class CameraManager: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleB
     }
     
     private func calculateDynamicThreshold() -> Float {
-        // Ortam koşullarına göre dinamik eşik
-        let baseThreshold: Float = 0.35
+        // Dynamic Threshold base
+        let baseThreshold: Float = 0.4
         
-        // Eğer geçmiş skorlar varsa, onlara göre ayarlama yap
+        // If there's any history adjust accordingly
         if smileScoreHistory.count >= 5 {
             let recentAverage = Array(smileScoreHistory.suffix(5)).reduce(0, +) / 5
             let standardDeviation = calculateStandardDeviation(scores: smileScoreHistory)
             
-            // Eğer çok değişkenlik varsa eşiği yükselt
+            // If there is a lot of variability, raise the threshold
             if standardDeviation > 0.15 {
                 return baseThreshold + 0.1
             }
             
-            // Eğer sürekli düşük skorlar varsa eşiği düşür
+            // If there are consistently low scores, lower the threshold
             if recentAverage < 0.2 {
                 return baseThreshold - 0.05
             }

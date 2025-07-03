@@ -19,6 +19,8 @@ struct PostDetailCard: View {
     @State private var isImageFullscreen = false
     @State private var imageOffset: CGFloat = 0
     @State private var buttonPresses: [String: Bool] = [:]
+    @State private var showEnhanceModal: Bool = false
+    @State private var showPromptModal: Bool = false
     @Environment(\.dismiss) var dismiss
     
     private var post: Post {
@@ -28,7 +30,16 @@ struct PostDetailCard: View {
 
     let animationNamespace: Namespace.ID
     private let headerHeight: CGFloat = 100
-    var currentUsername: String;
+    var currentUsername: String
+    
+    // Helper computed properties
+    private var hasEnhancedPrompt: Bool {
+        return post.enhanced_prompt != nil && !post.enhanced_prompt!.isEmpty
+    }
+    
+    private var shouldShowEnhanceButton: Bool {
+        return post.video == nil && !hasEnhancedPrompt
+    }
         
     init(viewModel: PostViewModel, animationNamespace: Namespace.ID) {
         self.viewModel = viewModel
@@ -87,6 +98,16 @@ struct PostDetailCard: View {
         }
         .navigationBarHidden(true)
         .toolbar(.hidden, for: .tabBar)
+        .fullScreenCover(isPresented: $showEnhanceModal) {
+            if post.video == nil {
+                EnhanceModalView(image: URL(string: post.image ?? "")!, prompt: post.prompt, postID: post.id, showEnhanceModal: $showEnhanceModal)
+            }
+        }
+        .sheet(isPresented: $showPromptModal) {
+            if post.enhanced_prompt != nil {
+                PromptModalView(post: post, showPromptModal: $showPromptModal)
+            }
+        }
         .sheet(isPresented: $showCommentSheet) {
             CommentView(parentPost: $viewModel.post)
                 .presentationDetents([.medium, .large])
@@ -462,18 +483,21 @@ struct PostDetailCard: View {
                     .foregroundColor(.primary.opacity(0.9))
             }
             
+            // Original prompt section - always show if exists
             if let prompt = post.prompt, !prompt.isEmpty {
-                VStack(alignment: .leading){
-                    HStack{
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack {
                         AIGeneratedIndicator(size: 24)
-                        Text("Prompt")
+                        Text(hasEnhancedPrompt ? "Original Prompt" : "Prompt")
                             .font(.subheadline)
+                            .fontWeight(.semibold)
                     }
                     
                     Text(prompt)
                         .font(.subheadline)
                         .fontWeight(.medium)
                         .multilineTextAlignment(.leading)
+                        .foregroundColor(.primary.opacity(0.8))
                 }
                 .padding()
                 .background(.ultraThinMaterial)
@@ -482,6 +506,107 @@ struct PostDetailCard: View {
                     RoundedRectangle(cornerRadius: 16)
                         .stroke(Color.primary.opacity(0.1), lineWidth: 1)
                 )
+            }
+            
+            // Enhanced prompt section - only show if exists
+            if let enhancedPrompt = post.enhanced_prompt, !enhancedPrompt.isEmpty {
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack {
+                        AIGeneratedIndicator(size: 24)
+                        Text("Enhanced Prompt")
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                        
+                        Spacer()
+                        
+                        // View full prompt button
+                        Button {
+                            showPromptModal = true
+                        } label: {
+                            HStack(spacing: 4) {
+                                Text("View Full")
+                                    .font(.caption)
+                                    .fontWeight(.medium)
+                                Image(systemName: "arrow.up.right")
+                                    .font(.caption)
+                            }
+                            .foregroundColor(.blue)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(.blue.opacity(0.1), in: RoundedRectangle(cornerRadius: 8))
+                        }
+                    }
+                    
+                    // Show preview of enhanced prompt (truncated)
+                    Text(enhancedPrompt)
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(.primary.opacity(0.8))
+                        .lineLimit(3)
+                    
+                    // Show small original image if this is an enhanced post
+                    if let originalImage = post.old_image, !originalImage.isEmpty {
+                        HStack {
+                            Text("Original Image:")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                            
+                            Spacer()
+                        }
+                        
+                        KFImage(URL(string: originalImage))
+                            .placeholder {
+                                RoundedRectangle(cornerRadius: 8)
+                                    .fill(Color.gray.opacity(0.2))
+                                    .frame(height: 80)
+                                    .overlay(
+                                        ProgressView()
+                                            .scaleEffect(0.8)
+                                    )
+                            }
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(height: 80)
+                            .frame(maxWidth: 120)
+                            .clipped()
+                            .cornerRadius(8)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color.primary.opacity(0.1), lineWidth: 1)
+                            )
+                    }
+                }
+                .padding()
+                .background(
+                    LinearGradient(
+                        gradient: Gradient(colors: [
+                            .yellow.opacity(0.1),
+                            .orange.opacity(0.1)
+                        ]),
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(
+                            LinearGradient(
+                                gradient: Gradient(colors: [.yellow.opacity(0.3), .orange.opacity(0.3)]),
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            ),
+                            lineWidth: 1
+                        )
+                )
+            }
+            
+            // Show enhance button only if there's no enhanced prompt and it's not a video
+            if shouldShowEnhanceButton {
+                HStack {
+                    EnhanceButton(showEnhanceModal: $showEnhanceModal)
+                }
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)

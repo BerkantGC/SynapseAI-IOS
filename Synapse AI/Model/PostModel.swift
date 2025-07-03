@@ -27,4 +27,6 @@ struct Post: Identifiable, Codable, Equatable {
     var feeling: String?
     var comments_count: Int?
     var top_comments: [CommentModel]?
+    var enhanced_prompt: String?
+    var old_image: String?
 }
