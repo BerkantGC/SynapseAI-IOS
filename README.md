@@ -177,11 +177,14 @@ SYNAPSE-AI is Yaşar University Computer Engineering Gradutation Project.
 - **Uğur Günal** - Recommender AI Developer
 
 ---
-## Application Screenshots
+<h2>Application Screenshots</h2>
 
-![WhatsApp Image 2025-06-18 at 02 22 01-portrait](https://github.com/user-attachments/assets/28520f02-fc62-4b13-bde0-06efc337fc78)
-![Simulator Screenshot - iPhone 16 Pro Max - 2025-06-11 at 20 57 32-portrait](https://github.com/user-attachments/assets/d7a4df18-6715-4123-9002-8ba3a082f1d4)
-![Simulator Screenshot - iPhone 16 Pro Max - 2025-06-11 at 21 00 26-portrait](https://github.com/user-attachments/assets/fa12871b-8636-4cdb-b0c8-24aa47f5b288)
+<div style="display: flex; gap: 10px;">
+  <img src="https://github.com/user-attachments/assets/28520f02-fc62-4b13-bde0-06efc337fc78" width="250"/>
+  <img src="https://github.com/user-attachments/assets/d7a4df18-6715-4123-9002-8ba3a082f1d4" width="250"/>
+  <img src="https://github.com/user-attachments/assets/fa12871b-8636-4cdb-b0c8-24aa47f5b288" width="250"/>
+</div>
+
 
 
 **Note**: This project requires a backend API server for full functionality. Make sure to set up the corresponding backend service and configure the `BASE_URL` accordingly.
